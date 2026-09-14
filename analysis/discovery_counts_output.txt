@@ -1,0 +1,238 @@
+TOTAL DEV TICKETS: 500
+OVERALL: {'n': 500, 'share': '100.0%', 'fcr': '43.8%', 'escalated': '56.2%', 'repeat': '21.6%', 'csat': '2.97', 'res_mean': '422', 'res_median': '214', 'answerable': '71.4%', 'auto_expected': '62.2%'}
+
+== BY CHANNEL ==
+group                                n       share         fcr   escalated      repeat        csat    res_mean  res_median  answerableauto_expected
+email                              212       42.4%       44.8%       55.2%       20.8%        3.08         382         193       72.2%       62.7%
+chat                               155       31.0%       44.5%       55.5%       19.4%        2.72         427         209       76.8%       67.7%
+docs_comment                        78       15.6%       34.6%       65.4%       33.3%        3.17         515         466       61.5%       52.6%
+forum                               55       11.0%       50.9%       49.1%       14.5%        2.98         430          54       67.3%       58.2%
+
+== BY URGENCY ==
+group                                n       share         fcr   escalated      repeat        csat    res_mean  res_median  answerableauto_expected
+high                               146       29.2%       39.7%       60.3%       20.5%        2.86         478         342       72.6%       52.1%
+medium                             226       45.2%       43.8%       56.2%       26.1%        2.99         403         188       69.9%       65.5%
+low                                128       25.6%       48.4%       51.6%       14.8%        3.06         391         132       72.7%       68.0%
+
+== BY TIER ==
+group                                n       share         fcr   escalated      repeat        csat    res_mean  res_median  answerableauto_expected
+enterprise                          83       16.6%       37.3%       62.7%       24.1%        3.05         484         369       71.1%       61.4%
+business                           164       32.8%       48.2%       51.8%       23.2%        2.91         359         141       75.0%       64.6%
+standard                           253       50.6%       43.1%       56.9%       19.8%        2.98         442         266       69.2%       60.9%
+
+== BY FLUENCY ==
+group                                n       share         fcr   escalated      repeat        csat    res_mean  res_median  answerableauto_expected
+fluent                             380       76.0%       43.2%       56.8%       22.4%        2.95         408         216       71.1%       60.8%
+non_fluent                         120       24.0%       45.8%       54.2%       19.2%        3.04         466         198       72.5%       66.7%
+
+== BY REGION ==
+group                                n       share         fcr   escalated      repeat        csat    res_mean  res_median  answerableauto_expected
+north_america                      170       34.0%       48.8%       51.2%       20.0%        3.05         407         110       72.4%       61.8%
+europe                             151       30.2%       43.7%       56.3%       21.9%        3.01         423         198       76.2%       68.2%
+asia_pacific                       119       23.8%       39.5%       60.5%       21.8%        2.94         423         292       63.9%       53.8%
+latin_america                       60       12.0%       38.3%       61.7%       25.0%        2.73         459         235       71.7%       65.0%
+
+== BY INTENT ==
+group                                n       share         fcr   escalated      repeat        csat    res_mean  res_median  answerableauto_expected
+data_export                         29        5.8%       65.5%       34.5%       20.7%        3.17         293          40       93.1%       93.1%
+data_residency                      29        5.8%       31.0%       69.0%       24.1%        3.00         515         319       72.4%       72.4%
+rollback_request                    28        5.6%       60.7%       39.3%       14.3%        3.21         350          49       75.0%       75.0%
+deployment_failure                  27        5.4%       40.7%       59.3%       25.9%        2.85         483         384       70.4%       70.4%
+compliance_request                  26        5.2%        0.0%      100.0%       42.3%        2.35         679         678       65.4%        0.0%
+sso_configuration                   26        5.2%       73.1%       26.9%        7.7%        3.73         191          47       84.6%       84.6%
+security_incident                   26        5.2%        0.0%      100.0%       26.9%        2.65         786         734       53.8%        0.0%
+database_issue                      26        5.2%       26.9%       73.1%       26.9%        2.85         457         388       69.2%       38.5%
+api_usage_question                  24        4.8%       58.3%       41.7%       16.7%        3.29         356          52       95.8%       95.8%
+billing_query                       24        4.8%       54.2%       45.8%       20.8%        3.33         393          46       87.5%       87.5%
+performance_degradation             23        4.6%       30.4%       69.6%       21.7%        2.48         543         482       73.9%       43.5%
+quota_or_overage                    23        4.6%       73.9%       26.1%        4.3%        2.61         262          37       87.0%       87.0%
+account_access                      22        4.4%       59.1%       40.9%       13.6%        3.09         290          44       77.3%       77.3%
+onboarding                          22        4.4%       72.7%       27.3%       18.2%        3.09         202          40       90.9%       90.9%
+integration_help                    21        4.2%       38.1%       61.9%       23.8%        3.19         521         268       76.2%       76.2%
+webhook_issue                       21        4.2%       52.4%       47.6%       19.0%        3.00         353          55       76.2%       76.2%
+feature_request                     20        4.0%        0.0%      100.0%       50.0%        3.15         724         738        0.0%        0.0%
+authentication_failure              20        4.0%       50.0%       50.0%        5.0%        2.75         449         160       70.0%       70.0%
+api_key_issue                       18        3.6%       55.6%       44.4%       11.1%        3.11         296          40       66.7%       66.7%
+configuration_help                  17        3.4%       47.1%       52.9%       41.2%        2.76         344         124       58.8%       58.8%
+unclear_request                     15        3.0%        0.0%      100.0%       33.3%        2.40         516         437        0.0%        0.0%
+rate_limit                          13        2.6%       76.9%       23.1%        7.7%        3.08         122          35       92.3%       92.3%
+
+== BY EXPECTED ROUTE ==
+group                                n       share         fcr   escalated      repeat        csat    res_mean  res_median  answerableauto_expected
+auto_respond                       311       62.2%       70.4%       29.6%       12.2%        3.18         237          40      100.0%      100.0%
+escalate                           189       37.8%        0.0%      100.0%       37.0%        2.63         725         731       24.3%        0.0%
+
+== BY ANSWERABLE_FROM_DOCS ==
+group                                n       share         fcr   escalated      repeat        csat    res_mean  res_median  answerableauto_expected
+True                               357       71.4%       61.3%       38.7%       16.2%        3.08         291          48      100.0%       87.1%
+False                              143       28.6%        0.0%      100.0%       35.0%        2.70         747         750        0.0%        0.0%
+
+== BY MUST_NOT_AUTO_RESPOND ==
+group                                n       share         fcr   escalated      repeat        csat    res_mean  res_median  answerableauto_expected
+False                              413       82.6%       53.0%       47.0%       18.2%        3.04         365          53       78.9%       75.3%
+True                                87       17.4%        0.0%      100.0%       37.9%        2.63         693         705       35.6%        0.0%
+
+== EFFORT SHARE BY INTENT (sum of historical resolution minutes as effort proxy) ==
+intent                        n    vol%  effort%  ratio  avg_min
+security_incident            26     5.2      9.7   1.86      786
+compliance_request           26     5.2      8.4   1.61      679
+data_residency               29     5.8      7.1   1.22      515
+feature_request              20     4.0      6.9   1.72      724
+deployment_failure           27     5.4      6.2   1.15      483
+performance_degradation      23     4.6      5.9   1.29      543
+database_issue               26     5.2      5.6   1.08      457
+integration_help             21     4.2      5.2   1.24      521
+rollback_request             28     5.6      4.6   0.83      350
+billing_query                24     4.8      4.5   0.93      393
+authentication_failure       20     4.0      4.3   1.07      449
+api_usage_question           24     4.8      4.1   0.84      356
+data_export                  29     5.8      4.0   0.69      293
+unclear_request              15     3.0      3.7   1.22      516
+webhook_issue                21     4.2      3.5   0.84      353
+account_access               22     4.4      3.0   0.69      290
+quota_or_overage             23     4.6      2.9   0.62      262
+configuration_help           17     3.4      2.8   0.82      344
+api_key_issue                18     3.6      2.5   0.70      296
+sso_configuration            26     5.2      2.4   0.45      191
+onboarding                   22     4.4      2.1   0.48      202
+rate_limit                   13     2.6      0.8   0.29      122
+total historical minutes: 210849  mean per ticket: 422
+
+== ANSWERABLE x FCR ==
+answerable_from_docs = True {'n': 357, 'share': '71.4%', 'fcr': '61.3%', 'escalated': '38.7%', 'repeat': '16.2%', 'csat': '3.08', 'res_mean': '291', 'res_median': '48', 'answerable': '100.0%', 'auto_expected': '87.1%'}
+answerable_from_docs = False {'n': 143, 'share': '28.6%', 'fcr': '0.0%', 'escalated': '100.0%', 'repeat': '35.0%', 'csat': '2.70', 'res_mean': '747', 'res_median': '750', 'answerable': '0.0%', 'auto_expected': '0.0%'}
+
+== DANIEL: escalated tickets that were answerable / expected auto ==
+escalated: 281 56.2%
+  of which answerable_from_docs: 138 49.1%
+  of which expected_route=auto_respond: 92 32.7%
+  of which must_not_auto_respond: 87
+  escalated by intent: [('compliance_request', 26), ('security_incident', 26), ('feature_request', 20), ('data_residency', 20), ('database_issue', 19), ('deployment_failure', 16), ('performance_degradation', 16), ('unclear_request', 15), ('integration_help', 13), ('rollback_request', 11), ('billing_query', 11), ('authentication_failure', 10), ('data_export', 10), ('api_usage_question', 10), ('webhook_issue', 10), ('configuration_help', 9), ('account_access', 9), ('api_key_issue', 8), ('sso_configuration', 7), ('quota_or_overage', 6), ('onboarding', 6), ('rate_limit', 3)]
+
+== SOFIA: answerable AND expected auto_respond: 62.2%
+== SOFIA: non-fluent worst CSAT? ==
+fluent {'n': 380, 'share': '76.0%', 'fcr': '43.2%', 'escalated': '56.8%', 'repeat': '22.4%', 'csat': '2.95', 'res_mean': '408', 'res_median': '216', 'answerable': '71.1%', 'auto_expected': '60.8%'}
+non_fluent {'n': 120, 'share': '24.0%', 'fcr': '45.8%', 'escalated': '54.2%', 'repeat': '19.2%', 'csat': '3.04', 'res_mean': '466', 'res_median': '198', 'answerable': '72.5%', 'auto_expected': '66.7%'}
+non-fluent within tier:
+   enterprise {'n': 19, 'share': '3.8%', 'fcr': '42.1%', 'escalated': '57.9%', 'repeat': '31.6%', 'csat': '3.42', 'res_mean': '539', 'res_median': '363', 'answerable': '73.7%', 'auto_expected': '57.9%'}
+   business {'n': 44, 'share': '8.8%', 'fcr': '56.8%', 'escalated': '43.2%', 'repeat': '20.5%', 'csat': '3.11', 'res_mean': '357', 'res_median': '52', 'answerable': '79.5%', 'auto_expected': '75.0%'}
+   standard {'n': 57, 'share': '11.4%', 'fcr': '38.6%', 'escalated': '61.4%', 'repeat': '14.0%', 'csat': '2.86', 'res_mean': '526', 'res_median': '502', 'answerable': '66.7%', 'auto_expected': '63.2%'}
+fluent within tier:
+   enterprise {'n': 64, 'share': '12.8%', 'fcr': '35.9%', 'escalated': '64.1%', 'repeat': '21.9%', 'csat': '2.94', 'res_mean': '467', 'res_median': '370', 'answerable': '70.3%', 'auto_expected': '62.5%'}
+   business {'n': 120, 'share': '24.0%', 'fcr': '45.0%', 'escalated': '55.0%', 'repeat': '24.2%', 'csat': '2.84', 'res_mean': '360', 'res_median': '178', 'answerable': '73.3%', 'auto_expected': '60.8%'}
+   standard {'n': 196, 'share': '39.2%', 'fcr': '44.4%', 'escalated': '55.6%', 'repeat': '21.4%', 'csat': '3.02', 'res_mean': '418', 'res_median': '210', 'answerable': '69.9%', 'auto_expected': '60.2%'}
+csat distribution fluent: [(1, 66), (2, 86), (3, 89), (4, 79), (5, 60)]
+csat distribution non-fluent: [(1, 23), (2, 21), (3, 25), (4, 30), (5, 21)]
+
+== RAVI: urgency x resolution time; tier x resolution time ==
+urgency high    n=146 mean=   478 median=  342 p90= 1244
+urgency medium  n=226 mean=   403 median=  188 p90= 1126
+urgency low     n=128 mean=   391 median=  132 p90= 1083
+tier enterprise  n= 83 mean=   484 median=  369 p90= 1106
+tier business    n=164 mean=   359 median=  141 p90= 1146
+tier standard    n=253 mean=   442 median=  266 p90= 1167
+urgency x tier median minutes:
+   high enterprise=198(n=30) business=292(n=37) standard=347(n=79)
+   medium enterprise=466(n=38) business=82(n=86) standard=140(n=102)
+   low enterprise=139(n=15) business=52(n=41) standard=210(n=72)
+
+== RESOLUTION TIME OVERALL ==
+mean 422 median 214.0 p95 1262 min 3 max 1394
+within 120 min: 45.0%  within 480 min: 62.4%
+
+== INTENTS: answerable share, must_not_auto share, expected docs ==
+data_export                n= 29 answerable= 93.1% must_not_auto=  0 expected_auto= 93.1% docs=[('DOC-DATA-001', 27)]
+data_residency             n= 29 answerable= 72.4% must_not_auto=  0 expected_auto= 72.4% docs=[('DOC-DATA-003', 21)]
+rollback_request           n= 28 answerable= 75.0% must_not_auto=  0 expected_auto= 75.0% docs=[('DOC-DEPLOY-002', 21)]
+deployment_failure         n= 27 answerable= 70.4% must_not_auto=  0 expected_auto= 70.4% docs=[('DOC-DEPLOY-001', 19), ('DOC-DEPLOY-003', 5)]
+compliance_request         n= 26 answerable= 65.4% must_not_auto= 26 expected_auto=  0.0% docs=[('DOC-SEC-003', 17)]
+sso_configuration          n= 26 answerable= 84.6% must_not_auto=  0 expected_auto= 84.6% docs=[('DOC-AUTH-003', 22)]
+security_incident          n= 26 answerable= 53.8% must_not_auto= 26 expected_auto=  0.0% docs=[('DOC-SEC-001', 14), ('DOC-SEC-002', 5)]
+database_issue             n= 26 answerable= 69.2% must_not_auto=  0 expected_auto= 38.5% docs=[('DOC-PERF-003', 18), ('DOC-DATA-002', 8)]
+api_usage_question         n= 24 answerable= 95.8% must_not_auto=  0 expected_auto= 95.8% docs=[('DOC-API-002', 23), ('DOC-API-003', 10)]
+billing_query              n= 24 answerable= 87.5% must_not_auto=  0 expected_auto= 87.5% docs=[('DOC-BILL-001', 21), ('DOC-BILL-002', 11)]
+performance_degradation    n= 23 answerable= 73.9% must_not_auto=  0 expected_auto= 43.5% docs=[('DOC-PERF-001', 17), ('DOC-PERF-002', 6)]
+quota_or_overage           n= 23 answerable= 87.0% must_not_auto=  0 expected_auto= 87.0% docs=[('DOC-BILL-003', 20), ('DOC-API-001', 12)]
+account_access             n= 22 answerable= 77.3% must_not_auto=  0 expected_auto= 77.3% docs=[('DOC-ACCT-001', 17)]
+onboarding                 n= 22 answerable= 90.9% must_not_auto=  0 expected_auto= 90.9% docs=[('DOC-ONB-001', 20), ('DOC-ONB-002', 10)]
+integration_help           n= 21 answerable= 76.2% must_not_auto=  0 expected_auto= 76.2% docs=[('DOC-INT-001', 16), ('DOC-INT-002', 8)]
+webhook_issue              n= 21 answerable= 76.2% must_not_auto=  0 expected_auto= 76.2% docs=[('DOC-API-003', 16)]
+feature_request            n= 20 answerable=  0.0% must_not_auto= 20 expected_auto=  0.0% docs=[]
+authentication_failure     n= 20 answerable= 70.0% must_not_auto=  0 expected_auto= 70.0% docs=[('DOC-AUTH-001', 14), ('DOC-AUTH-002', 4)]
+api_key_issue              n= 18 answerable= 66.7% must_not_auto=  0 expected_auto= 66.7% docs=[('DOC-AUTH-004', 12), ('DOC-SEC-002', 6)]
+configuration_help         n= 17 answerable= 58.8% must_not_auto=  0 expected_auto= 58.8% docs=[('DOC-DEPLOY-004', 10), ('DOC-ACCT-002', 5)]
+unclear_request            n= 15 answerable=  0.0% must_not_auto= 15 expected_auto=  0.0% docs=[]
+rate_limit                 n= 13 answerable= 92.3% must_not_auto=  0 expected_auto= 92.3% docs=[('DOC-API-001', 12)]
+
+== EXPECTED DOC FREQUENCY ==
+[('DOC-DATA-001', 27), ('DOC-API-003', 26), ('DOC-API-001', 24), ('DOC-API-002', 23), ('DOC-AUTH-003', 22), ('DOC-DEPLOY-002', 21), ('DOC-BILL-001', 21), ('DOC-DATA-003', 21), ('DOC-BILL-003', 20), ('DOC-ONB-001', 20), ('DOC-DEPLOY-001', 19), ('DOC-PERF-003', 18), ('DOC-SEC-003', 17), ('DOC-ACCT-001', 17), ('DOC-PERF-001', 17), ('DOC-INT-001', 16), ('DOC-AUTH-001', 14), ('DOC-SEC-001', 14), ('DOC-AUTH-004', 12), ('DOC-SEC-002', 11), ('DOC-BILL-002', 11), ('DOC-DEPLOY-004', 10), ('DOC-ONB-002', 10), ('DOC-INT-002', 8), ('DOC-DATA-002', 8), ('DOC-PERF-002', 6), ('DOC-ACCT-002', 5), ('DOC-DEPLOY-003', 5), ('DOC-AUTH-002', 4)]
+tickets with no expected docs: 143
+expected doc ids not in corpus: []
+corpus docs never expected: []
+
+== MOST FREQUENT SINGLE QUESTION ==
+top intents: [('data_export', 29), ('data_residency', 29), ('rollback_request', 28), ('deployment_failure', 27), ('compliance_request', 26)]
+top exact subjects: [('Please add per-project spend caps', 12), ('Connecting our CI pipeline', 11), ('Pagination returns duplicates', 9), ('Build fails in the pipeline', 9), ('Need data to stay in the EU', 9), ('User cannot access a project', 8), ('Retention period question', 8), ('How do I page through large results', 8)]
+chat tickets with empty subject: 155 of 155
+
+== CHANNEL x TOP INTENTS ==
+chat [('data_residency', 12), ('api_key_issue', 11), ('rollback_request', 11), ('data_export', 11)]
+docs_comment [('compliance_request', 8), ('data_export', 8), ('api_usage_question', 8), ('account_access', 5)]
+email [('sso_configuration', 13), ('deployment_failure', 13), ('billing_query', 13), ('configuration_help', 12)]
+forum [('quota_or_overage', 9), ('rate_limit', 5), ('data_residency', 4), ('security_incident', 4)]
+
+== BODY LENGTH (chars) by channel / fluency ==
+chat          mean=   143 median=  146
+docs_comment  mean=   133 median=  133
+email         mean=   136 median=  140
+forum         mean=   142 median=  144
+fluent        mean=   142 median=  144
+non_fluent    mean=   127 median=  134
+
+== TIME RANGE / WEEKDAY ==
+2026-03-01 to 2026-05-30  weeks: 12.7
+[('Fri', 85), ('Tue', 80), ('Mon', 75), ('Wed', 73), ('Thu', 69), ('Sun', 61), ('Sat', 57)]
+
+== REPEAT CONTACTS ==
+repeat: 108 21.6%
+repeat by fluency: {'fluent': '22.4%', 'non_fluent': '19.2%'}
+repeat by fcr: {True: '0.0%', False: '38.4%'}
+repeat by intent: [('compliance_request', 11), ('feature_request', 10), ('security_incident', 7), ('database_issue', 7), ('configuration_help', 7), ('data_residency', 7)]
+distinct customers: 220  customers with >1 ticket: 150
+
+== CSAT ==
+distribution: [(1, 89), (2, 107), (3, 114), (4, 109), (5, 81)]
+csat by fcr: {True: '3.41', False: '2.63'}
+csat by escalated: {True: '2.63', False: '3.41'}
+
+== PRIVATE DATA IN TICKET TEXT (regex scan of subject+body) ==
+email              0 tickets  e.g. []
+api_key_like       0 tickets  e.g. []
+ipv4               0 tickets  e.g. []
+card_like          0 tickets  e.g. []
+phone_like         0 tickets  e.g. []
+account_id_like   39 tickets  e.g. ['DEV-0005', 'DEV-0007', 'DEV-0008', 'DEV-0011']
+customer_name present on every ticket: True
+tickets mentioning own customer_name in body: 0
+
+== DOCUMENTATION CORPUS ==
+articles: 29
+categories: [('authentication', 4), ('deployment', 4), ('api', 3), ('performance', 3), ('billing', 3), ('data', 3), ('security', 3), ('account', 2), ('integration', 2), ('onboarding', 2)]
+last_reviewed_days_ago: min 0 median 0 max 0
+articles reviewed >180 days ago: []
+content length chars: mean 1094 min 860 max 1336
+headings in first doc: ['# Resolving invalid credential errors on login', '## Symptoms', '## Common causes', '## Resolution', '## Notes']
+
+== GROUND TRUTH ==
+responses: 200  intents covered: 20
+written_by: Counter({'senior_support_agent': 200})
+must_mention empty: 141  must_not_claim empty: 0
+most common must_not_claim: [('a refund has been issued', 200), ('the issue has been fixed on our side', 200), ('a specific delivery date for a fix', 200)]
+ground truth ticket_ids found in dev set: 200 of 200
+
+== SAMPLE TICKETS (one per channel, one non-fluent) ==
+[chat] DEV-0001 | subj='' | 'builds that work last week are now fail during dependency resolution. we are having not change our code at all.'
+[docs_comment] DEV-0003 | subj='Evidence for a compliance review' | 'Our auditor has asked for access records covering the last six months. Can I export these, and is that period within what you retain?'
+[email] DEV-0005 | subj='Please add per-project spend caps' | "It would be very useful to set spend caps per project rather than only for the whole organisation. At the moment one team's overspend affects everyone."
+[forum] DEV-0023 | subj='User cannot access a project' | 'We are tightening permissions after a review and I want to understand how group membership interacts with directly assigned roles.'
+[non_fluent] DEV-0001 | deployment_failure | 'builds that work last week are now fail during dependency resolution. we are having not change our code at all.'

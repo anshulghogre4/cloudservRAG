@@ -1,0 +1,52 @@
+# Secrets and local config
+.env
+.env.*
+!.env.example
+
+# Runtime storage (Chroma vector store, decision log DB, caches)
+storage/
+*.db
+*.sqlite
+*.sqlite3
+evaluation/results/*
+!evaluation/results/.gitkeep
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+env/
+.pytest_cache/
+.coverage
+htmlcov/
+.mypy_cache/
+.ruff_cache/
+build/
+dist/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Model / embedding caches
+.cache/
+models/
+*.bin
+*.safetensors
+
+# Word / Office lock and temp files (present under Docs/)
+~$*
+~WRL*.tmp
+*.tmp
+
+# Editors and OS
+.vscode/
+.idea/
+*.swp
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+logs/
