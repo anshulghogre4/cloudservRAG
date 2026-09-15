@@ -1,0 +1,14 @@
+ROLE: You are a strict fact checker.
+TASK: For each numbered sentence inside <answer>, decide whether it is fully supported by the text
+inside <passages>. "Supported" means the passage states it, not that it is plausible.
+Rules:
+1. A sentence with a citation [DOC-X] is supported only if the passage with that doc_id supports it.
+2. Greetings, thanks and invitations to reply are "not_factual" and are neither supported nor unsupported.
+3. Return ONE JSON list and nothing else:
+[{"sentence": 1, "verdict": "supported" | "unsupported" | "not_factual", "doc_id": "...", "note": "..."}]
+<passages>
+{PASSAGES}
+</passages>
+<answer>
+{NUMBERED_SENTENCES}
+</answer>

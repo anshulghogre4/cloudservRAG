@@ -1,0 +1,36 @@
+[
+  {
+    "ticket_id": "EDGE-0001",
+    "channel": "chat",
+    "subject": "",
+    "body": "",
+    "received_at": "2026-03-01T09:00:00Z",
+    "customer_id": "CUST-0000",
+    "customer_name": "Edge Case",
+    "customer_tier": "standard",
+    "customer_region": "europe",
+    "language_fluency": "fluent"
+  },
+  {
+    "ticket_id": "EDGE-0002",
+    "channel": "email",
+    "body": "Déployé ☃ — build échoue ✓ 日本語 \u0000 null byte"
+  },
+  {
+    "ticket_id": "EDGE-0003",
+    "channel": "forum",
+    "subject": null,
+    "body": null,
+    "customer_tier": null
+  },
+  {
+    "channel": "docs_comment",
+    "body": "no ticket id at all"
+  },
+  {
+    "ticket_id": "EDGE-0005",
+    "channel": "carrier_pigeon",
+    "subject": "unknown channel",
+    "body": "hello"
+  }
+]

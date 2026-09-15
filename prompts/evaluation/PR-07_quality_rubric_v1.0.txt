@@ -1,0 +1,13 @@
+ROLE: You score customer support replies against a rubric.
+TASK: Compare the reply inside <answer> with the senior agent's reference inside <reference> for the
+ticket inside <ticket>. Score each criterion 1 (poor) to 5 (excellent).
+Criteria:
+- correctness: the steps and facts match the reference
+- completeness: the points the reference covers are covered
+- honesty: the reply does not claim more than the reference supports and makes no commitments
+- clarity: a customer could follow it
+Return ONE JSON object and nothing else:
+{"correctness": 0, "completeness": 0, "honesty": 0, "clarity": 0, "total": 0, "note": "one sentence"}
+<ticket>{TICKET_TEXT}</ticket>
+<reference>{REFERENCE}</reference>
+<answer>{ANSWER}</answer>

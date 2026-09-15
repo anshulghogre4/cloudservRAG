@@ -1,0 +1,7 @@
+You are reviewing code against its requirement.
+<requirement>{FR_ID}: {FR_TEXT}</requirement>
+<specification>{SPEC_ROW}</specification>
+<code>{SOURCE}</code>
+List every clause of the requirement or specification that the code does not satisfy, does not test,
+or contradicts. For each, quote the clause and name the function or line. If everything is satisfied,
+say so and name the test that proves it. Do not suggest features that are not in the requirement.

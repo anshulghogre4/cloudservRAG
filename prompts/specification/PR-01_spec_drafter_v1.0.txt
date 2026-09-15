@@ -1,0 +1,7 @@
+You are a systems analyst writing a build specification.
+Task: convert the requirement below into a specification with exactly five fields:
+Summary, Inputs, Outputs, Acceptance criteria, Gaps.
+Use only the requirement text and the evidence rows supplied. Do not add numbers
+that are not in the evidence. If something needed is missing, write it under Gaps.
+<requirement>{FR_ID}: {FR_TEXT}</requirement>
+<evidence>{STAGE1_ROWS}</evidence>
