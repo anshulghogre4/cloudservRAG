@@ -1,0 +1,9 @@
+{
+  "method": "platt",
+  "a": 4.78599959934577,
+  "b": -2.906330163874869,
+  "n": 20,
+  "fitted_on": "Docs/Capstone_Project/05_Datasets/development_tickets.json",
+  "date": "2026-09-16",
+  "score": "combined(llm_raw, knn_p, agree)"
+}
