@@ -59,3 +59,14 @@ _To be filled from the calibration table._
 
 ## Decision log schema (B-10)
 _Governance Framework §1 record; see `src/logging_store.py`._
+
+## Evaluation harness (B-05, 16 Sep 2026)
+
+`python -m evaluation.harness --input <file> --output <dir>`. One JSONL row per ticket, appended
+as each ticket finishes, so a crash loses nothing and `--resume` continues from the last row.
+A component failure becomes an escalation row carrying the error; the run never stops (A9, A11).
+Quality metrics are computed only over labelled rows; completion (`failed_tickets`) is a separate
+axis, following current batch-evaluation practice. Headline rates carry Wilson 95% intervals
+because the graded set is small (80 to 120 tickets). Calibration uses the Evaluation Framework's
+equal-width five-band table plus ECE. Segment tables (tier, region, fluency, ticket length,
+channel) feed the fairness audit directly.

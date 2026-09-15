@@ -1,0 +1,403 @@
+{
+  "volume": {
+    "processed": 500,
+    "auto_responded": 310,
+    "escalated": 190,
+    "blocked": 0
+  },
+  "business": {
+    "first_contact_resolution": {
+      "value": 0.62,
+      "n": 500,
+      "ci95": [
+        0.5766916822967054,
+        0.6614784092558779
+      ]
+    },
+    "escalation_rate": {
+      "value": 0.38,
+      "n": 500,
+      "ci95": [
+        0.3385215907441222,
+        0.42330831770329463
+      ]
+    },
+    "response_time_ms_mean": 11.976007800001186,
+    "response_time_ms_median": 12.0,
+    "response_time_ms_p95": 12.0,
+    "note": "FCR = auto-responded and not blocked; repeat contacts are not observable in an offline run."
+  },
+  "technical": {
+    "classification": {
+      "labelled": 500,
+      "per_class": {
+        "account_access": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "support": 22.0
+        },
+        "api_key_issue": {
+          "precision": 1.0,
+          "recall": 0.9444444444444444,
+          "f1": 0.9714285714285714,
+          "support": 18.0
+        },
+        "api_usage_question": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "support": 24.0
+        },
+        "authentication_failure": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "support": 20.0
+        },
+        "billing_query": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "support": 24.0
+        },
+        "compliance_request": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "support": 26.0
+        },
+        "configuration_help": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "support": 17.0
+        },
+        "data_export": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "support": 29.0
+        },
+        "data_residency": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "support": 29.0
+        },
+        "database_issue": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "support": 26.0
+        },
+        "deployment_failure": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "support": 27.0
+        },
+        "feature_request": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "support": 20.0
+        },
+        "integration_help": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "support": 21.0
+        },
+        "onboarding": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "support": 22.0
+        },
+        "performance_degradation": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "support": 23.0
+        },
+        "quota_or_overage": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "support": 23.0
+        },
+        "rate_limit": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "support": 13.0
+        },
+        "rollback_request": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "support": 28.0
+        },
+        "security_incident": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "support": 26.0
+        },
+        "sso_configuration": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "support": 26.0
+        },
+        "unclear_request": {
+          "precision": 0.9375,
+          "recall": 1.0,
+          "f1": 0.967741935483871,
+          "support": 15.0
+        },
+        "webhook_issue": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "support": 21.0
+        }
+      },
+      "macro_precision": 0.9971590909090909,
+      "macro_recall": 0.9974747474747474,
+      "accuracy": 0.998,
+      "urgency_accuracy": 1.0,
+      "confusion": {
+        "deployment_failure": {
+          "deployment_failure": 27
+        },
+        "api_key_issue": {
+          "api_key_issue": 17,
+          "unclear_request": 1
+        },
+        "compliance_request": {
+          "compliance_request": 26
+        },
+        "rollback_request": {
+          "rollback_request": 28
+        },
+        "feature_request": {
+          "feature_request": 20
+        },
+        "configuration_help": {
+          "configuration_help": 17
+        },
+        "authentication_failure": {
+          "authentication_failure": 20
+        },
+        "data_export": {
+          "data_export": 29
+        },
+        "sso_configuration": {
+          "sso_configuration": 26
+        },
+        "security_incident": {
+          "security_incident": 26
+        },
+        "account_access": {
+          "account_access": 22
+        },
+        "api_usage_question": {
+          "api_usage_question": 24
+        },
+        "database_issue": {
+          "database_issue": 26
+        },
+        "rate_limit": {
+          "rate_limit": 13
+        },
+        "billing_query": {
+          "billing_query": 24
+        },
+        "integration_help": {
+          "integration_help": 21
+        },
+        "performance_degradation": {
+          "performance_degradation": 23
+        },
+        "quota_or_overage": {
+          "quota_or_overage": 23
+        },
+        "data_residency": {
+          "data_residency": 29
+        },
+        "webhook_issue": {
+          "webhook_issue": 21
+        },
+        "unclear_request": {
+          "unclear_request": 15
+        },
+        "onboarding": {
+          "onboarding": 22
+        }
+      }
+    },
+    "retrieval_hit_rate": 0.9971988795518207,
+    "retrieval_hit_rate_n": 357,
+    "routing_accuracy": 0.998,
+    "citation_resolves_to_retrieved": 1.0,
+    "citation_hits_expected_doc": 1.0,
+    "latency_ms_median": 12.0,
+    "latency_ms_p95": 12.0
+  },
+  "governance": {
+    "decisions_logged": 500,
+    "guardrail_activations": {},
+    "private_data_detections": 0,
+    "failed_tickets": 1,
+    "instruction_like_flagged": 0,
+    "must_not_auto_respond_violations": 0,
+    "calibration": {
+      "bins": [
+        {
+          "band": [
+            0.0,
+            0.2
+          ],
+          "n": 1,
+          "stated": 0.0,
+          "observed": 0.0,
+          "gap": 0.0
+        },
+        {
+          "band": [
+            0.2,
+            0.4
+          ],
+          "n": 189,
+          "stated": 0.29999999999999905,
+          "observed": 1.0,
+          "gap": -0.700000000000001
+        },
+        {
+          "band": [
+            0.8,
+            1.0
+          ],
+          "n": 310,
+          "stated": 0.9000000000000018,
+          "observed": 1.0,
+          "gap": -0.0999999999999982
+        }
+      ],
+      "ece": 0.3265999999999993,
+      "all_bins_within_5_points": false,
+      "n": 500
+    }
+  },
+  "segments": {
+    "tier": {
+      "business": {
+        "n": 164,
+        "auto_respond_rate": 0.6402439024390244,
+        "routing_accuracy": 0.9939024390243902,
+        "intent_accuracy": 0.9939024390243902
+      },
+      "enterprise": {
+        "n": 83,
+        "auto_respond_rate": 0.6144578313253012,
+        "routing_accuracy": 1.0,
+        "intent_accuracy": 1.0
+      },
+      "standard": {
+        "n": 253,
+        "auto_respond_rate": 0.6086956521739131,
+        "routing_accuracy": 1.0,
+        "intent_accuracy": 1.0
+      }
+    },
+    "region": {
+      "asia_pacific": {
+        "n": 119,
+        "auto_respond_rate": 0.5378151260504201,
+        "routing_accuracy": 1.0,
+        "intent_accuracy": 1.0
+      },
+      "europe": {
+        "n": 151,
+        "auto_respond_rate": 0.6754966887417219,
+        "routing_accuracy": 0.9933774834437086,
+        "intent_accuracy": 0.9933774834437086
+      },
+      "latin_america": {
+        "n": 60,
+        "auto_respond_rate": 0.65,
+        "routing_accuracy": 1.0,
+        "intent_accuracy": 1.0
+      },
+      "north_america": {
+        "n": 170,
+        "auto_respond_rate": 0.6176470588235294,
+        "routing_accuracy": 1.0,
+        "intent_accuracy": 1.0
+      }
+    },
+    "fluency": {
+      "fluent": {
+        "n": 380,
+        "auto_respond_rate": 0.6052631578947368,
+        "routing_accuracy": 0.9973684210526316,
+        "intent_accuracy": 0.9973684210526316
+      },
+      "non_fluent": {
+        "n": 120,
+        "auto_respond_rate": 0.6666666666666666,
+        "routing_accuracy": 1.0,
+        "intent_accuracy": 1.0
+      }
+    },
+    "ticket_length": {
+      "long": {
+        "n": 451,
+        "auto_respond_rate": 0.6297117516629712,
+        "routing_accuracy": 0.9977827050997783,
+        "intent_accuracy": 0.9977827050997783
+      },
+      "short": {
+        "n": 49,
+        "auto_respond_rate": 0.5306122448979592,
+        "routing_accuracy": 1.0,
+        "intent_accuracy": 1.0
+      }
+    },
+    "channel": {
+      "chat": {
+        "n": 155,
+        "auto_respond_rate": 0.6774193548387096,
+        "routing_accuracy": 1.0,
+        "intent_accuracy": 1.0
+      },
+      "docs_comment": {
+        "n": 78,
+        "auto_respond_rate": 0.5128205128205128,
+        "routing_accuracy": 0.9871794871794872,
+        "intent_accuracy": 0.9871794871794872
+      },
+      "email": {
+        "n": 212,
+        "auto_respond_rate": 0.6273584905660378,
+        "routing_accuracy": 1.0,
+        "intent_accuracy": 1.0
+      },
+      "forum": {
+        "n": 55,
+        "auto_respond_rate": 0.5818181818181818,
+        "routing_accuracy": 1.0,
+        "intent_accuracy": 1.0
+      }
+    }
+  },
+  "segment_variation_routing_accuracy": {
+    "tier": 0.0060975609756097615,
+    "region": 0.0066225165562914245,
+    "fluency": 0.0026315789473684292,
+    "ticket_length": 0.0022172949002217113,
+    "channel": 0.012820512820512775
+  }
+}
