@@ -6,6 +6,7 @@ langchain-openai==0.0.7
 
 # Vector Database & Embeddings
 chromadb==0.4.24
+posthog==3.5.0
 sentence-transformers==2.2.2
 huggingface-hub==0.20.3
 

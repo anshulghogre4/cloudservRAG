@@ -48,7 +48,7 @@ class Settings:
     database_url: str = f"sqlite:///{(ROOT / 'storage' / 'decisions.db').as_posix()}"
     log_level: str = "INFO"
     confidence_threshold: float = 0.80   # illustrative until derived from dev data (FR-05)
-    retrieval_threshold: float = 0.35    # cosine similarity floor; derived from dev data (FR-04)
+    retrieval_threshold: float = 0.40    # cosine floor, derived from dev data 16 Sep 2026: keeps 97.8% answerable, cuts 100% unclear_request (FR-04)
     retrieval_top_k: int = 5
     llm_timeout_seconds: float = 30.0
     llm_max_retries: int = 3

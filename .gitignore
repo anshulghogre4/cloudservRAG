@@ -8,8 +8,6 @@ storage/
 *.db
 *.sqlite
 *.sqlite3
-evaluation/results/*
-!evaluation/results/.gitkeep
 
 # Python
 __pycache__/

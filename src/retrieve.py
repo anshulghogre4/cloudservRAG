@@ -1,6 +1,6 @@
 """Retrieve: chunk the 29 articles by section, embed, store in Chroma, search (FR-03, FR-04).
 
-Design decisions (recorded in docs/architecture.md):
+Design decisions (recorded in Docs/architecture.md):
 - Chunk per article section (Symptoms, Common causes, Resolution, Notes), never inside a
   resolution sequence (Dataset Guide §2). Each chunk keeps doc_id, title, applies_to as metadata
   so a citation can be verified and plan restrictions checked by the router.
@@ -11,8 +11,10 @@ Design decisions (recorded in docs/architecture.md):
 """
 from __future__ import annotations
 
+import os
 import re
-import shutil
+
+os.environ.setdefault("ANONYMIZED_TELEMETRY", "False")   # Chroma reads this at import; no outbound telemetry
 from dataclasses import dataclass
 from pathlib import Path
 from typing import List, Optional, Protocol, Sequence
@@ -107,11 +109,12 @@ class Retriever:
     def _connect(self):
         import chromadb
         if self._client is None:
+            cfg = chromadb.Settings(anonymized_telemetry=False)   # no outbound telemetry, no noise
             if self.persist_dir:
                 self.persist_dir.mkdir(parents=True, exist_ok=True)
-                self._client = chromadb.PersistentClient(path=str(self.persist_dir))
+                self._client = chromadb.PersistentClient(path=str(self.persist_dir), settings=cfg)
             else:
-                self._client = chromadb.Client()
+                self._client = chromadb.Client(settings=cfg)
         if self._collection is None:
             self._collection = self._client.get_or_create_collection(
                 self.collection_name, metadata={"hnsw:space": "cosine"})

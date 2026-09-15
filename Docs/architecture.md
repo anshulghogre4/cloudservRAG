@@ -16,15 +16,43 @@ the nearest version that satisfies the neighbouring pins; nothing else was alter
 | langchain-community | 0.0.10 | 0.0.24 | same langchain-core / langsmith range as above |
 | chromadb | 0.3.21 | 0.4.24 | 0.3.21 depends on `hnswlib`, which has no Windows wheel and needs a C++ toolchain; 0.4.x ships `chroma-hnswlib` wheels |
 | huggingface-hub | (unpinned) | 0.20.3 | `sentence-transformers==2.2.2` imports `cached_download`, removed from huggingface_hub 0.26+ |
+| posthog | (unpinned) | 3.5.0 | chromadb 0.4.24 calls the pre-7.x posthog API; newer posthog prints a telemetry error on every client start |
 
 Environment: Python 3.11 (the version the pack's CI workflow uses), created with `uv`.
 Python 3.13 cannot build `pandas==2.0.0`; a 3.10 venv would also work.
 
-## Chunking (B-03)
-_To be filled after the retrieval hit-rate comparison._
+## Chunking (B-03, decided 16 Sep 2026)
 
-## Retrieval threshold (B-04)
-_To be filled from development-set score distributions._
+One chunk per article section (Symptoms, Common causes, Resolution, Notes), with the article
+title and section name prepended; 29 articles x 4 = 116 chunks. Measured on the 357 answerable
+development tickets, article-level hit rate against `expected_doc_ids`
+(`evaluation/results/retrieval_check.json`):
+
+| Config | hit@1 | hit@3 | hit@5 | MRR |
+|---|---|---|---|---|
+| section + dense (chosen) | 0.905 | 0.952 | 0.989 | 0.937 |
+| section + hybrid (BM25 RRF) | 0.894 | 0.955 | 0.972 | 0.930 |
+| article + dense | 0.874 | 0.958 | 0.972 | 0.921 |
+| article + hybrid | 0.894 | 0.961 | 0.972 | 0.930 |
+
+Why sections: the Dataset Guide warns against splitting inside a resolution sequence, and
+all-MiniLM-L6-v2 truncates at 256 tokens, so a whole article (about 250 to 300 tokens) loses its
+Notes; a section is 30 to 100 tokens, inside the model's best range. Hybrid BM25 fusion was
+measured and not adopted: it lowered hit@1 and hit@5 on section chunks. Embeddings:
+all-MiniLM-L6-v2, cosine space, vectors normalised.
+
+## Retrieval threshold (B-04, decided 16 Sep 2026)
+
+RETRIEVAL_THRESHOLD = 0.40 (cosine). On the development set: keeps 97.8% of answerable
+tickets (99.4% at 0.35, 91.9% at 0.50) and returns nothing for 100% of `unclear_request`
+tickets (median top score 0.265). Top-k = 5.
+
+Finding that changes the design: the threshold cannot detect "no article exists". Non-answerable
+tickets score almost as high as answerable ones (median top score 0.635 vs 0.644, p90 0.740),
+because a feature request about spend caps resembles the spend-caps article. So FR-04's
+"return nothing when nothing is relevant" holds only for off-topic text; deciding that a
+compliance, security or feature request must not be auto-answered is the router's job (FR-06)
+and the classifier's, not retrieval's. Recorded for the Stage 5 revision log.
 
 ## Routing threshold and calibration (B-07)
 _To be filled from the calibration table._
