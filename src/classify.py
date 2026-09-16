@@ -146,6 +146,11 @@ class KNNClassifier:
     def __len__(self) -> int:
         return len(self._labels)
 
+    def contains(self, text: str) -> bool:
+        """True when a ticket with exactly this text is in the memory (a development-set run)."""
+        ex = (text or "").strip().lower()
+        return any(t.strip().lower() == ex for t in self._texts)
+
     def _neighbours(self, text: str, exclude_text: Optional[str] = None,
                     exclude_sim_above: Optional[float] = None):
         if not self._vecs:
@@ -215,14 +220,20 @@ def combine(llm_conf: float, knn_share: Optional[float], agree: Optional[bool]) 
 # Main entry
 # ---------------------------------------------------------------------------------------------
 def classify(ticket: Ticket, llm, calibrator: Optional[Callable[[float], float]] = None,
-             knn: Optional[KNNClassifier] = None, template: Optional[str] = None) -> Classification:
-    """Classify one ticket. Never raises; returns a fallback Classification on any failure."""
+             knn: Optional[KNNClassifier] = None, template: Optional[str] = None,
+             exclude_self: bool = True) -> Classification:
+    """Classify one ticket. Never raises; returns a fallback Classification on any failure.
+    exclude_self: when the ticket itself is in the neighbour memory (a development-set run), it does
+    not vote for itself, so development figures are leave-one-out rather than memorised. The hidden
+    and validation sets are never in the memory, so production behaviour is unchanged."""
     knn_intent, knn_probs, knn_answerable = None, {}, None
+    ex = None
     if knn is not None and len(knn):
         try:
-            knn_probs = knn.predict_proba(ticket.text)
+            ex = ticket.text if (exclude_self and knn.contains(ticket.text)) else None
+            knn_probs = knn.predict_proba(ticket.text, exclude_text=ex)
             knn_intent = max(knn_probs, key=knn_probs.get) if knn_probs else None
-            knn_answerable = knn.predict_answerable(ticket.text)
+            knn_answerable = knn.predict_answerable(ticket.text, exclude_text=ex)
         except Exception:  # the local signal must never break classification
             knn_intent, knn_probs, knn_answerable = None, {}, None
 
@@ -254,7 +265,7 @@ def classify(ticket: Ticket, llm, calibrator: Optional[Callable[[float], float]]
     urgency_source = "llm"
     if knn is not None and len(knn):
         try:
-            u, _share = knn.predict_urgency(ticket.text)
+            u, _share = knn.predict_urgency(ticket.text, exclude_text=ex)
             if u in URGENCIES:
                 urgency, urgency_source = u, "knn"   # neighbours beat the model on urgency (classify_check)
         except Exception:

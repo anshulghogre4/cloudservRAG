@@ -103,6 +103,9 @@ def citation_map(text: str) -> List[Dict[str, object]]:
     for s in split_sentences(normalise_markers(text)):
         cites = _CITE.findall(s)
         clean = _CITE.sub("", s).replace("  ", " ").strip()
+        if not re.search(r"\w", clean) and out:          # "[DOC-X] [DOC-X]." left after a sentence: its markers
+            out[-1]["citations"] = list(dict.fromkeys(out[-1]["citations"] + cites))
+            continue
         out.append({"sentence": clean, "citations": list(dict.fromkeys(cites))})
     return out
 
@@ -144,7 +147,7 @@ def generate(ticket: Ticket, passages: Sequence[Passage], llm, tier: Optional[st
     valid = [c for c in wanted if c in retrieved]
     invalid = [c for c in wanted if c not in retrieved]
     for bad in invalid:                          # never leave a citation that cannot be verified (A6)
-        answer = answer.replace(f"[{bad}]", "").replace("  ", " ")
+        answer = re.sub(r"\s*\[" + re.escape(bad) + r"\]", "", answer)
     if unknown:
         return Draft(answer=UNKNOWN_ANSWER, citations=[], unknown=True, invalid_citations=invalid, raw=raw)
     return Draft(answer=answer, citations=valid, unknown=False, invalid_citations=invalid, raw=raw)

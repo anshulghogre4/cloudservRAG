@@ -181,3 +181,172 @@ taken from the passage without a marker; one v1.0 draft inverted a fact (contain
 values "without a restart", the passage says the opposite). Both facts define B-09: verify every
 sentence against the retrieved passages, attach the marker mechanically when a sentence is
 supported, block when it is not. Forbidden claims: 0 in all 57 drafts.
+
+## Guardrails (B-09, 16 Sep 2026)
+
+Four checks in `src/guardrails.py`, each returning pass, block or skipped on every draft, all local
+(no provider call, so they keep working during an outage):
+
+- pii: exact match on the customer's own name and id from the ticket fields, plus patterns for
+  e-mail, credential-like strings, card and phone numbers, IPs. Block, never redact. Only the
+  match type is logged, never the value. Exact matching beats NER here because the strings to
+  catch are known and the corpus contains no other names.
+- tone: forbidden commitments (refund issued, fixed on our side, a delivery date or timeline), the
+  three universal must_not_claim items from the ground truth plus regex families around them.
+  The articles' own wording about refunds ("an account owner should raise the request") passes.
+- injection: instruction-like customer text by pattern; the classifier's instruction_like flag is
+  the second signal; the router escalates on either.
+- grounding: every factual sentence (greetings, closings and rhetorical fillers excluded) is
+  compared with the retrieved passages at sentence level: best cosine over every passage sentence,
+  lexical containment over every passage, and an NLI contradiction score from
+  cross-encoder/nli-MiniLM2-L6-H768 against the matched passage sentence. Supported and uncited
+  sentences get their marker attached; unsupported or contradicted sentences block the draft with
+  the sentence flagged.
+
+Tuning on the 57 development drafts (218 factual sentences, `evaluation/results/guardrail_check.json`):
+
+| Stage | Blocked drafts | Known contradiction (DEV-0404) |
+|---|---|---|
+| chunk-level cosine, whole-passage NLI premise | 31 of 57 | passed (0.015) |
+| sentence-level NLI premise | 21 | caught (0.965) |
+| sentence-level cosine and lexical too | 7 | caught |
+| contradiction threshold 0.85, filler filter | 3 | caught |
+
+The three remaining blocks are all genuine: a v1.0 "we will investigate" filler, the inverted fact,
+and a v1.1 draft that copied the prompt's example sentences into a billing answer. Zero false
+blocks on the 19 v1.2 drafts. Thresholds at B-09: cosine 0.55 or lexical 0.50 for support (p05 of correct
+sentences is 0.61 / 0.33), contradiction 0.85 (true positive 0.965; false positives at 0.61 and
+0.73 on compound or conditional sentences). Cost: about 0.5 s per draft on CPU.
+
+Guardrails AI (guardrailsai.com) was evaluated at the user's suggestion. Facts: hub validators are
+pip-installable and, per the user, no hub key is now required; `provenance_embeddings` implements
+the same cosine-to-sources check as the grounder; `detect_pii` depends on Presidio and a spaCy
+model downloaded at first use; `detect_jailbreak` downloads a model. Installing guardrails-ai with
+the pack's pinned stack fails on openai (needs >= 1.30.1); relaxing openai within the
+langchain-openai range makes it resolve with 23 more packages (45 with detect_pii), replacing
+openai, rich and typer. Decision: not adopted for the gate build, because it adds an install
+surface to a clean-checkout test for mechanisms already implemented locally with models the
+system already loads, and its PII validator is weaker than exact matching for this corpus. It is
+recorded as the production-hardening option, and its provenance validator could be run as an
+independent cross-check of the grounder in evaluation if time allows.
+
+## Decision log, escalation package and pipeline (B-10, 16 Sep 2026)
+
+`src/logging_store.py`: SQLite, WAL journal with synchronous=FULL, one committed row per decision,
+no update or delete path in the code (append-only). Columns are the Governance Framework section 1
+record plus run_id and latency. Four rows per ticket (classification, routing, generation,
+validation); blocked tickets carry two generation rows (the draft and the escalation summary).
+`reconcile()` is the A8 check the harness runs after every batch: every processed ticket must have
+a routing and a validation row. The input summary is the ticket text only, never customer fields.
+
+`src/escalation.py`: PR-04 summary plus intent, confidence, retrieved article ids, the draft if
+one exists, the route reason and the rule; when the provider is unavailable or the output is
+unparseable a deterministic template is used, so no escalation leaves without its context (FR-14).
+
+`src/pipeline.py`: one `process()` used by the harness and the API. Component failures become
+escalations with the reason. First real end-to-end run (20 development tickets, 16 Sep):
+0 errors, 83 log rows reconciled, 12 auto-responses, 5 escalations, 3 grounding blocks.
+Latency median 9.9 s, p95 20 s: two to three provider round trips per ticket at free-tier pacing
+plus the NLI check; the 3 s p95 target (NFR-01) is not achievable with a remote free-tier model
+and is reported as such.
+
+### Checkpoint fixes after the first 20-ticket run (B-10, 16 Sep 2026)
+
+The three grounding blocks in that run were re-scored sentence by sentence and all three were
+false positives, with three distinct causes:
+
+| Ticket | Sentence | Scores | Cause |
+|---|---|---|---|
+| DEV-0006 | "we recommend storing them as secrets rather than environment variables" | cos 0.79, lex 0.50, contradiction 0.96 | NLI premise was the chunk's prepended title line "Configuring environment variables and secrets" (best cosine, but a heading, not a claim) |
+| DEV-0008 | "We will then be able to assist you further." | cos 0.20, lex 0.00 | closing filler not in the filter |
+| DEV-0010 | "We're here to help you resolve the issue with ..." / "After making any changes, please redeploy ..." | cos 0.54 / cos 0.51, lex 0.38 | filler opener; a genuine paraphrase of the redeploy step just under the 0.55 line |
+
+Changes (tests first, `tests/test_guardrails.py`, `tests/test_generate.py`): the title and section
+heading lines are excluded from passage sentences, so a heading is never an NLI premise or the
+best-cosine match; closing/filler patterns gained "assist you further", "able to help", "here to
+help", "we're here to", "we will be able to"; a marker-only fragment left by repeated trailing
+markers ("[DOC-X] [DOC-X].") is merged into the previous sentence instead of being scored as ".";
+the cosine support threshold moved from 0.55 to 0.50. Evidence for the last: the 57-draft tuning
+set has no factual sentence with cosine in [0.45, 0.55) (the threshold sits in a gap, so the
+tuning data is silent), the run produced one correct paraphrase at 0.51, and the contradiction
+check remains the second line against inverted facts. Re-run of the tuning set: still 3 of 57
+blocked, the same three, known contradiction still caught at 0.965 with a body sentence as
+premise. The three checkpoint drafts now pass. 106 tests pass.
+
+## Full development-set run (B-11, 16 Sep 2026)
+
+`python -m evaluation.harness --input Docs/Capstone_Project/05_Datasets/development_tickets.json --output evaluation/results/2026-09-16_dev_full`
+was run three times on the same output directory (run count 3 in `run_meta.json`); run 1 is
+archived as `2026-09-16_dev_full_run1`. Runs 2 and 3 reused the cached model replies, so their
+latency figures measure the local pipeline only; run 1 is the honest end-to-end latency.
+
+| | Run 1 (as built) | Run 3 (final) |
+|---|---|---|
+| auto / escalate / block | 356 / 101 / 43 | 387 / 107 / 6 |
+| first-contact resolution | 71.2% | 77.4% (CI 73.5 to 80.8) |
+| escalation rate | 28.8% | 22.6% |
+| intent accuracy | 1.000 (memorised) | 0.992 (leave-one-out) |
+| routing accuracy | 73.8% | 77.2% |
+| retrieval hit rate (357 answerable) | 93.3% | 93.3% |
+| citations resolve / cite expected article | 100% / 72.2% | 100% / 72.6% |
+| must-not-auto violations / private data | 0 / 0 | 0 / 0 |
+| calibration, bins with n >= 20 within 5 points | fails (a 2-ticket bin) | passes; ECE 0.005 |
+| decision log | not reconciled by the harness | 2006 rows, 500/500 routing and validation rows |
+| latency median / p95 | 2.4 s / 16.8 s (live provider) | 0.35 s / 0.53 s (cached) |
+| errors | 0 | 0 |
+| provider cost | about $0.03 | about $0.01 (escalation summaries) |
+
+What run 1 exposed and what changed (tests first; 133 tests pass):
+
+1. **Intent accuracy 1.000 was memorisation.** The neighbour memory is the development set, so
+   every development ticket found itself. `classify()` now excludes a ticket with identical text
+   from its own vote (`exclude_self`); development figures are leave-one-out (0.992, matching the
+   B-06 estimate). The validation and hidden sets are never in the memory, so this changes nothing
+   in production.
+2. **The harness never called `reconcile()`**; A8 was asserted, not checked. The harness now
+   reconciles the run's rows against every ticket id after the run, writes the result into
+   `metrics.json` (governance.decision_log) and `run_summary.md`, and writes routing and
+   validation rows itself when `process()` raises, so failures reconcile too.
+3. **Calibration was judged on a 2-ticket bin.** The 5-point test is now judged on bins with at
+   least 20 tickets; smaller bins are reported with `evaluable: false`. Run 3: bin 0.8-1.0 n=486
+   stated 0.996 observed 1.000; bin 0.6-0.8 n=14 not judged.
+4. **43 grounding blocks, 37 false.** Every unsupported sentence was re-scored
+   (`2026-09-16_dev_full/block_review.json`). Causes and fixes: (a) NLI premise was a Symptoms or
+   Common-causes line ("The invitation was never accepted and the account does not exist"), which
+   any resolution step contradicts; premises now come only from Resolution and Notes sentences,
+   and list bullets are stripped. (b) Plan applicability ("a feature of our Business and
+   Enterprise plans") is stated in the passage metadata, not its body; `applies_to` is now a
+   passage sentence. (c) Narration and courtesy sentences ("Please follow the steps outlined in
+   our documentation", "To better understand the problem", "We understand that", "This will help",
+   "We'd like to help you troubleshoot") were scored as claims; the filler and closing filters
+   gained those patterns. Tuning set after the change: 5 of 57 blocked, the 3 genuine ones plus
+   two superseded v1.1 drafts that copied a Common-causes line verbatim as a diagnosis; accepted as
+   conservative rather than adding a verbatim bypass around the contradiction check (a negation
+   flip would use the same path). Known inverted fact still caught at 0.965.
+5. **The six remaining blocks** are genuine by the rule: "If the job is still in progress, please
+   wait for it to complete" (4 tickets; the article says large jobs take several minutes, not to
+   wait), "This is a known issue", "This approach is more secure and scalable".
+
+Retrieval hit rate 93.3% versus the B-04 hit@5 of 0.989: the check counted the expected article
+among the top five distinct articles over all chunks with no threshold; the pipeline passes at
+most five chunks above 0.40, typically one or two articles, so the pipeline figure sits between
+the check's hit@1 (0.905) and hit@3 (0.952). Of the 24 misses, 8 have no passage above the
+threshold and 16 rank another article first. Capping chunks per article was measured (k=5 with at
+most one or two per article, k=6, k=8): 0.933 to 0.938 at best, two tickets; not adopted.
+
+Routing errors in run 3: 114 of 500; 95 are auto-responses on tickets labelled escalate (the label
+ceiling problem from B-07: same text, different expected route), 19 are escalations on tickets
+labelled auto (7 no passage above threshold, 6 grounding blocks, 6 low confidence).
+
+Governance segment condition (under 5 points variation in routing accuracy) is **not met** on the
+development set: ticket length 11.7 (short tickets n=49, 0.878 vs 0.761), region 7.5, tier 7.4,
+channel 6.5, fluency 2.6. Short tickets are mostly chat and route better because they are more
+often labelled escalate and get no passage; this is carried into the fairness audit (B-14) with
+confidence intervals rather than tuned here.
+
+Latency: the 3 s p95 target (NFR-01) fails with the live provider (run 1 p95 16.8 s, two or three
+round trips per ticket at free-tier pacing); the local pipeline without the provider is 0.5 s p95.
+
+Validation run: not yet done. `validation_tickets.json` is absent from the datasets folder by the
+user's rule (restored only after the build); it is to be run once with the same command and
+reported as validation figures with the run count from `run_meta.json`.

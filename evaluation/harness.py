@@ -59,6 +59,33 @@ def _done_ids(results_path: Path) -> set:
     return ids
 
 
+def _log_failure(pipeline, ticket: Ticket, error: str, settings: Settings) -> None:
+    """A8 includes failures: when process() itself raised, write the routing and validation rows here."""
+    store = getattr(pipeline, "log", None)
+    if store is None or not hasattr(store, "record"):
+        return
+    for stage in ("routing", "validation"):
+        try:
+            store.record(ticket_id=ticket.ticket_id, stage=stage, action_taken="escalate",
+                         reason=f"Escalated: pipeline failure ({error})", input_summary=(ticket.text or "")[:300],
+                         model_name=settings.model_name, prediction_value="escalate", requirement_ids=["FR-14"], error=error)
+        except Exception:  # noqa: BLE001
+            log.exception("could not log failure row for %s", ticket.ticket_id)
+
+
+def _reconcile(pipeline, ticket_ids: List[str], resume: bool) -> Optional[dict]:
+    """A8: logged decisions must reconcile with tickets processed. Scoped to this run id unless resuming
+    (a resumed run has rows under earlier run ids)."""
+    store = getattr(pipeline, "log", None)
+    if store is None or not hasattr(store, "reconcile"):
+        return None
+    try:
+        return store.reconcile(ticket_ids, run_id=None if resume else getattr(store, "run_id", None))
+    except Exception:  # noqa: BLE001
+        log.exception("reconciliation failed")
+        return None
+
+
 def run(input_path, output_dir, pipeline: Optional[Pipeline] = None, settings: Optional[Settings] = None,
         limit: Optional[int] = None, resume: bool = False, sort_urgency: bool = False,
         progress_every: int = 25) -> dict:
@@ -89,6 +116,7 @@ def run(input_path, output_dir, pipeline: Optional[Pipeline] = None, settings: O
                 ms = (time.perf_counter() - t_start) * 1000
                 log.exception("ticket %s failed; escalating", ticket.ticket_id)
                 result = failure_result(ticket, f"{type(exc).__name__}: {exc}", stage="pipeline", latency_ms=ms)
+                _log_failure(pipeline, ticket, result.error, settings)
             fh.write(json.dumps(result.to_record(), ensure_ascii=False) + "\n")
             fh.flush()
             processed += 1
@@ -101,6 +129,12 @@ def run(input_path, output_dir, pipeline: Optional[Pipeline] = None, settings: O
         (out / "results_by_urgency.jsonl").write_text(
             "".join(json.dumps(r, ensure_ascii=False) + "\n" for r in ordered), encoding="utf-8")
     metrics = compute_metrics(records)
+    rec = _reconcile(pipeline, [t.ticket_id for t in tickets], resume)
+    if rec is not None:
+        metrics["governance"]["decision_log"] = rec
+        metrics["governance"]["decisions_logged"] = rec["rows_total"]
+        (log.info if rec["complete"] else log.error)("decision log reconciliation: %s (%d rows, %d tickets)",
+                                                     "complete" if rec["complete"] else "INCOMPLETE", rec["rows_total"], rec["tickets"])
 
     meta_path = out / "run_meta.json"
     prior = json.loads(meta_path.read_text(encoding="utf-8")) if meta_path.exists() else {}

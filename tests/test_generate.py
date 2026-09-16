@@ -127,3 +127,10 @@ def test_prompt_version_is_current():
 def test_format_passages_lists_id_section_and_plan():
     s = format_passages([passage(), passage("DOC-API-002", "Notes", "Cursors expire after one hour.")])
     assert "[DOC-API-001 | Resolution | All plans]" in s and "Cursors expire" in s
+
+
+def test_trailing_marker_only_fragment_is_merged_into_previous_sentence():
+    text = "Store secrets as secrets. Refer to the documentation for details. [DOC-DEPLOY-004] [DOC-DEPLOY-004] [DOC-DEPLOY-004]."
+    cm = citation_map(text)
+    assert [x["sentence"] for x in cm] == ["Store secrets as secrets.", "Refer to the documentation for details."]
+    assert cm[1]["citations"] == ["DOC-DEPLOY-004"]

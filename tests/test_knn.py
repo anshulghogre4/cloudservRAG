@@ -100,3 +100,11 @@ def test_classify_takes_urgency_from_neighbours(knn):
     assert c.urgency == "high" and c.urgency_source == "knn"
     c2 = classify(t, FakeLLM(reply=reply))
     assert c2.urgency == "low" and c2.urgency_source == "llm"
+
+
+def test_contains_and_self_exclusion_for_memorised_tickets(knn):
+    body = knn._texts[0]
+    assert knn.contains(body) and not knn.contains("something never seen before")
+    with_self = knn._neighbours(body)
+    without = knn._neighbours(body, exclude_text=body)
+    assert with_self[0][1] > 0.999 and all(sim < 0.999 for _, sim in without)

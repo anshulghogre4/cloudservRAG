@@ -9,6 +9,7 @@ T-07 (hit rate >= 85% on development tickets) is measured by evaluation/retrieva
 """
 import math
 import re
+import zlib
 from collections import Counter
 
 import pytest
@@ -25,7 +26,7 @@ class BagOfWordsEmbedder:
     def _vec(self, text: str):
         v = [0.0] * self.n
         for tok in re.findall(r"[a-z0-9]+", text.lower()):
-            v[hash(tok) % self.n] += 1.0
+            v[zlib.crc32(tok.encode()) % self.n] += 1.0   # deterministic: hash() is randomised per process
         norm = math.sqrt(sum(x * x for x in v)) or 1.0
         return [x / norm for x in v]
 

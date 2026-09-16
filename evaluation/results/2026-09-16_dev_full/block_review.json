@@ -1,0 +1,516 @@
+[
+ {
+  "ticket": "DEV-0059",
+  "reason": "no_supporting_passage",
+  "cos": 0.258,
+  "lex": 0.0,
+  "contra": 0.005,
+  "sentence": "Please have them reply to this ticket with what they observed.",
+  "doc": "DOC-DATA-003",
+  "expected": [
+   "DOC-DATA-003"
+  ]
+ },
+ {
+  "ticket": "DEV-0066",
+  "reason": "no_supporting_passage",
+  "cos": 0.193,
+  "lex": 0.0,
+  "contra": 0.001,
+  "sentence": "This approach can help you avoid the issues you're currently facing.",
+  "doc": "DOC-API-002",
+  "expected": [
+   "DOC-API-002"
+  ]
+ },
+ {
+  "ticket": "DEV-0081",
+  "reason": "no_supporting_passage",
+  "cos": 0.366,
+  "lex": 0.0,
+  "contra": 0.001,
+  "sentence": "According to our documentation, this could be due to a few reasons.",
+  "doc": "DOC-DEPLOY-001",
+  "expected": [
+   "DOC-DEPLOY-001"
+  ]
+ },
+ {
+  "ticket": "DEV-0084",
+  "reason": "contradicted",
+  "cos": 0.861,
+  "lex": 0.571,
+  "contra": 0.976,
+  "sentence": "This will ensure that your pipeline can authenticate against CloudServe without any issues.",
+  "doc": "DOC-INT-001",
+  "expected": [
+   "DOC-INT-001",
+   "DOC-INT-002"
+  ]
+ },
+ {
+  "ticket": "DEV-0086",
+  "reason": "no_supporting_passage",
+  "cos": 0.366,
+  "lex": 0.167,
+  "contra": 0.001,
+  "sentence": "According to our documentation, this could be due to a few reasons.",
+  "doc": "DOC-DEPLOY-001",
+  "expected": []
+ },
+ {
+  "ticket": "DEV-0088",
+  "reason": "contradicted",
+  "cos": 0.699,
+  "lex": 0.25,
+  "contra": 0.982,
+  "sentence": "We understand that you're experiencing a long-running restore.",
+  "doc": "DOC-DATA-002",
+  "expected": [
+   "DOC-PERF-003",
+   "DOC-DATA-002"
+  ]
+ },
+ {
+  "ticket": "DEV-0089",
+  "reason": "no_supporting_passage",
+  "cos": 0.387,
+  "lex": 0.0,
+  "contra": 0.004,
+  "sentence": "We'd like to help you troubleshoot the problem.",
+  "doc": "DOC-PERF-002",
+  "expected": []
+ },
+ {
+  "ticket": "DEV-0093",
+  "reason": "contradicted",
+  "cos": 0.851,
+  "lex": 0.6,
+  "contra": 0.972,
+  "sentence": "Please verify that the account exists and has accepted the invitation.",
+  "doc": "DOC-ACCT-001",
+  "expected": [
+   "DOC-ACCT-001"
+  ]
+ },
+ {
+  "ticket": "DEV-0095",
+  "reason": "no_supporting_passage",
+  "cos": 0.387,
+  "lex": 0.0,
+  "contra": 0.004,
+  "sentence": "We'd like to help you troubleshoot the problem.",
+  "doc": "DOC-PERF-002",
+  "expected": [
+   "DOC-PERF-001"
+  ]
+ },
+ {
+  "ticket": "DEV-0096",
+  "reason": "no_supporting_passage",
+  "cos": 0.287,
+  "lex": 0.0,
+  "contra": 0.004,
+  "sentence": "Please follow the steps outlined in our documentation: 1.",
+  "doc": "DOC-ONB-002",
+  "expected": [
+   "DOC-ONB-001",
+   "DOC-ONB-002"
+  ]
+ },
+ {
+  "ticket": "DEV-0106",
+  "reason": "no_supporting_passage",
+  "cos": 0.359,
+  "lex": 0.0,
+  "contra": 0.002,
+  "sentence": "This is a feature of our Business and Enterprise plans.",
+  "doc": "DOC-DATA-003",
+  "expected": [
+   "DOC-DATA-003"
+  ]
+ },
+ {
+  "ticket": "DEV-0128",
+  "reason": "no_supporting_passage",
+  "cos": 0.348,
+  "lex": 0.2,
+  "contra": 0.001,
+  "sentence": "To better understand the problem, let's go through some steps to identify the possible cause.",
+  "doc": "DOC-PERF-003",
+  "expected": []
+ },
+ {
+  "ticket": "DEV-0129",
+  "reason": "no_supporting_passage",
+  "cos": 0.396,
+  "lex": 0.2,
+  "contra": 0.556,
+  "sentence": "If the job is still in progress, please wait for it to complete.",
+  "doc": "DOC-DATA-001",
+  "expected": [
+   "DOC-DATA-001"
+  ]
+ },
+ {
+  "ticket": "DEV-0143",
+  "reason": "no_supporting_passage",
+  "cos": 0.348,
+  "lex": 0.2,
+  "contra": 0.001,
+  "sentence": "To better understand the problem, let's go through some steps to identify the possible cause.",
+  "doc": "DOC-PERF-003",
+  "expected": [
+   "DOC-PERF-003"
+  ]
+ },
+ {
+  "ticket": "DEV-0173",
+  "reason": "no_supporting_passage",
+  "cos": 0.309,
+  "lex": 0.0,
+  "contra": 0.004,
+  "sentence": "This is a known issue that can cause reconciliation difficulties.",
+  "doc": "DOC-BILL-001",
+  "expected": [
+   "DOC-BILL-001"
+  ]
+ },
+ {
+  "ticket": "DEV-0197",
+  "reason": "no_supporting_passage",
+  "cos": 0.375,
+  "lex": 0.0,
+  "contra": 0.002,
+  "sentence": "This will help us understand the cause of the failure.",
+  "doc": "DOC-API-003",
+  "expected": [
+   "DOC-API-003"
+  ]
+ },
+ {
+  "ticket": "DEV-0209",
+  "reason": "no_supporting_passage",
+  "cos": 0.283,
+  "lex": 0.0,
+  "contra": 0.01,
+  "sentence": "We recommend checking this to ensure it's not causing the issue.",
+  "doc": "DOC-DATA-002",
+  "expected": [
+   "DOC-PERF-003",
+   "DOC-DATA-002"
+  ]
+ },
+ {
+  "ticket": "DEV-0218",
+  "reason": "no_supporting_passage",
+  "cos": 0.359,
+  "lex": 0.0,
+  "contra": 0.006,
+  "sentence": "Please follow the steps below to troubleshoot the problem.",
+  "doc": "DOC-AUTH-001",
+  "expected": [
+   "DOC-AUTH-001"
+  ]
+ },
+ {
+  "ticket": "DEV-0221",
+  "reason": "no_supporting_passage",
+  "cos": 0.147,
+  "lex": 0.0,
+  "contra": 0.006,
+  "sentence": "We'll be happy to further assist you.",
+  "doc": "DOC-API-001",
+  "expected": [
+   "DOC-API-001"
+  ]
+ },
+ {
+  "ticket": "DEV-0233",
+  "reason": "no_supporting_passage",
+  "cos": 0.287,
+  "lex": 0.0,
+  "contra": 0.004,
+  "sentence": "Please follow the steps outlined in our documentation: 1.",
+  "doc": "DOC-ONB-002",
+  "expected": [
+   "DOC-ONB-001"
+  ]
+ },
+ {
+  "ticket": "DEV-0250",
+  "reason": "no_supporting_passage",
+  "cos": 0.205,
+  "lex": 0.25,
+  "contra": 0.022,
+  "sentence": "We will review your ticket and respond accordingly.",
+  "doc": "DOC-AUTH-004",
+  "expected": [
+   "DOC-AUTH-004"
+  ]
+ },
+ {
+  "ticket": "DEV-0256",
+  "reason": "no_supporting_passage",
+  "cos": 0.24,
+  "lex": 0.0,
+  "contra": 0.001,
+  "sentence": "This will help ensure a smooth transition.",
+  "doc": "DOC-ONB-002",
+  "expected": [
+   "DOC-ONB-001"
+  ]
+ },
+ {
+  "ticket": "DEV-0259",
+  "reason": "no_supporting_passage",
+  "cos": 0.25,
+  "lex": 0.0,
+  "contra": 0.001,
+  "sentence": "This approach is more secure and scalable.",
+  "doc": "DOC-INT-001",
+  "expected": [
+   "DOC-INT-001"
+  ]
+ },
+ {
+  "ticket": "DEV-0266",
+  "reason": "no_supporting_passage",
+  "cos": 0.34,
+  "lex": 0.0,
+  "contra": 0.005,
+  "sentence": "If the issue persists, we will continue to work with you to resolve the problem.",
+  "doc": "DOC-ACCT-001",
+  "expected": []
+ },
+ {
+  "ticket": "DEV-0274",
+  "reason": "no_supporting_passage",
+  "cos": 0.277,
+  "lex": 0.0,
+  "contra": 0.004,
+  "sentence": "To better understand the issue, let's go through the steps outlined in our documentation.",
+  "doc": "DOC-PERF-001",
+  "expected": [
+   "DOC-PERF-001",
+   "DOC-PERF-002"
+  ]
+ },
+ {
+  "ticket": "DEV-0277",
+  "reason": "no_supporting_passage",
+  "cos": 0.348,
+  "lex": 0.2,
+  "contra": 0.001,
+  "sentence": "To better understand the problem, let's go through some steps to identify the possible cause.",
+  "doc": "DOC-PERF-003",
+  "expected": [
+   "DOC-PERF-003"
+  ]
+ },
+ {
+  "ticket": "DEV-0286",
+  "reason": "no_supporting_passage",
+  "cos": 0.186,
+  "lex": 0.0,
+  "contra": 0.001,
+  "sentence": "To better understand the issue, I would like to guide you through a few steps.",
+  "doc": "DOC-PERF-001",
+  "expected": [
+   "DOC-PERF-001",
+   "DOC-PERF-002"
+  ]
+ },
+ {
+  "ticket": "DEV-0290",
+  "reason": "no_supporting_passage",
+  "cos": 0.252,
+  "lex": 0.0,
+  "contra": 0.002,
+  "sentence": "To help us better understand the problem, please follow the steps outlined in our documentation.",
+  "doc": "DOC-PERF-001",
+  "expected": [
+   "DOC-PERF-001",
+   "DOC-PERF-002"
+  ]
+ },
+ {
+  "ticket": "DEV-0306",
+  "reason": "no_supporting_passage",
+  "cos": 0.263,
+  "lex": 0.2,
+  "contra": 0.003,
+  "sentence": "This log can help us understand the cause of the problem.",
+  "doc": "DOC-API-003",
+  "expected": [
+   "DOC-API-003"
+  ]
+ },
+ {
+  "ticket": "DEV-0313",
+  "reason": "no_supporting_passage",
+  "cos": 0.223,
+  "lex": 0.0,
+  "contra": 0.006,
+  "sentence": "To do this, please follow the steps below.",
+  "doc": "DOC-DEPLOY-002",
+  "expected": [
+   "DOC-DEPLOY-002"
+  ]
+ },
+ {
+  "ticket": "DEV-0318",
+  "reason": "contradicted",
+  "cos": 0.561,
+  "lex": 0.429,
+  "contra": 0.941,
+  "sentence": "We understand that your staging environment is picking up production configuration values.",
+  "doc": "DOC-DEPLOY-004",
+  "expected": [
+   "DOC-DEPLOY-004"
+  ]
+ },
+ {
+  "ticket": "DEV-0325",
+  "reason": "no_supporting_passage",
+  "cos": 0.241,
+  "lex": 0.0,
+  "contra": 0.002,
+  "sentence": "We understand that this can be frustrating.",
+  "doc": "DOC-INT-002",
+  "expected": []
+ },
+ {
+  "ticket": "DEV-0340",
+  "reason": "no_supporting_passage",
+  "cos": 0.396,
+  "lex": 0.2,
+  "contra": 0.556,
+  "sentence": "If the job is still in progress, please wait for it to complete.",
+  "doc": "DOC-DATA-001",
+  "expected": [
+   "DOC-DATA-001"
+  ]
+ },
+ {
+  "ticket": "DEV-0341",
+  "reason": "no_supporting_passage",
+  "cos": 0.146,
+  "lex": 0.0,
+  "contra": 0.001,
+  "sentence": "You can find this information by following the steps outlined in our documentation.",
+  "doc": "DOC-INT-002",
+  "expected": [
+   "DOC-INT-001"
+  ]
+ },
+ {
+  "ticket": "DEV-0378",
+  "reason": "no_supporting_passage",
+  "cos": 0.301,
+  "lex": 0.0,
+  "contra": 0.003,
+  "sentence": "If the issue persists, we can discuss further steps to resolve the problem.",
+  "doc": "DOC-DATA-002",
+  "expected": [
+   "DOC-PERF-003"
+  ]
+ },
+ {
+  "ticket": "DEV-0379",
+  "reason": "no_supporting_passage",
+  "cos": 0.492,
+  "lex": 0.2,
+  "contra": 0.003,
+  "sentence": "This will help you identify any potential issues with your endpoint.",
+  "doc": "DOC-API-003",
+  "expected": [
+   "DOC-API-003"
+  ]
+ },
+ {
+  "ticket": "DEV-0429",
+  "reason": "no_supporting_passage",
+  "cos": 0.396,
+  "lex": 0.2,
+  "contra": 0.556,
+  "sentence": "If the job is still in progress, please wait for it to complete.",
+  "doc": "DOC-DATA-001",
+  "expected": [
+   "DOC-DATA-001"
+  ]
+ },
+ {
+  "ticket": "DEV-0433",
+  "reason": "no_supporting_passage",
+  "cos": 0.258,
+  "lex": 0.0,
+  "contra": 0.005,
+  "sentence": "Please have them reply to this ticket with what they observed.",
+  "doc": "DOC-DATA-003",
+  "expected": [
+   "DOC-DATA-003"
+  ]
+ },
+ {
+  "ticket": "DEV-0435",
+  "reason": "contradicted",
+  "cos": 0.743,
+  "lex": 0.375,
+  "contra": 0.865,
+  "sentence": "We understand that you're looking to understand how group membership interacts with directly assigned roles.",
+  "doc": "DOC-ACCT-001",
+  "expected": [
+   "DOC-ACCT-001"
+  ]
+ },
+ {
+  "ticket": "DEV-0485",
+  "reason": "contradicted",
+  "cos": 0.851,
+  "lex": 0.6,
+  "contra": 0.972,
+  "sentence": "Please verify that the account exists and has accepted the invitation.",
+  "doc": "DOC-ACCT-001",
+  "expected": [
+   "DOC-ACCT-001"
+  ]
+ },
+ {
+  "ticket": "DEV-0489",
+  "reason": "no_supporting_passage",
+  "cos": 0.359,
+  "lex": 0.0,
+  "contra": 0.002,
+  "sentence": "This is a feature of our Business and Enterprise plans.",
+  "doc": "DOC-DATA-003",
+  "expected": [
+   "DOC-DATA-003"
+  ]
+ },
+ {
+  "ticket": "DEV-0490",
+  "reason": "no_supporting_passage",
+  "cos": 0.396,
+  "lex": 0.2,
+  "contra": 0.556,
+  "sentence": "If the job is still in progress, please wait for it to complete.",
+  "doc": "DOC-DATA-001",
+  "expected": [
+   "DOC-DATA-001"
+  ]
+ },
+ {
+  "ticket": "DEV-0496",
+  "reason": "no_supporting_passage",
+  "cos": 0.324,
+  "lex": 0.2,
+  "contra": 0.002,
+  "sentence": "This will help ensure a smooth transition to CloudServe.",
+  "doc": "DOC-ONB-002",
+  "expected": [
+   "DOC-ONB-001",
+   "DOC-ONB-002"
+  ]
+ }
+]

@@ -41,8 +41,10 @@ def _pct(values: Sequence[float], q: float) -> Optional[float]:
     return s[min(len(s) - 1, max(0, int(math.ceil(q * len(s))) - 1))]
 
 
-def calibration_table(pairs: Sequence[Tuple[float, bool]], bands: int = 5) -> Dict[str, Any]:
-    """Evaluation Framework section 3: bin by stated confidence, compare to observed accuracy; ECE weighted by size."""
+def calibration_table(pairs: Sequence[Tuple[float, bool]], bands: int = 5, min_n: int = 20) -> Dict[str, Any]:
+    """Evaluation Framework section 3: bin by stated confidence, compare to observed accuracy; ECE weighted by size.
+    The 5-point test is judged on bins with at least `min_n` tickets; a two-ticket bin cannot show a
+    calibration gap (its Wilson interval spans most of [0, 1]) and is reported, not judged."""
     rows: List[Dict[str, Any]] = []
     ece, total = 0.0, len(pairs)
     for i in range(bands):
@@ -52,10 +54,12 @@ def calibration_table(pairs: Sequence[Tuple[float, bool]], bands: int = 5) -> Di
             continue
         stated = sum(c for c, _ in group) / len(group)
         observed = sum(1 for _, ok in group if ok) / len(group)
-        rows.append({"band": [low, high], "n": len(group), "stated": stated, "observed": observed, "gap": stated - observed})
+        rows.append({"band": [low, high], "n": len(group), "stated": stated, "observed": observed,
+                     "gap": stated - observed, "evaluable": len(group) >= min_n})
         ece += abs(stated - observed) * len(group) / total
-    within5 = all(abs(r["gap"]) <= 0.05 for r in rows) if rows else None
-    return {"bins": rows, "ece": ece if total else None, "all_bins_within_5_points": within5, "n": total}
+    judged = [r for r in rows if r["evaluable"]]
+    within5 = all(abs(r["gap"]) <= 0.05 for r in judged) if judged else None
+    return {"bins": rows, "ece": ece if total else None, "all_bins_within_5_points": within5, "n": total, "min_n": min_n}
 
 
 def _route_of(r: Dict[str, Any]) -> str:
@@ -186,6 +190,15 @@ def _ms(x: Optional[float]) -> str:
     return "n/a" if x is None else f"{x:.0f} ms"
 
 
+def _reconcile_line(rec: Optional[Dict[str, Any]]) -> str:
+    if not rec:
+        return "- Decision log reconciliation: not available (pipeline exposes no decision log)"
+    state = "complete" if rec.get("complete") else "INCOMPLETE"
+    return (f"- Decision log reconciliation: {state}; {rec.get('rows_total')} rows for {rec.get('tickets')} tickets; "
+            f"routing rows {rec.get('tickets_with_routing')}/{rec.get('tickets')}, validation rows "
+            f"{rec.get('tickets_with_validation')}/{rec.get('tickets')}")
+
+
 def render_summary(m: Dict[str, Any], meta: Dict[str, Any]) -> str:
     fcr, esc = m["business"]["first_contact_resolution"], m["business"]["escalation_rate"]
     cls = m["technical"]["classification"]
@@ -213,7 +226,8 @@ def render_summary(m: Dict[str, Any], meta: Dict[str, Any]) -> str:
         "## Governance",
         f"- Decisions logged {g['decisions_logged']}, failed tickets {g['failed_tickets']}, guardrail blocks {g['guardrail_activations']}",
         f"- Private data detections {g['private_data_detections']}, must-not-auto-respond violations {g['must_not_auto_respond_violations']}",
-        f"- Calibration ECE {g['calibration'].get('ece')}, all bins within 5 points: {g['calibration'].get('all_bins_within_5_points')}",
+        f"- Calibration ECE {g['calibration'].get('ece')}, all bins with n >= {g['calibration'].get('min_n')} within 5 points: {g['calibration'].get('all_bins_within_5_points')}",
+        _reconcile_line(g.get("decision_log")),
         "",
         "## Segment variation in routing accuracy (percentage points)",
     ]

@@ -1,0 +1,288 @@
+{
+  "volume": {
+    "processed": 20,
+    "auto_responded": 12,
+    "escalated": 5,
+    "blocked": 3
+  },
+  "business": {
+    "first_contact_resolution": {
+      "value": 0.6,
+      "n": 20,
+      "ci95": [
+        0.3865779423152061,
+        0.7811960325858074
+      ]
+    },
+    "escalation_rate": {
+      "value": 0.4,
+      "n": 20,
+      "ci95": [
+        0.21880396741419272,
+        0.613422057684794
+      ]
+    },
+    "response_time_ms_mean": 9902.54308000076,
+    "response_time_ms_median": 9906.858349997492,
+    "response_time_ms_p95": 20376.92870000319,
+    "note": "FCR = auto-responded and not blocked; repeat contacts are not observable in an offline run."
+  },
+  "technical": {
+    "classification": {
+      "labelled": 20,
+      "per_class": {
+        "account_access": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "support": 2.0
+        },
+        "api_key_issue": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "support": 2.0
+        },
+        "api_usage_question": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "support": 1.0
+        },
+        "authentication_failure": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "support": 2.0
+        },
+        "compliance_request": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "support": 2.0
+        },
+        "configuration_help": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "support": 2.0
+        },
+        "data_export": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "support": 1.0
+        },
+        "deployment_failure": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "support": 1.0
+        },
+        "feature_request": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "support": 2.0
+        },
+        "rollback_request": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "support": 2.0
+        },
+        "security_incident": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "support": 1.0
+        },
+        "sso_configuration": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "support": 2.0
+        }
+      },
+      "macro_precision": 1.0,
+      "macro_recall": 1.0,
+      "accuracy": 1.0,
+      "urgency_accuracy": 0.75,
+      "confusion": {
+        "deployment_failure": {
+          "deployment_failure": 1
+        },
+        "api_key_issue": {
+          "api_key_issue": 2
+        },
+        "compliance_request": {
+          "compliance_request": 2
+        },
+        "rollback_request": {
+          "rollback_request": 2
+        },
+        "feature_request": {
+          "feature_request": 2
+        },
+        "configuration_help": {
+          "configuration_help": 2
+        },
+        "authentication_failure": {
+          "authentication_failure": 2
+        },
+        "data_export": {
+          "data_export": 1
+        },
+        "sso_configuration": {
+          "sso_configuration": 2
+        },
+        "security_incident": {
+          "security_incident": 1
+        },
+        "account_access": {
+          "account_access": 2
+        },
+        "api_usage_question": {
+          "api_usage_question": 1
+        }
+      }
+    },
+    "retrieval_hit_rate": 0.9333333333333333,
+    "retrieval_hit_rate_n": 15,
+    "routing_accuracy": 0.75,
+    "citation_resolves_to_retrieved": 1.0,
+    "citation_hits_expected_doc": 0.75,
+    "latency_ms_median": 9906.858349997492,
+    "latency_ms_p95": 20376.92870000319
+  },
+  "governance": {
+    "decisions_logged": 20,
+    "guardrail_activations": {
+      "grounding": 3
+    },
+    "private_data_detections": 0,
+    "failed_tickets": 0,
+    "instruction_like_flagged": 0,
+    "must_not_auto_respond_violations": 0,
+    "calibration": {
+      "bins": [
+        {
+          "band": [
+            0.8,
+            1.0
+          ],
+          "n": 20,
+          "stated": 0.9962566844919787,
+          "observed": 1.0,
+          "gap": -0.0037433155080213165
+        }
+      ],
+      "ece": 0.0037433155080213165,
+      "all_bins_within_5_points": true,
+      "n": 20
+    }
+  },
+  "segments": {
+    "tier": {
+      "business": {
+        "n": 8,
+        "auto_respond_rate": 0.875,
+        "routing_accuracy": 0.875,
+        "intent_accuracy": 1.0
+      },
+      "enterprise": {
+        "n": 3,
+        "auto_respond_rate": 0.6666666666666666,
+        "routing_accuracy": 1.0,
+        "intent_accuracy": 1.0
+      },
+      "standard": {
+        "n": 9,
+        "auto_respond_rate": 0.3333333333333333,
+        "routing_accuracy": 0.5555555555555556,
+        "intent_accuracy": 1.0
+      }
+    },
+    "region": {
+      "asia_pacific": {
+        "n": 4,
+        "auto_respond_rate": 0.75,
+        "routing_accuracy": 1.0,
+        "intent_accuracy": 1.0
+      },
+      "europe": {
+        "n": 5,
+        "auto_respond_rate": 0.2,
+        "routing_accuracy": 0.2,
+        "intent_accuracy": 1.0
+      },
+      "latin_america": {
+        "n": 6,
+        "auto_respond_rate": 1.0,
+        "routing_accuracy": 0.8333333333333334,
+        "intent_accuracy": 1.0
+      },
+      "north_america": {
+        "n": 5,
+        "auto_respond_rate": 0.4,
+        "routing_accuracy": 1.0,
+        "intent_accuracy": 1.0
+      }
+    },
+    "fluency": {
+      "fluent": {
+        "n": 14,
+        "auto_respond_rate": 0.5714285714285714,
+        "routing_accuracy": 0.7142857142857143,
+        "intent_accuracy": 1.0
+      },
+      "non_fluent": {
+        "n": 6,
+        "auto_respond_rate": 0.6666666666666666,
+        "routing_accuracy": 0.8333333333333334,
+        "intent_accuracy": 1.0
+      }
+    },
+    "ticket_length": {
+      "long": {
+        "n": 18,
+        "auto_respond_rate": 0.5555555555555556,
+        "routing_accuracy": 0.7222222222222222,
+        "intent_accuracy": 1.0
+      },
+      "short": {
+        "n": 2,
+        "auto_respond_rate": 1.0,
+        "routing_accuracy": 1.0,
+        "intent_accuracy": 1.0
+      }
+    },
+    "channel": {
+      "chat": {
+        "n": 6,
+        "auto_respond_rate": 0.8333333333333334,
+        "routing_accuracy": 0.5,
+        "intent_accuracy": 1.0
+      },
+      "docs_comment": {
+        "n": 3,
+        "auto_respond_rate": 0.3333333333333333,
+        "routing_accuracy": 1.0,
+        "intent_accuracy": 1.0
+      },
+      "email": {
+        "n": 11,
+        "auto_respond_rate": 0.5454545454545454,
+        "routing_accuracy": 0.8181818181818182,
+        "intent_accuracy": 1.0
+      }
+    }
+  },
+  "segment_variation_routing_accuracy": {
+    "tier": 0.4444444444444444,
+    "region": 0.8,
+    "fluency": 0.11904761904761907,
+    "ticket_length": 0.2777777777777778,
+    "channel": 0.5
+  }
+}

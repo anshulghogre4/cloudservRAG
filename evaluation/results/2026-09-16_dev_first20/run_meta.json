@@ -1,0 +1,15 @@
+{
+  "input": "Docs/Capstone_Project/05_Datasets/development_tickets.json",
+  "output": "evaluation\\results\\2026-09-16_dev_first20",
+  "tickets": 20,
+  "processed_this_run": 20,
+  "started_at": "2026-09-16T04:53:11.486266+00:00",
+  "finished_at": "2026-09-16T04:56:38.609841+00:00",
+  "duration_s": 207.12301480000315,
+  "version": "2576f80",
+  "model": "meta-llama/llama-3.1-8b-instruct",
+  "confidence_threshold": 0.8,
+  "retrieval_threshold": 0.4,
+  "kill_switch": false,
+  "run_count_on_this_input": 1
+}

@@ -59,6 +59,11 @@ class Settings:
     answerable_floor: float = 0.0        # escalate when neighbours say P(answerable from docs) is below this; 0 disables
     plan_rule: bool = False              # escalate when the cited article's plan excludes the customer's tier
     metrics_port: int = 8001
+    # grounding guardrail thresholds (tuned on development drafts, evaluation/guardrail_check.py)
+    grounding_cos: float = 0.50           # sentence-passage cosine at or above this counts as supported
+    grounding_lex: float = 0.50           # or this share of the sentence's content words found in the passage
+    grounding_contradiction: float = 0.85 # NLI contradiction probability at or above this blocks (dev drafts: true positive 0.965, false positives 0.61-0.73)
+    grounding_nli: bool = True            # set false to skip the NLI model (faster, weaker)
 
     @property
     def sqlite_path(self) -> Path:
@@ -100,4 +105,8 @@ def load_settings(env_file: Optional[str | os.PathLike] = ".env") -> Settings:
         answerable_floor=_float(env.get("ANSWERABLE_FLOOR"), defaults.answerable_floor),
         plan_rule=_bool(env.get("PLAN_RULE"), defaults.plan_rule),
         metrics_port=_int(env.get("METRICS_PORT"), defaults.metrics_port),
+        grounding_cos=_float(env.get("GROUNDING_COS"), defaults.grounding_cos),
+        grounding_lex=_float(env.get("GROUNDING_LEX"), defaults.grounding_lex),
+        grounding_contradiction=_float(env.get("GROUNDING_CONTRADICTION"), defaults.grounding_contradiction),
+        grounding_nli=_bool(env.get("GROUNDING_NLI"), defaults.grounding_nli),
     )

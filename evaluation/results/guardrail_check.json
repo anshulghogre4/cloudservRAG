@@ -1,0 +1,3268 @@
+{
+  "summary": {
+    "drafts": 57,
+    "factual_sentences": 206,
+    "seconds": 27.1,
+    "thresholds": {
+      "cos": 0.5,
+      "lex": 0.5,
+      "contradiction": 0.85
+    },
+    "cos_quantiles": {
+      "p05": 0.637,
+      "p10": 0.705,
+      "p25": 0.819,
+      "p50": 0.926,
+      "min": 0.146
+    },
+    "lex_quantiles": {
+      "p05": 0.545,
+      "p10": 0.6,
+      "p25": 0.75,
+      "p50": 0.909,
+      "min": 0.0
+    },
+    "contradiction_quantiles": {
+      "p50": 0.003,
+      "p90": 0.04,
+      "p95": 0.072,
+      "p99": 0.945,
+      "max": 0.968
+    },
+    "blocked_drafts": 5,
+    "blocked_by": {
+      "pii": 0,
+      "tone": 0,
+      "grounding": 5,
+      "injection": 0
+    },
+    "markers_attached_total": 88,
+    "known_contradiction": {
+      "verdict": "block",
+      "scores": [
+        {
+          "sentence": "This will ensure that running containers pick up the new values without a restart.",
+          "doc_id": "DOC-DEPLOY-004",
+          "cos": 0.919,
+          "lex": 0.875,
+          "contradiction": 0.965,
+          "cited": []
+        }
+      ],
+      "unsupported": [
+        {
+          "sentence": "This will ensure that running containers pick up the new values without a restart.",
+          "doc_id": "DOC-DEPLOY-004",
+          "cos": 0.919,
+          "lex": 0.875,
+          "contradiction": 0.965,
+          "cited": [],
+          "reason": "contradicted"
+        }
+      ]
+    },
+    "unsupported_examples": [
+      [
+        "no_supporting_passage",
+        "We'll need to investigate further to determine the cause of the issue.",
+        0.146,
+        0.0,
+        0.003
+      ],
+      [
+        "contradicted",
+        "This will ensure that running containers pick up the new values without a restart.",
+        0.919,
+        0.875,
+        0.965
+      ],
+      [
+        "contradicted",
+        "The application cannot read a variable that appears to be set .",
+        0.969,
+        1.0,
+        0.908
+      ],
+      [
+        "contradicted",
+        "Connections are not being returned to the pool after use .",
+        0.977,
+        1.0,
+        0.945
+      ],
+      [
+        "contradicted",
+        "Long-running transactions are holding connections open .",
+        0.94,
+        1.0,
+        0.968
+      ],
+      [
+        "no_supporting_passage",
+        "Read the rate limit headers returned with every response .",
+        0.349,
+        0.143,
+        0.11
+      ],
+      [
+        "no_supporting_passage",
+        "Implement exponential backoff with jitter on 429 responses rather than retrying immediatel",
+        0.198,
+        0.222,
+        0.263
+      ]
+    ]
+  },
+  "per_draft": [
+    {
+      "source": "generate_check",
+      "ticket_id": "DEV-0471",
+      "verdicts": {
+        "injection": "pass",
+        "pii": "pass",
+        "tone": "pass",
+        "grounding": "pass"
+      },
+      "blocked": false,
+      "unsupported": [],
+      "checked": 5,
+      "attached": 5
+    },
+    {
+      "source": "generate_check",
+      "ticket_id": "DEV-0124",
+      "verdicts": {
+        "injection": "pass",
+        "pii": "pass",
+        "tone": "pass",
+        "grounding": "pass"
+      },
+      "blocked": false,
+      "unsupported": [],
+      "checked": 2,
+      "attached": 0
+    },
+    {
+      "source": "generate_check",
+      "ticket_id": "DEV-0116",
+      "verdicts": {
+        "injection": "pass",
+        "pii": "pass",
+        "tone": "pass",
+        "grounding": "block"
+      },
+      "blocked": true,
+      "unsupported": [
+        [
+          "no_supporting_passage",
+          "We'll need to investigate further to determine the cause of the issue.",
+          0.146,
+          0.0,
+          0.003
+        ]
+      ],
+      "checked": 3,
+      "attached": 1
+    },
+    {
+      "source": "generate_check",
+      "ticket_id": "DEV-0404",
+      "verdicts": {
+        "injection": "pass",
+        "pii": "pass",
+        "tone": "pass",
+        "grounding": "block"
+      },
+      "blocked": true,
+      "unsupported": [
+        [
+          "contradicted",
+          "This will ensure that running containers pick up the new values without a restart.",
+          0.919,
+          0.875,
+          0.965
+        ]
+      ],
+      "checked": 5,
+      "attached": 5
+    },
+    {
+      "source": "generate_check",
+      "ticket_id": "DEV-0213",
+      "verdicts": {
+        "injection": "pass",
+        "pii": "pass",
+        "tone": "pass",
+        "grounding": "pass"
+      },
+      "blocked": false,
+      "unsupported": [],
+      "checked": 3,
+      "attached": 0
+    },
+    {
+      "source": "generate_check",
+      "ticket_id": "DEV-0386",
+      "verdicts": {
+        "injection": "pass",
+        "pii": "pass",
+        "tone": "pass",
+        "grounding": "pass"
+      },
+      "blocked": false,
+      "unsupported": [],
+      "checked": 6,
+      "attached": 6
+    },
+    {
+      "source": "generate_check",
+      "ticket_id": "DEV-0137",
+      "verdicts": {
+        "injection": "pass",
+        "pii": "pass",
+        "tone": "pass",
+        "grounding": "pass"
+      },
+      "blocked": false,
+      "unsupported": [],
+      "checked": 2,
+      "attached": 0
+    },
+    {
+      "source": "generate_check",
+      "ticket_id": "DEV-0252",
+      "verdicts": {
+        "injection": "pass",
+        "pii": "pass",
+        "tone": "pass",
+        "grounding": "pass"
+      },
+      "blocked": false,
+      "unsupported": [],
+      "checked": 1,
+      "attached": 0
+    },
+    {
+      "source": "generate_check",
+      "ticket_id": "DEV-0478",
+      "verdicts": {
+        "injection": "pass",
+        "pii": "pass",
+        "tone": "pass",
+        "grounding": "pass"
+      },
+      "blocked": false,
+      "unsupported": [],
+      "checked": 3,
+      "attached": 3
+    },
+    {
+      "source": "generate_check",
+      "ticket_id": "DEV-0366",
+      "verdicts": {
+        "injection": "pass",
+        "pii": "pass",
+        "tone": "pass",
+        "grounding": "pass"
+      },
+      "blocked": false,
+      "unsupported": [],
+      "checked": 4,
+      "attached": 4
+    },
+    {
+      "source": "generate_check",
+      "ticket_id": "DEV-0351",
+      "verdicts": {
+        "injection": "pass",
+        "pii": "pass",
+        "tone": "pass",
+        "grounding": "pass"
+      },
+      "blocked": false,
+      "unsupported": [],
+      "checked": 7,
+      "attached": 5
+    },
+    {
+      "source": "generate_check",
+      "ticket_id": "DEV-0357",
+      "verdicts": {
+        "injection": "pass",
+        "pii": "pass",
+        "tone": "pass",
+        "grounding": "pass"
+      },
+      "blocked": false,
+      "unsupported": [],
+      "checked": 4,
+      "attached": 4
+    },
+    {
+      "source": "generate_check",
+      "ticket_id": "DEV-0419",
+      "verdicts": {
+        "injection": "pass",
+        "pii": "pass",
+        "tone": "pass",
+        "grounding": "pass"
+      },
+      "blocked": false,
+      "unsupported": [],
+      "checked": 2,
+      "attached": 2
+    },
+    {
+      "source": "generate_check",
+      "ticket_id": "DEV-0109",
+      "verdicts": {
+        "injection": "pass",
+        "pii": "pass",
+        "tone": "pass",
+        "grounding": "pass"
+      },
+      "blocked": false,
+      "unsupported": [],
+      "checked": 5,
+      "attached": 3
+    },
+    {
+      "source": "generate_check",
+      "ticket_id": "DEV-0390",
+      "verdicts": {
+        "injection": "pass",
+        "pii": "pass",
+        "tone": "pass",
+        "grounding": "pass"
+      },
+      "blocked": false,
+      "unsupported": [],
+      "checked": 2,
+      "attached": 1
+    },
+    {
+      "source": "generate_check",
+      "ticket_id": "DEV-0299",
+      "verdicts": {
+        "injection": "pass",
+        "pii": "pass",
+        "tone": "pass",
+        "grounding": "pass"
+      },
+      "blocked": false,
+      "unsupported": [],
+      "checked": 2,
+      "attached": 0
+    },
+    {
+      "source": "generate_check",
+      "ticket_id": "DEV-0247",
+      "verdicts": {
+        "injection": "pass",
+        "pii": "pass",
+        "tone": "pass",
+        "grounding": "pass"
+      },
+      "blocked": false,
+      "unsupported": [],
+      "checked": 2,
+      "attached": 1
+    },
+    {
+      "source": "generate_check",
+      "ticket_id": "DEV-0056",
+      "verdicts": {
+        "injection": "pass",
+        "pii": "pass",
+        "tone": "pass",
+        "grounding": "pass"
+      },
+      "blocked": false,
+      "unsupported": [],
+      "checked": 4,
+      "attached": 4
+    },
+    {
+      "source": "generate_check",
+      "ticket_id": "DEV-0092",
+      "verdicts": {
+        "injection": "pass",
+        "pii": "pass",
+        "tone": "pass",
+        "grounding": "pass"
+      },
+      "blocked": false,
+      "unsupported": [],
+      "checked": 2,
+      "attached": 0
+    },
+    {
+      "source": "generate_check_v1.1",
+      "ticket_id": "DEV-0471",
+      "verdicts": {
+        "injection": "pass",
+        "pii": "pass",
+        "tone": "pass",
+        "grounding": "pass"
+      },
+      "blocked": false,
+      "unsupported": [],
+      "checked": 4,
+      "attached": 3
+    },
+    {
+      "source": "generate_check_v1.1",
+      "ticket_id": "DEV-0124",
+      "verdicts": {
+        "injection": "pass",
+        "pii": "pass",
+        "tone": "pass",
+        "grounding": "pass"
+      },
+      "blocked": false,
+      "unsupported": [],
+      "checked": 1,
+      "attached": 0
+    },
+    {
+      "source": "generate_check_v1.1",
+      "ticket_id": "DEV-0116",
+      "verdicts": {
+        "injection": "pass",
+        "pii": "pass",
+        "tone": "pass",
+        "grounding": "block"
+      },
+      "blocked": true,
+      "unsupported": [
+        [
+          "contradicted",
+          "The application cannot read a variable that appears to be set .",
+          0.969,
+          1.0,
+          0.908
+        ]
+      ],
+      "checked": 8,
+      "attached": 3
+    },
+    {
+      "source": "generate_check_v1.1",
+      "ticket_id": "DEV-0404",
+      "verdicts": {
+        "injection": "pass",
+        "pii": "pass",
+        "tone": "pass",
+        "grounding": "pass"
+      },
+      "blocked": false,
+      "unsupported": [],
+      "checked": 5,
+      "attached": 5
+    },
+    {
+      "source": "generate_check_v1.1",
+      "ticket_id": "DEV-0213",
+      "verdicts": {
+        "injection": "pass",
+        "pii": "pass",
+        "tone": "pass",
+        "grounding": "pass"
+      },
+      "blocked": false,
+      "unsupported": [],
+      "checked": 4,
+      "attached": 1
+    },
+    {
+      "source": "generate_check_v1.1",
+      "ticket_id": "DEV-0386",
+      "verdicts": {
+        "injection": "pass",
+        "pii": "pass",
+        "tone": "pass",
+        "grounding": "pass"
+      },
+      "blocked": false,
+      "unsupported": [],
+      "checked": 4,
+      "attached": 4
+    },
+    {
+      "source": "generate_check_v1.1",
+      "ticket_id": "DEV-0137",
+      "verdicts": {
+        "injection": "pass",
+        "pii": "pass",
+        "tone": "pass",
+        "grounding": "block"
+      },
+      "blocked": true,
+      "unsupported": [
+        [
+          "contradicted",
+          "Connections are not being returned to the pool after use .",
+          0.977,
+          1.0,
+          0.945
+        ],
+        [
+          "contradicted",
+          "Long-running transactions are holding connections open .",
+          0.94,
+          1.0,
+          0.968
+        ]
+      ],
+      "checked": 4,
+      "attached": 0
+    },
+    {
+      "source": "generate_check_v1.1",
+      "ticket_id": "DEV-0252",
+      "verdicts": {
+        "injection": "pass",
+        "pii": "pass",
+        "tone": "pass",
+        "grounding": "pass"
+      },
+      "blocked": false,
+      "unsupported": [],
+      "checked": 4,
+      "attached": 0
+    },
+    {
+      "source": "generate_check_v1.1",
+      "ticket_id": "DEV-0478",
+      "verdicts": {
+        "injection": "pass",
+        "pii": "pass",
+        "tone": "pass",
+        "grounding": "pass"
+      },
+      "blocked": false,
+      "unsupported": [],
+      "checked": 2,
+      "attached": 0
+    },
+    {
+      "source": "generate_check_v1.1",
+      "ticket_id": "DEV-0366",
+      "verdicts": {
+        "injection": "pass",
+        "pii": "pass",
+        "tone": "pass",
+        "grounding": "pass"
+      },
+      "blocked": false,
+      "unsupported": [],
+      "checked": 2,
+      "attached": 0
+    },
+    {
+      "source": "generate_check_v1.1",
+      "ticket_id": "DEV-0351",
+      "verdicts": {
+        "injection": "pass",
+        "pii": "pass",
+        "tone": "pass",
+        "grounding": "pass"
+      },
+      "blocked": false,
+      "unsupported": [],
+      "checked": 4,
+      "attached": 0
+    },
+    {
+      "source": "generate_check_v1.1",
+      "ticket_id": "DEV-0357",
+      "verdicts": {
+        "injection": "pass",
+        "pii": "pass",
+        "tone": "pass",
+        "grounding": "pass"
+      },
+      "blocked": false,
+      "unsupported": [],
+      "checked": 2,
+      "attached": 0
+    },
+    {
+      "source": "generate_check_v1.1",
+      "ticket_id": "DEV-0419",
+      "verdicts": {
+        "injection": "pass",
+        "pii": "pass",
+        "tone": "pass",
+        "grounding": "pass"
+      },
+      "blocked": false,
+      "unsupported": [],
+      "checked": 2,
+      "attached": 0
+    },
+    {
+      "source": "generate_check_v1.1",
+      "ticket_id": "DEV-0109",
+      "verdicts": {
+        "injection": "pass",
+        "pii": "pass",
+        "tone": "pass",
+        "grounding": "pass"
+      },
+      "blocked": false,
+      "unsupported": [],
+      "checked": 4,
+      "attached": 0
+    },
+    {
+      "source": "generate_check_v1.1",
+      "ticket_id": "DEV-0390",
+      "verdicts": {
+        "injection": "pass",
+        "pii": "pass",
+        "tone": "pass",
+        "grounding": "pass"
+      },
+      "blocked": false,
+      "unsupported": [],
+      "checked": 2,
+      "attached": 0
+    },
+    {
+      "source": "generate_check_v1.1",
+      "ticket_id": "DEV-0299",
+      "verdicts": {
+        "injection": "pass",
+        "pii": "pass",
+        "tone": "pass",
+        "grounding": "pass"
+      },
+      "blocked": false,
+      "unsupported": [],
+      "checked": 3,
+      "attached": 0
+    },
+    {
+      "source": "generate_check_v1.1",
+      "ticket_id": "DEV-0247",
+      "verdicts": {
+        "injection": "pass",
+        "pii": "pass",
+        "tone": "pass",
+        "grounding": "pass"
+      },
+      "blocked": false,
+      "unsupported": [],
+      "checked": 3,
+      "attached": 1
+    },
+    {
+      "source": "generate_check_v1.1",
+      "ticket_id": "DEV-0056",
+      "verdicts": {
+        "injection": "pass",
+        "pii": "pass",
+        "tone": "pass",
+        "grounding": "pass"
+      },
+      "blocked": false,
+      "unsupported": [],
+      "checked": 5,
+      "attached": 1
+    },
+    {
+      "source": "generate_check_v1.1",
+      "ticket_id": "DEV-0092",
+      "verdicts": {
+        "injection": "pass",
+        "pii": "pass",
+        "tone": "pass",
+        "grounding": "block"
+      },
+      "blocked": true,
+      "unsupported": [
+        [
+          "no_supporting_passage",
+          "Read the rate limit headers returned with every response .",
+          0.349,
+          0.143,
+          0.11
+        ],
+        [
+          "no_supporting_passage",
+          "Implement exponential backoff with jitter on 429 responses rather than retrying immediatel",
+          0.198,
+          0.222,
+          0.263
+        ]
+      ],
+      "checked": 4,
+      "attached": 4
+    },
+    {
+      "source": "generate_check_v1.2",
+      "ticket_id": "DEV-0471",
+      "verdicts": {
+        "injection": "pass",
+        "pii": "pass",
+        "tone": "pass",
+        "grounding": "pass"
+      },
+      "blocked": false,
+      "unsupported": [],
+      "checked": 4,
+      "attached": 0
+    },
+    {
+      "source": "generate_check_v1.2",
+      "ticket_id": "DEV-0124",
+      "verdicts": {
+        "injection": "pass",
+        "pii": "pass",
+        "tone": "pass",
+        "grounding": "pass"
+      },
+      "blocked": false,
+      "unsupported": [],
+      "checked": 3,
+      "attached": 1
+    },
+    {
+      "source": "generate_check_v1.2",
+      "ticket_id": "DEV-0116",
+      "verdicts": {
+        "injection": "pass",
+        "pii": "pass",
+        "tone": "pass",
+        "grounding": "pass"
+      },
+      "blocked": false,
+      "unsupported": [],
+      "checked": 2,
+      "attached": 0
+    },
+    {
+      "source": "generate_check_v1.2",
+      "ticket_id": "DEV-0404",
+      "verdicts": {
+        "injection": "pass",
+        "pii": "pass",
+        "tone": "pass",
+        "grounding": "pass"
+      },
+      "blocked": false,
+      "unsupported": [],
+      "checked": 4,
+      "attached": 0
+    },
+    {
+      "source": "generate_check_v1.2",
+      "ticket_id": "DEV-0213",
+      "verdicts": {
+        "injection": "pass",
+        "pii": "pass",
+        "tone": "pass",
+        "grounding": "pass"
+      },
+      "blocked": false,
+      "unsupported": [],
+      "checked": 6,
+      "attached": 2
+    },
+    {
+      "source": "generate_check_v1.2",
+      "ticket_id": "DEV-0386",
+      "verdicts": {
+        "injection": "pass",
+        "pii": "pass",
+        "tone": "pass",
+        "grounding": "pass"
+      },
+      "blocked": false,
+      "unsupported": [],
+      "checked": 5,
+      "attached": 5
+    },
+    {
+      "source": "generate_check_v1.2",
+      "ticket_id": "DEV-0137",
+      "verdicts": {
+        "injection": "pass",
+        "pii": "pass",
+        "tone": "pass",
+        "grounding": "pass"
+      },
+      "blocked": false,
+      "unsupported": [],
+      "checked": 3,
+      "attached": 3
+    },
+    {
+      "source": "generate_check_v1.2",
+      "ticket_id": "DEV-0252",
+      "verdicts": {
+        "injection": "pass",
+        "pii": "pass",
+        "tone": "pass",
+        "grounding": "pass"
+      },
+      "blocked": false,
+      "unsupported": [],
+      "checked": 5,
+      "attached": 1
+    },
+    {
+      "source": "generate_check_v1.2",
+      "ticket_id": "DEV-0478",
+      "verdicts": {
+        "injection": "pass",
+        "pii": "pass",
+        "tone": "pass",
+        "grounding": "pass"
+      },
+      "blocked": false,
+      "unsupported": [],
+      "checked": 4,
+      "attached": 1
+    },
+    {
+      "source": "generate_check_v1.2",
+      "ticket_id": "DEV-0366",
+      "verdicts": {
+        "injection": "pass",
+        "pii": "pass",
+        "tone": "pass",
+        "grounding": "pass"
+      },
+      "blocked": false,
+      "unsupported": [],
+      "checked": 4,
+      "attached": 0
+    },
+    {
+      "source": "generate_check_v1.2",
+      "ticket_id": "DEV-0351",
+      "verdicts": {
+        "injection": "pass",
+        "pii": "pass",
+        "tone": "pass",
+        "grounding": "pass"
+      },
+      "blocked": false,
+      "unsupported": [],
+      "checked": 8,
+      "attached": 1
+    },
+    {
+      "source": "generate_check_v1.2",
+      "ticket_id": "DEV-0357",
+      "verdicts": {
+        "injection": "pass",
+        "pii": "pass",
+        "tone": "pass",
+        "grounding": "pass"
+      },
+      "blocked": false,
+      "unsupported": [],
+      "checked": 3,
+      "attached": 0
+    },
+    {
+      "source": "generate_check_v1.2",
+      "ticket_id": "DEV-0419",
+      "verdicts": {
+        "injection": "pass",
+        "pii": "pass",
+        "tone": "pass",
+        "grounding": "pass"
+      },
+      "blocked": false,
+      "unsupported": [],
+      "checked": 4,
+      "attached": 0
+    },
+    {
+      "source": "generate_check_v1.2",
+      "ticket_id": "DEV-0109",
+      "verdicts": {
+        "injection": "pass",
+        "pii": "pass",
+        "tone": "pass",
+        "grounding": "pass"
+      },
+      "blocked": false,
+      "unsupported": [],
+      "checked": 3,
+      "attached": 0
+    },
+    {
+      "source": "generate_check_v1.2",
+      "ticket_id": "DEV-0390",
+      "verdicts": {
+        "injection": "pass",
+        "pii": "pass",
+        "tone": "pass",
+        "grounding": "pass"
+      },
+      "blocked": false,
+      "unsupported": [],
+      "checked": 2,
+      "attached": 0
+    },
+    {
+      "source": "generate_check_v1.2",
+      "ticket_id": "DEV-0299",
+      "verdicts": {
+        "injection": "pass",
+        "pii": "pass",
+        "tone": "pass",
+        "grounding": "pass"
+      },
+      "blocked": false,
+      "unsupported": [],
+      "checked": 3,
+      "attached": 3
+    },
+    {
+      "source": "generate_check_v1.2",
+      "ticket_id": "DEV-0247",
+      "verdicts": {
+        "injection": "pass",
+        "pii": "pass",
+        "tone": "pass",
+        "grounding": "pass"
+      },
+      "blocked": false,
+      "unsupported": [],
+      "checked": 4,
+      "attached": 1
+    },
+    {
+      "source": "generate_check_v1.2",
+      "ticket_id": "DEV-0056",
+      "verdicts": {
+        "injection": "pass",
+        "pii": "pass",
+        "tone": "pass",
+        "grounding": "pass"
+      },
+      "blocked": false,
+      "unsupported": [],
+      "checked": 5,
+      "attached": 1
+    },
+    {
+      "source": "generate_check_v1.2",
+      "ticket_id": "DEV-0092",
+      "verdicts": {
+        "injection": "pass",
+        "pii": "pass",
+        "tone": "pass",
+        "grounding": "pass"
+      },
+      "blocked": false,
+      "unsupported": [],
+      "checked": 3,
+      "attached": 3
+    }
+  ],
+  "sentences": [
+    {
+      "sentence": "We recommend comparing the assertion consumer service URL in your identity provider against the value shown on the SSO settings page.",
+      "doc_id": "DOC-AUTH-003",
+      "cos": 0.974,
+      "lex": 0.857,
+      "contradiction": 0.002,
+      "cited": [],
+      "ticket_id": "DEV-0471",
+      "source": "generate_check"
+    },
+    {
+      "sentence": "They must match exactly, including the trailing path.",
+      "doc_id": "DOC-AUTH-003",
+      "cos": 1.0,
+      "lex": 1.0,
+      "contradiction": 0.0,
+      "cited": [],
+      "ticket_id": "DEV-0471",
+      "source": "generate_check"
+    },
+    {
+      "sentence": "Additionally, please confirm that the NameID in a failing assertion is the user's email address in lower case.",
+      "doc_id": "DOC-AUTH-003",
+      "cos": 0.939,
+      "lex": 0.9,
+      "contradiction": 0.001,
+      "cited": [],
+      "ticket_id": "DEV-0471",
+      "source": "generate_check"
+    },
+    {
+      "sentence": "If new users should be created on first login, enable just-in-time provisioning and set a default role for provisioned users.",
+      "doc_id": "DOC-AUTH-003",
+      "cos": 0.967,
+      "lex": 1.0,
+      "contradiction": 0.001,
+      "cited": [],
+      "ticket_id": "DEV-0471",
+      "source": "generate_check"
+    },
+    {
+      "sentence": "Finally, ensure that at least one administrator account has password access while testing, so a misconfiguration does not lock the whole organisation out.",
+      "doc_id": "DOC-AUTH-003",
+      "cos": 0.89,
+      "lex": 0.867,
+      "contradiction": 0.003,
+      "cited": [],
+      "ticket_id": "DEV-0471",
+      "source": "generate_check"
+    },
+    {
+      "sentence": "According to our documentation, you can expect a delay of up to two minutes on metrics since they are aggregated before being sent .",
+      "doc_id": "DOC-INT-002",
+      "cos": 0.952,
+      "lex": 0.833,
+      "contradiction": 0.001,
+      "cited": [
+        "DOC-INT-002"
+      ],
+      "ticket_id": "DEV-0124",
+      "source": "generate_check"
+    },
+    {
+      "sentence": "To confirm, you can check the forwarding status page, which shows the last successful delivery and any error returned by the destination .",
+      "doc_id": "DOC-INT-002",
+      "cos": 0.961,
+      "lex": 0.917,
+      "contradiction": 0.002,
+      "cited": [
+        "DOC-INT-002"
+      ],
+      "ticket_id": "DEV-0124",
+      "source": "generate_check"
+    },
+    {
+      "sentence": "We'll need to investigate further to determine the cause of the issue.",
+      "doc_id": "DOC-DEPLOY-004",
+      "cos": 0.146,
+      "lex": 0.0,
+      "contradiction": 0.003,
+      "cited": [],
+      "ticket_id": "DEV-0116",
+      "source": "generate_check"
+    },
+    {
+      "sentence": "According to our documentation, common causes of environment variables and secrets not being read include the variable being set at project scope but read at service scope, the application logging its configuration at startup, and an environment override existing that is not visible on the main settings page .",
+      "doc_id": "DOC-SEC-002",
+      "cos": 0.637,
+      "lex": 0.769,
+      "contradiction": 0.005,
+      "cited": [
+        "DOC-DEPLOY-004"
+      ],
+      "ticket_id": "DEV-0116",
+      "source": "generate_check"
+    },
+    {
+      "sentence": "We recommend checking the scope at which the variable was defined, storing sensitive values as secrets rather than variables, reviewing the environment overrides page, and redeploying after changing configuration .",
+      "doc_id": "DOC-SEC-002",
+      "cos": 0.564,
+      "lex": 0.722,
+      "contradiction": 0.055,
+      "cited": [
+        "DOC-DEPLOY-004"
+      ],
+      "ticket_id": "DEV-0116",
+      "source": "generate_check"
+    },
+    {
+      "sentence": "To store sensitive information as secrets, you should reference them from the environment rather than committing them.",
+      "doc_id": "DOC-DEPLOY-004",
+      "cos": 0.695,
+      "lex": 0.556,
+      "contradiction": 0.046,
+      "cited": [],
+      "ticket_id": "DEV-0404",
+      "source": "generate_check"
+    },
+    {
+      "sentence": "This way, they are masked in logs and not readable through the API.",
+      "doc_id": "DOC-DEPLOY-004",
+      "cos": 0.705,
+      "lex": 0.714,
+      "contradiction": 0.001,
+      "cited": [],
+      "ticket_id": "DEV-0404",
+      "source": "generate_check"
+    },
+    {
+      "sentence": "You can check the environment overrides page to see values that differ from the defaults for each environment.",
+      "doc_id": "DOC-DEPLOY-004",
+      "cos": 0.939,
+      "lex": 0.875,
+      "contradiction": 0.001,
+      "cited": [],
+      "ticket_id": "DEV-0404",
+      "source": "generate_check"
+    },
+    {
+      "sentence": "If you've made changes to your configuration, be sure to redeploy after updating your settings.",
+      "doc_id": "DOC-DEPLOY-004",
+      "cos": 0.644,
+      "lex": 0.286,
+      "contradiction": 0.003,
+      "cited": [],
+      "ticket_id": "DEV-0404",
+      "source": "generate_check"
+    },
+    {
+      "sentence": "This will ensure that running containers pick up the new values without a restart.",
+      "doc_id": "DOC-DEPLOY-004",
+      "cos": 0.919,
+      "lex": 0.875,
+      "contradiction": 0.965,
+      "cited": [],
+      "ticket_id": "DEV-0404",
+      "source": "generate_check"
+    },
+    {
+      "sentence": "According to our documentation, a large gap between median and 95th percentile latency on the metrics page may indicate contention or queueing .",
+      "doc_id": "DOC-PERF-001",
+      "cos": 0.772,
+      "lex": 0.714,
+      "contradiction": 0.003,
+      "cited": [
+        "DOC-PERF-001"
+      ],
+      "ticket_id": "DEV-0213",
+      "source": "generate_check"
+    },
+    {
+      "sentence": "We recommend checking memory utilisation across instances, as sustained utilisation above eighty per cent can show up as latency before failure .",
+      "doc_id": "DOC-PERF-001",
+      "cos": 0.773,
+      "lex": 0.786,
+      "contradiction": 0.001,
+      "cited": [
+        "DOC-PERF-001"
+      ],
+      "ticket_id": "DEV-0213",
+      "source": "generate_check"
+    },
+    {
+      "sentence": "Additionally, reviewing the dependency timing breakdown on the trace view may help identify whether the time is being spent in your service or waiting on another .",
+      "doc_id": "DOC-PERF-001",
+      "cos": 0.972,
+      "lex": 0.812,
+      "contradiction": 0.001,
+      "cited": [
+        "DOC-PERF-001"
+      ],
+      "ticket_id": "DEV-0213",
+      "source": "generate_check"
+    },
+    {
+      "sentence": "To revert to an earlier revision, you can follow the documented steps.",
+      "doc_id": "DOC-DEPLOY-002",
+      "cos": 0.796,
+      "lex": 0.167,
+      "contradiction": 0.002,
+      "cited": [],
+      "ticket_id": "DEV-0386",
+      "source": "generate_check"
+    },
+    {
+      "sentence": "According to our knowledge base, you can open the revisions page for the service and identify the last revision that was healthy.",
+      "doc_id": "DOC-DEPLOY-002",
+      "cos": 0.936,
+      "lex": 0.727,
+      "contradiction": 0.001,
+      "cited": [],
+      "ticket_id": "DEV-0386",
+      "source": "generate_check"
+    },
+    {
+      "sentence": "Then, select roll back on that revision.",
+      "doc_id": "DOC-DEPLOY-002",
+      "cos": 0.962,
+      "lex": 1.0,
+      "contradiction": 0.002,
+      "cited": [],
+      "ticket_id": "DEV-0386",
+      "source": "generate_check"
+    },
+    {
+      "sentence": "This will move traffic to the previous revision within roughly thirty seconds without rebuilding the service.",
+      "doc_id": "DOC-DEPLOY-002",
+      "cos": 0.533,
+      "lex": 0.636,
+      "contradiction": 0.003,
+      "cited": [],
+      "ticket_id": "DEV-0386",
+      "source": "generate_check"
+    },
+    {
+      "sentence": "If the release included a database migration, it's recommended to roll the migration back before the service to avoid schema issues.",
+      "doc_id": "DOC-DEPLOY-002",
+      "cos": 0.9,
+      "lex": 0.727,
+      "contradiction": 0.01,
+      "cited": [],
+      "ticket_id": "DEV-0386",
+      "source": "generate_check"
+    },
+    {
+      "sentence": "Please record the incident and the reason for the rollback before deploying a fix, while the detail is still fresh.",
+      "doc_id": "DOC-DEPLOY-002",
+      "cos": 0.937,
+      "lex": 1.0,
+      "contradiction": 0.002,
+      "cited": [],
+      "ticket_id": "DEV-0386",
+      "source": "generate_check"
+    },
+    {
+      "sentence": "Database connection pool exhaustion can cause errors indicating no connection is available, and this can be caused by the pool size multiplied by the instance count exceeding the database connection limit .",
+      "doc_id": "DOC-PERF-003",
+      "cos": 0.824,
+      "lex": 0.6,
+      "contradiction": 0.008,
+      "cited": [
+        "DOC-PERF-003"
+      ],
+      "ticket_id": "DEV-0137",
+      "source": "generate_check"
+    },
+    {
+      "sentence": "It can also be caused by connections not being returned to the pool after use or long-running transactions holding connections open .",
+      "doc_id": "DOC-PERF-003",
+      "cos": 0.663,
+      "lex": 0.9,
+      "contradiction": 0.003,
+      "cited": [
+        "DOC-PERF-003"
+      ],
+      "ticket_id": "DEV-0137",
+      "source": "generate_check"
+    },
+    {
+      "sentence": "The rate limit applies per organisation, not per key, so having multiple keys does not increase the available quota .",
+      "doc_id": "DOC-API-001",
+      "cos": 0.807,
+      "lex": 0.583,
+      "contradiction": 0.009,
+      "cited": [
+        "DOC-API-001"
+      ],
+      "ticket_id": "DEV-0252",
+      "source": "generate_check"
+    },
+    {
+      "sentence": "The billing period for your CloudServe account runs from the anniversary of the subscription date.",
+      "doc_id": "DOC-BILL-001",
+      "cos": 0.707,
+      "lex": 0.75,
+      "contradiction": 0.003,
+      "cited": [],
+      "ticket_id": "DEV-0478",
+      "source": "generate_check"
+    },
+    {
+      "sentence": "To understand your invoice and usage breakdown, please open the usage breakdown for the period, which itemises charges by service and by environment.",
+      "doc_id": "DOC-BILL-001",
+      "cos": 0.832,
+      "lex": 0.9,
+      "contradiction": 0.003,
+      "cited": [],
+      "ticket_id": "DEV-0478",
+      "source": "generate_check"
+    },
+    {
+      "sentence": "Additionally, check the billing period dates at the top of the invoice to ensure they align with your expectations.",
+      "doc_id": "DOC-BILL-001",
+      "cos": 0.906,
+      "lex": 0.545,
+      "contradiction": 0.001,
+      "cited": [],
+      "ticket_id": "DEV-0478",
+      "source": "generate_check"
+    },
+    {
+      "sentence": "To change the behavior so that your service is not stopped when the spend cap is reached, you should configure alerts at fifty, eighty and ninety-five per cent of your plan allowance rather than relying on the cap as a warning.",
+      "doc_id": "DOC-BILL-003",
+      "cos": 0.822,
+      "lex": 0.842,
+      "contradiction": 0.001,
+      "cited": [],
+      "ticket_id": "DEV-0366",
+      "source": "generate_check"
+    },
+    {
+      "sentence": "Additionally, you can deliberately decide between a hard spend cap, which stops the service, and overage, which continues at the listed rate.",
+      "doc_id": "DOC-BILL-003",
+      "cos": 0.958,
+      "lex": 0.923,
+      "contradiction": 0.005,
+      "cited": [],
+      "ticket_id": "DEV-0366",
+      "source": "generate_check"
+    },
+    {
+      "sentence": "For production workloads, overage is generally the preferred option.",
+      "doc_id": "DOC-BILL-003",
+      "cos": 0.567,
+      "lex": 0.667,
+      "contradiction": 0.002,
+      "cited": [],
+      "ticket_id": "DEV-0366",
+      "source": "generate_check"
+    },
+    {
+      "sentence": "Please check the current period usage against the plan allowance on the billing page and decide which option is best for your service.",
+      "doc_id": "DOC-BILL-003",
+      "cos": 0.84,
+      "lex": 0.846,
+      "contradiction": 0.001,
+      "cited": [],
+      "ticket_id": "DEV-0366",
+      "source": "generate_check"
+    },
+    {
+      "sentence": "We can help you with exporting audit logs.",
+      "doc_id": "DOC-SEC-003",
+      "cos": 0.722,
+      "lex": 0.5,
+      "contradiction": 0.025,
+      "cited": [],
+      "ticket_id": "DEV-0351",
+      "source": "generate_check"
+    },
+    {
+      "sentence": "On our Business plan, audit logs are retained for ninety days .",
+      "doc_id": "DOC-SEC-001",
+      "cos": 0.949,
+      "lex": 0.857,
+      "contradiction": 0.004,
+      "cited": [
+        "DOC-SEC-001"
+      ],
+      "ticket_id": "DEV-0351",
+      "source": "generate_check"
+    },
+    {
+      "sentence": "To export the relevant period, you can filter the audit log by actor, resource, and date range .",
+      "doc_id": "DOC-SEC-003",
+      "cos": 0.816,
+      "lex": 1.0,
+      "contradiction": 0.003,
+      "cited": [
+        "DOC-SEC-003"
+      ],
+      "ticket_id": "DEV-0351",
+      "source": "generate_check"
+    },
+    {
+      "sentence": "You can then export the relevant period to object storage for anything needed beyond the retention window.",
+      "doc_id": "DOC-SEC-003",
+      "cos": 0.982,
+      "lex": 1.0,
+      "contradiction": 0.001,
+      "cited": [],
+      "ticket_id": "DEV-0351",
+      "source": "generate_check"
+    },
+    {
+      "sentence": "Exports are not subject to retention limits.",
+      "doc_id": "DOC-SEC-003",
+      "cos": 1.0,
+      "lex": 1.0,
+      "contradiction": 0.001,
+      "cited": [],
+      "ticket_id": "DEV-0351",
+      "source": "generate_check"
+    },
+    {
+      "sentence": "Note that read access to resources is not logged on our Business plan, only administrative and configuration changes are logged.",
+      "doc_id": "DOC-SEC-003",
+      "cos": 0.976,
+      "lex": 1.0,
+      "contradiction": 0.383,
+      "cited": [],
+      "ticket_id": "DEV-0351",
+      "source": "generate_check"
+    },
+    {
+      "sentence": "We recommend configuring continuous export to your own storage if a policy requires retention longer than the plan provides.",
+      "doc_id": "DOC-SEC-003",
+      "cos": 0.988,
+      "lex": 0.833,
+      "contradiction": 0.002,
+      "cited": [],
+      "ticket_id": "DEV-0351",
+      "source": "generate_check"
+    },
+    {
+      "sentence": "We've identified that the symptoms you're experiencing are consistent with issues related to webhook delivery, retries, and signature verification.",
+      "doc_id": "DOC-API-003",
+      "cos": 0.626,
+      "lex": 0.545,
+      "contradiction": 0.014,
+      "cited": [],
+      "ticket_id": "DEV-0357",
+      "source": "generate_check"
+    },
+    {
+      "sentence": "According to our documentation, common causes of these issues include a non-2xx status returned by the endpoint, slow response times, and incorrect signature computation.",
+      "doc_id": "DOC-API-003",
+      "cos": 0.61,
+      "lex": 0.438,
+      "contradiction": 0.003,
+      "cited": [],
+      "ticket_id": "DEV-0357",
+      "source": "generate_check"
+    },
+    {
+      "sentence": "Additionally, we suggest returning 2xx as quickly as possible and processing the event asynchronously.",
+      "doc_id": "DOC-API-003",
+      "cos": 0.91,
+      "lex": 0.556,
+      "contradiction": 0.001,
+      "cited": [],
+      "ticket_id": "DEV-0357",
+      "source": "generate_check"
+    },
+    {
+      "sentence": "It's also essential to compute the signature over the raw request body before any parsing, and to make your handler idempotent using the event identifier.",
+      "doc_id": "DOC-API-003",
+      "cos": 0.75,
+      "lex": 0.923,
+      "contradiction": 0.002,
+      "cited": [],
+      "ticket_id": "DEV-0357",
+      "source": "generate_check"
+    },
+    {
+      "sentence": "They must match exactly, including the trailing path.",
+      "doc_id": "DOC-AUTH-003",
+      "cos": 1.0,
+      "lex": 1.0,
+      "contradiction": 0.0,
+      "cited": [],
+      "ticket_id": "DEV-0419",
+      "source": "generate_check"
+    },
+    {
+      "sentence": "Additionally, confirm that just-in-time provisioning is enabled and that a default role is set for provisioned users.",
+      "doc_id": "DOC-AUTH-003",
+      "cos": 0.792,
+      "lex": 0.8,
+      "contradiction": 0.001,
+      "cited": [],
+      "ticket_id": "DEV-0419",
+      "source": "generate_check"
+    },
+    {
+      "sentence": "We retain audit logs for ninety days on Business plans .",
+      "doc_id": "DOC-SEC-001",
+      "cos": 0.901,
+      "lex": 0.857,
+      "contradiction": 0.003,
+      "cited": [
+        "DOC-SEC-001"
+      ],
+      "ticket_id": "DEV-0109",
+      "source": "generate_check"
+    },
+    {
+      "sentence": "To access the relevant period, you can filter the audit log by actor, resource, and date range .",
+      "doc_id": "DOC-SEC-003",
+      "cos": 0.875,
+      "lex": 1.0,
+      "contradiction": 0.002,
+      "cited": [
+        "DOC-SEC-003"
+      ],
+      "ticket_id": "DEV-0109",
+      "source": "generate_check"
+    },
+    {
+      "sentence": "You can then export the relevant period to object storage for anything needed beyond the retention window.",
+      "doc_id": "DOC-SEC-003",
+      "cos": 0.982,
+      "lex": 1.0,
+      "contradiction": 0.001,
+      "cited": [],
+      "ticket_id": "DEV-0109",
+      "source": "generate_check"
+    },
+    {
+      "sentence": "Exports are not subject to retention limits.",
+      "doc_id": "DOC-SEC-003",
+      "cos": 1.0,
+      "lex": 1.0,
+      "contradiction": 0.001,
+      "cited": [],
+      "ticket_id": "DEV-0109",
+      "source": "generate_check"
+    },
+    {
+      "sentence": "Note that read access to resources is not logged on Business plans, only administrative and configuration changes are recorded.",
+      "doc_id": "DOC-SEC-003",
+      "cos": 0.979,
+      "lex": 0.917,
+      "contradiction": 0.013,
+      "cited": [],
+      "ticket_id": "DEV-0109",
+      "source": "generate_check"
+    },
+    {
+      "sentence": "This can be caused by the role being granted at project scope rather than organisation scope .",
+      "doc_id": "DOC-ACCT-001",
+      "cos": 0.816,
+      "lex": 0.75,
+      "contradiction": 0.023,
+      "cited": [
+        "DOC-ACCT-001"
+      ],
+      "ticket_id": "DEV-0390",
+      "source": "generate_check"
+    },
+    {
+      "sentence": "Please confirm that the invitation was accepted and that the user has the correct permissions.",
+      "doc_id": "DOC-ACCT-001",
+      "cos": 0.819,
+      "lex": 0.833,
+      "contradiction": 0.001,
+      "cited": [],
+      "ticket_id": "DEV-0390",
+      "source": "generate_check"
+    },
+    {
+      "sentence": "According to our documentation, forwarding pauses after one hour of consecutive failures and must be resumed manually once the destination is healthy .",
+      "doc_id": "DOC-INT-002",
+      "cos": 0.973,
+      "lex": 0.857,
+      "contradiction": 0.001,
+      "cited": [
+        "DOC-INT-002"
+      ],
+      "ticket_id": "DEV-0299",
+      "source": "generate_check"
+    },
+    {
+      "sentence": "Additionally, you may want to verify the destination credential separately if delivery has stopped entirely, as expired credentials are the most common cause .",
+      "doc_id": "DOC-INT-002",
+      "cos": 0.98,
+      "lex": 0.857,
+      "contradiction": 0.001,
+      "cited": [
+        "DOC-INT-002"
+      ],
+      "ticket_id": "DEV-0299",
+      "source": "generate_check"
+    },
+    {
+      "sentence": "According to our documentation, the billing period runs from the anniversary of the subscription date .",
+      "doc_id": "DOC-BILL-001",
+      "cos": 0.87,
+      "lex": 0.75,
+      "contradiction": 0.002,
+      "cited": [
+        "DOC-BILL-001"
+      ],
+      "ticket_id": "DEV-0247",
+      "source": "generate_check"
+    },
+    {
+      "sentence": "This means that the period may not align with the calendar month.",
+      "doc_id": "DOC-BILL-001",
+      "cos": 0.691,
+      "lex": 0.8,
+      "contradiction": 0.025,
+      "cited": [],
+      "ticket_id": "DEV-0247",
+      "source": "generate_check"
+    },
+    {
+      "sentence": "Elevated response latency can be caused by several factors, including contention or queueing, high memory utilisation, or dependencies on other services.",
+      "doc_id": "DOC-PERF-001",
+      "cos": 0.587,
+      "lex": 0.533,
+      "contradiction": 0.002,
+      "cited": [],
+      "ticket_id": "DEV-0056",
+      "source": "generate_check"
+    },
+    {
+      "sentence": "To diagnose the issue, we recommend comparing the median and 95th percentile latency on the metrics page, checking memory utilisation across instances, and reviewing the dependency timing breakdown on the trace view.",
+      "doc_id": "DOC-PERF-001",
+      "cos": 0.614,
+      "lex": 0.714,
+      "contradiction": 0.003,
+      "cited": [],
+      "ticket_id": "DEV-0056",
+      "source": "generate_check"
+    },
+    {
+      "sentence": "If load is predictable, adjusting the autoscaling policy may also help.",
+      "doc_id": "DOC-PERF-001",
+      "cos": 0.954,
+      "lex": 0.667,
+      "contradiction": 0.001,
+      "cited": [],
+      "ticket_id": "DEV-0056",
+      "source": "generate_check"
+    },
+    {
+      "sentence": "Cold starts can also affect the first request to a new instance, so frequent scaling events may raise the 95th percentile even when the service itself is healthy.",
+      "doc_id": "DOC-PERF-001",
+      "cos": 0.749,
+      "lex": 1.0,
+      "contradiction": 0.004,
+      "cited": [],
+      "ticket_id": "DEV-0056",
+      "source": "generate_check"
+    },
+    {
+      "sentence": "According to our documentation, spend caps apply per organisation and cannot currently be set per project .",
+      "doc_id": "DOC-BILL-003",
+      "cos": 0.93,
+      "lex": 0.818,
+      "contradiction": 0.001,
+      "cited": [
+        "DOC-BILL-003"
+      ],
+      "ticket_id": "DEV-0092",
+      "source": "generate_check"
+    },
+    {
+      "sentence": "Please check the billing page to see the current period usage against the plan allowance and decide whether to configure a hard spend cap or overage .",
+      "doc_id": "DOC-BILL-003",
+      "cos": 0.821,
+      "lex": 0.882,
+      "contradiction": 0.001,
+      "cited": [
+        "DOC-BILL-003"
+      ],
+      "ticket_id": "DEV-0092",
+      "source": "generate_check"
+    },
+    {
+      "sentence": "According to our documentation , the assertion consumer service URL in your identity provider must match the value shown on the SSO settings page, including the trailing path.",
+      "doc_id": "DOC-AUTH-003",
+      "cos": 0.891,
+      "lex": 0.889,
+      "contradiction": 0.008,
+      "cited": [
+        "DOC-AUTH-003"
+      ],
+      "ticket_id": "DEV-0471",
+      "source": "generate_check_v1.1"
+    },
+    {
+      "sentence": "Additionally, the NameID in the assertion should be the user's email address in lower case.",
+      "doc_id": "DOC-AUTH-003",
+      "cos": 0.894,
+      "lex": 0.875,
+      "contradiction": 0.007,
+      "cited": [],
+      "ticket_id": "DEV-0471",
+      "source": "generate_check_v1.1"
+    },
+    {
+      "sentence": "It's also recommended to enable just-in-time provisioning if new users should be created on first login, and set a default role for provisioned users.",
+      "doc_id": "DOC-AUTH-003",
+      "cos": 0.951,
+      "lex": 0.923,
+      "contradiction": 0.001,
+      "cited": [],
+      "ticket_id": "DEV-0471",
+      "source": "generate_check_v1.1"
+    },
+    {
+      "sentence": "Please ensure that the assertion consumer service URL is correctly configured and that just-in-time provisioning is enabled.",
+      "doc_id": "DOC-AUTH-003",
+      "cos": 0.746,
+      "lex": 0.6,
+      "contradiction": 0.01,
+      "cited": [],
+      "ticket_id": "DEV-0471",
+      "source": "generate_check_v1.1"
+    },
+    {
+      "sentence": "The delay in metrics is expected due to aggregation before being sent .",
+      "doc_id": "DOC-INT-002",
+      "cos": 0.883,
+      "lex": 0.714,
+      "contradiction": 0.008,
+      "cited": [
+        "DOC-INT-002"
+      ],
+      "ticket_id": "DEV-0124",
+      "source": "generate_check_v1.1"
+    },
+    {
+      "sentence": "The application cannot read a variable that appears to be set .",
+      "doc_id": "DOC-DEPLOY-004",
+      "cos": 0.969,
+      "lex": 1.0,
+      "contradiction": 0.908,
+      "cited": [
+        "DOC-DEPLOY-004"
+      ],
+      "ticket_id": "DEV-0116",
+      "source": "generate_check_v1.1"
+    },
+    {
+      "sentence": "Check the scope at which the variable was defined.",
+      "doc_id": "DOC-DEPLOY-004",
+      "cos": 1.0,
+      "lex": 1.0,
+      "contradiction": 0.001,
+      "cited": [],
+      "ticket_id": "DEV-0116",
+      "source": "generate_check_v1.1"
+    },
+    {
+      "sentence": "Service scope overrides project scope, and project scope overrides organisation defaults .",
+      "doc_id": "DOC-DEPLOY-004",
+      "cos": 1.0,
+      "lex": 1.0,
+      "contradiction": 0.072,
+      "cited": [
+        "DOC-DEPLOY-004"
+      ],
+      "ticket_id": "DEV-0116",
+      "source": "generate_check_v1.1"
+    },
+    {
+      "sentence": "Store anything sensitive as a secret rather than a variable.",
+      "doc_id": "DOC-DEPLOY-004",
+      "cos": 1.0,
+      "lex": 1.0,
+      "contradiction": 0.002,
+      "cited": [],
+      "ticket_id": "DEV-0116",
+      "source": "generate_check_v1.1"
+    },
+    {
+      "sentence": "Secrets are masked in logs and are not readable through the API after creation .",
+      "doc_id": "DOC-DEPLOY-004",
+      "cos": 1.0,
+      "lex": 1.0,
+      "contradiction": 0.008,
+      "cited": [
+        "DOC-DEPLOY-004"
+      ],
+      "ticket_id": "DEV-0116",
+      "source": "generate_check_v1.1"
+    },
+    {
+      "sentence": "Review the environment overrides page, which lists values that differ from the defaults for each environment .",
+      "doc_id": "DOC-DEPLOY-004",
+      "cos": 1.0,
+      "lex": 1.0,
+      "contradiction": 0.029,
+      "cited": [
+        "DOC-DEPLOY-004"
+      ],
+      "ticket_id": "DEV-0116",
+      "source": "generate_check_v1.1"
+    },
+    {
+      "sentence": "Redeploy after changing configuration.",
+      "doc_id": "DOC-DEPLOY-004",
+      "cos": 1.0,
+      "lex": 1.0,
+      "contradiction": 0.003,
+      "cited": [],
+      "ticket_id": "DEV-0116",
+      "source": "generate_check_v1.1"
+    },
+    {
+      "sentence": "Running containers do not pick up new values without a restart .",
+      "doc_id": "DOC-DEPLOY-004",
+      "cos": 1.0,
+      "lex": 1.0,
+      "contradiction": 0.015,
+      "cited": [
+        "DOC-DEPLOY-004"
+      ],
+      "ticket_id": "DEV-0116",
+      "source": "generate_check_v1.1"
+    },
+    {
+      "sentence": "To prevent secrets from appearing in logs, store them as secrets rather than variables.",
+      "doc_id": "DOC-DEPLOY-004",
+      "cos": 0.718,
+      "lex": 0.625,
+      "contradiction": 0.175,
+      "cited": [],
+      "ticket_id": "DEV-0404",
+      "source": "generate_check_v1.1"
+    },
+    {
+      "sentence": "Secrets are masked in logs and are not readable through the API after creation.",
+      "doc_id": "DOC-DEPLOY-004",
+      "cos": 1.0,
+      "lex": 1.0,
+      "contradiction": 0.001,
+      "cited": [],
+      "ticket_id": "DEV-0404",
+      "source": "generate_check_v1.1"
+    },
+    {
+      "sentence": "Check the environment overrides page to ensure values differ from the defaults for each environment.",
+      "doc_id": "DOC-DEPLOY-004",
+      "cos": 0.887,
+      "lex": 0.875,
+      "contradiction": 0.001,
+      "cited": [],
+      "ticket_id": "DEV-0404",
+      "source": "generate_check_v1.1"
+    },
+    {
+      "sentence": "Redeploy after changing configuration to ensure running containers pick up new values without a restart.",
+      "doc_id": "DOC-DEPLOY-004",
+      "cos": 0.765,
+      "lex": 0.909,
+      "contradiction": 0.072,
+      "cited": [],
+      "ticket_id": "DEV-0404",
+      "source": "generate_check_v1.1"
+    },
+    {
+      "sentence": "Check the scope at which the variable was defined, as service scope overrides project scope, and project scope overrides organisation defaults.",
+      "doc_id": "DOC-DEPLOY-004",
+      "cos": 0.793,
+      "lex": 1.0,
+      "contradiction": 0.012,
+      "cited": [],
+      "ticket_id": "DEV-0404",
+      "source": "generate_check_v1.1"
+    },
+    {
+      "sentence": "We've identified some common causes of elevated response latency.",
+      "doc_id": "DOC-PERF-001",
+      "cos": 0.648,
+      "lex": 0.714,
+      "contradiction": 0.002,
+      "cited": [],
+      "ticket_id": "DEV-0213",
+      "source": "generate_check_v1.1"
+    },
+    {
+      "sentence": "A large gap between median and 95th percentile latency on the metrics page suggests contention or queueing rather than a uniformly slower service .",
+      "doc_id": "DOC-PERF-001",
+      "cos": 0.791,
+      "lex": 0.875,
+      "contradiction": 0.008,
+      "cited": [
+        "DOC-PERF-001"
+      ],
+      "ticket_id": "DEV-0213",
+      "source": "generate_check_v1.1"
+    },
+    {
+      "sentence": "Check memory utilisation across instances, as sustained utilisation above eighty per cent typically shows up as latency before it shows up as failure .",
+      "doc_id": "DOC-PERF-001",
+      "cos": 0.713,
+      "lex": 1.0,
+      "contradiction": 0.007,
+      "cited": [
+        "DOC-PERF-001"
+      ],
+      "ticket_id": "DEV-0213",
+      "source": "generate_check_v1.1"
+    },
+    {
+      "sentence": "Review the dependency timing breakdown on the trace view to identify whether the time is being spent in your service or waiting on another .",
+      "doc_id": "DOC-PERF-001",
+      "cos": 1.0,
+      "lex": 1.0,
+      "contradiction": 0.028,
+      "cited": [
+        "DOC-PERF-001"
+      ],
+      "ticket_id": "DEV-0213",
+      "source": "generate_check_v1.1"
+    },
+    {
+      "sentence": "To roll back a failed release, open the revisions page for the service and identify the last revision that was healthy.",
+      "doc_id": "DOC-DEPLOY-002",
+      "cos": 0.741,
+      "lex": 1.0,
+      "contradiction": 0.007,
+      "cited": [],
+      "ticket_id": "DEV-0386",
+      "source": "generate_check_v1.1"
+    },
+    {
+      "sentence": "Select roll back on that revision.",
+      "doc_id": "DOC-DEPLOY-002",
+      "cos": 1.0,
+      "lex": 1.0,
+      "contradiction": 0.001,
+      "cited": [],
+      "ticket_id": "DEV-0386",
+      "source": "generate_check_v1.1"
+    },
+    {
+      "sentence": "Traffic moves within roughly thirty seconds and no rebuild takes place.",
+      "doc_id": "DOC-DEPLOY-002",
+      "cos": 1.0,
+      "lex": 1.0,
+      "contradiction": 0.001,
+      "cited": [],
+      "ticket_id": "DEV-0386",
+      "source": "generate_check_v1.1"
+    },
+    {
+      "sentence": "If the release included a database migration, roll the migration back before the service, or the older code will encounter a schema it does not expect.",
+      "doc_id": "DOC-DEPLOY-002",
+      "cos": 1.0,
+      "lex": 1.0,
+      "contradiction": 0.002,
+      "cited": [],
+      "ticket_id": "DEV-0386",
+      "source": "generate_check_v1.1"
+    },
+    {
+      "sentence": "Database connection pool exhaustion is a common issue when the pool size multiplied by the instance count exceeds the database connection limit .",
+      "doc_id": "DOC-PERF-003",
+      "cos": 0.893,
+      "lex": 0.917,
+      "contradiction": 0.019,
+      "cited": [
+        "DOC-PERF-003"
+      ],
+      "ticket_id": "DEV-0137",
+      "source": "generate_check_v1.1"
+    },
+    {
+      "sentence": "Connections are not being returned to the pool after use .",
+      "doc_id": "DOC-PERF-003",
+      "cos": 0.977,
+      "lex": 1.0,
+      "contradiction": 0.945,
+      "cited": [
+        "DOC-PERF-003"
+      ],
+      "ticket_id": "DEV-0137",
+      "source": "generate_check_v1.1"
+    },
+    {
+      "sentence": "Long-running transactions are holding connections open .",
+      "doc_id": "DOC-PERF-003",
+      "cos": 0.94,
+      "lex": 1.0,
+      "contradiction": 0.968,
+      "cited": [
+        "DOC-PERF-003"
+      ],
+      "ticket_id": "DEV-0137",
+      "source": "generate_check_v1.1"
+    },
+    {
+      "sentence": "Allow roughly ten minutes per hundred gigabytes for the restore, and considerably longer where the instance is also under load .",
+      "doc_id": "DOC-DATA-002",
+      "cos": 1.0,
+      "lex": 1.0,
+      "contradiction": 0.005,
+      "cited": [
+        "DOC-DATA-002"
+      ],
+      "ticket_id": "DEV-0137",
+      "source": "generate_check_v1.1"
+    },
+    {
+      "sentence": "Requests return 429 Too Many Requests .",
+      "doc_id": "DOC-API-001",
+      "cos": 0.967,
+      "lex": 1.0,
+      "contradiction": 0.317,
+      "cited": [
+        "DOC-API-001"
+      ],
+      "ticket_id": "DEV-0252",
+      "source": "generate_check_v1.1"
+    },
+    {
+      "sentence": "Limits appear lower than the documented figure .",
+      "doc_id": "DOC-API-001",
+      "cos": 0.96,
+      "lex": 1.0,
+      "contradiction": 0.017,
+      "cited": [
+        "DOC-API-001"
+      ],
+      "ticket_id": "DEV-0252",
+      "source": "generate_check_v1.1"
+    },
+    {
+      "sentence": "The limit applies per organisation rather than per key .",
+      "doc_id": "DOC-API-001",
+      "cos": 0.984,
+      "lex": 1.0,
+      "contradiction": 0.014,
+      "cited": [
+        "DOC-API-001"
+      ],
+      "ticket_id": "DEV-0252",
+      "source": "generate_check_v1.1"
+    },
+    {
+      "sentence": "Implement exponential backoff with jitter on 429 responses rather than retrying immediately .",
+      "doc_id": "DOC-API-001",
+      "cos": 0.901,
+      "lex": 1.0,
+      "contradiction": 0.012,
+      "cited": [
+        "DOC-API-001"
+      ],
+      "ticket_id": "DEV-0252",
+      "source": "generate_check_v1.1"
+    },
+    {
+      "sentence": "The billing period runs from the anniversary of the subscription date .",
+      "doc_id": "DOC-BILL-001",
+      "cos": 0.915,
+      "lex": 1.0,
+      "contradiction": 0.023,
+      "cited": [
+        "DOC-BILL-001"
+      ],
+      "ticket_id": "DEV-0478",
+      "source": "generate_check_v1.1"
+    },
+    {
+      "sentence": "Check the billing period dates at the top of the invoice to confirm this .",
+      "doc_id": "DOC-BILL-001",
+      "cos": 0.923,
+      "lex": 0.857,
+      "contradiction": 0.004,
+      "cited": [
+        "DOC-BILL-001"
+      ],
+      "ticket_id": "DEV-0478",
+      "source": "generate_check_v1.1"
+    },
+    {
+      "sentence": "To avoid being throttled and instead pay overage, you should configure alerts at fifty, eighty and ninety-five per cent of allowance rather than relying on the cap as a warning .",
+      "doc_id": "DOC-BILL-003",
+      "cos": 0.903,
+      "lex": 0.722,
+      "contradiction": 0.002,
+      "cited": [
+        "DOC-BILL-003"
+      ],
+      "ticket_id": "DEV-0366",
+      "source": "generate_check_v1.1"
+    },
+    {
+      "sentence": "An account owner can also raise the spend cap immediately from the billing page and service will resume within a minute .",
+      "doc_id": "DOC-BILL-003",
+      "cos": 0.815,
+      "lex": 0.917,
+      "contradiction": 0.003,
+      "cited": [
+        "DOC-BILL-003"
+      ],
+      "ticket_id": "DEV-0366",
+      "source": "generate_check_v1.1"
+    },
+    {
+      "sentence": "Audit logs are retained for ninety days on Business plans .",
+      "doc_id": "DOC-SEC-001",
+      "cos": 0.968,
+      "lex": 1.0,
+      "contradiction": 0.025,
+      "cited": [
+        "DOC-SEC-001"
+      ],
+      "ticket_id": "DEV-0351",
+      "source": "generate_check_v1.1"
+    },
+    {
+      "sentence": "You can export the relevant period to object storage for anything needed beyond the retention window .",
+      "doc_id": "DOC-SEC-003",
+      "cos": 0.983,
+      "lex": 1.0,
+      "contradiction": 0.002,
+      "cited": [
+        "DOC-SEC-003"
+      ],
+      "ticket_id": "DEV-0351",
+      "source": "generate_check_v1.1"
+    },
+    {
+      "sentence": "Note that read access to resources is not logged on Business plans, only administrative and configuration changes .",
+      "doc_id": "DOC-SEC-003",
+      "cos": 1.0,
+      "lex": 1.0,
+      "contradiction": 0.004,
+      "cited": [
+        "DOC-SEC-003"
+      ],
+      "ticket_id": "DEV-0351",
+      "source": "generate_check_v1.1"
+    },
+    {
+      "sentence": "Audit log exports are themselves audited, including the fields selected and the destination .",
+      "doc_id": "DOC-SEC-003",
+      "cos": 1.0,
+      "lex": 1.0,
+      "contradiction": 0.043,
+      "cited": [
+        "DOC-SEC-003"
+      ],
+      "ticket_id": "DEV-0351",
+      "source": "generate_check_v1.1"
+    },
+    {
+      "sentence": "According to our documentation, failed deliveries are retried with backoff for twenty-four hours, after which the endpoint is disabled and the account is notified .",
+      "doc_id": "DOC-API-003",
+      "cos": 0.989,
+      "lex": 0.833,
+      "contradiction": 0.001,
+      "cited": [
+        "DOC-API-003"
+      ],
+      "ticket_id": "DEV-0357",
+      "source": "generate_check_v1.1"
+    },
+    {
+      "sentence": "We also suggest returning a 2xx status as quickly as possible and processing the event asynchronously, as deliveries time out after five seconds .",
+      "doc_id": "DOC-API-003",
+      "cos": 0.69,
+      "lex": 0.786,
+      "contradiction": 0.001,
+      "cited": [
+        "DOC-API-003"
+      ],
+      "ticket_id": "DEV-0357",
+      "source": "generate_check_v1.1"
+    },
+    {
+      "sentence": "We've seen cases where the assertion consumer service URL in the identity provider doesn't match the value shown on the SSO settings page, including the trailing path .",
+      "doc_id": "DOC-AUTH-003",
+      "cos": 0.857,
+      "lex": 0.833,
+      "contradiction": 0.003,
+      "cited": [
+        "DOC-AUTH-003"
+      ],
+      "ticket_id": "DEV-0419",
+      "source": "generate_check_v1.1"
+    },
+    {
+      "sentence": "It's also possible that the NameID is not the user's email address in lower case, or that just-in-time provisioning is disabled on the connection .",
+      "doc_id": "DOC-AUTH-003",
+      "cos": 0.64,
+      "lex": 0.727,
+      "contradiction": 0.002,
+      "cited": [
+        "DOC-AUTH-003"
+      ],
+      "ticket_id": "DEV-0419",
+      "source": "generate_check_v1.1"
+    },
+    {
+      "sentence": "Audit logs are retained for ninety days on Business plans .",
+      "doc_id": "DOC-SEC-001",
+      "cos": 0.968,
+      "lex": 1.0,
+      "contradiction": 0.025,
+      "cited": [
+        "DOC-SEC-001"
+      ],
+      "ticket_id": "DEV-0109",
+      "source": "generate_check_v1.1"
+    },
+    {
+      "sentence": "Filter the audit log by actor, resource and date range .",
+      "doc_id": "DOC-SEC-003",
+      "cos": 1.0,
+      "lex": 1.0,
+      "contradiction": 0.066,
+      "cited": [
+        "DOC-SEC-003"
+      ],
+      "ticket_id": "DEV-0109",
+      "source": "generate_check_v1.1"
+    },
+    {
+      "sentence": "Configure continuous export to your own storage if a policy requires retention longer than the plan provides .",
+      "doc_id": "DOC-SEC-003",
+      "cos": 1.0,
+      "lex": 1.0,
+      "contradiction": 0.026,
+      "cited": [
+        "DOC-SEC-003"
+      ],
+      "ticket_id": "DEV-0109",
+      "source": "generate_check_v1.1"
+    },
+    {
+      "sentence": "Note that read access to resources is not logged on Business plans, only administrative and configuration changes .",
+      "doc_id": "DOC-SEC-003",
+      "cos": 1.0,
+      "lex": 1.0,
+      "contradiction": 0.004,
+      "cited": [
+        "DOC-SEC-003"
+      ],
+      "ticket_id": "DEV-0109",
+      "source": "generate_check_v1.1"
+    },
+    {
+      "sentence": "The issue may be due to the role being granted at project scope rather than organisation scope .",
+      "doc_id": "DOC-ACCT-001",
+      "cos": 0.854,
+      "lex": 0.667,
+      "contradiction": 0.011,
+      "cited": [
+        "DOC-ACCT-001"
+      ],
+      "ticket_id": "DEV-0390",
+      "source": "generate_check_v1.1"
+    },
+    {
+      "sentence": "Confirm the invitation was accepted, as pending invitations appear in a separate section and expire after seven days .",
+      "doc_id": "DOC-ACCT-001",
+      "cos": 0.841,
+      "lex": 1.0,
+      "contradiction": 0.028,
+      "cited": [
+        "DOC-ACCT-001"
+      ],
+      "ticket_id": "DEV-0390",
+      "source": "generate_check_v1.1"
+    },
+    {
+      "sentence": "Forwarding pauses after one hour of consecutive failures and must be resumed manually once the destination is healthy .",
+      "doc_id": "DOC-INT-002",
+      "cos": 1.0,
+      "lex": 1.0,
+      "contradiction": 0.008,
+      "cited": [
+        "DOC-INT-002"
+      ],
+      "ticket_id": "DEV-0299",
+      "source": "generate_check_v1.1"
+    },
+    {
+      "sentence": "Check the forwarding status page, which shows the last successful delivery and any error returned by the destination .",
+      "doc_id": "DOC-INT-002",
+      "cos": 1.0,
+      "lex": 1.0,
+      "contradiction": 0.02,
+      "cited": [
+        "DOC-INT-002"
+      ],
+      "ticket_id": "DEV-0299",
+      "source": "generate_check_v1.1"
+    },
+    {
+      "sentence": "Verify the destination credential separately if delivery has stopped entirely, as expired credentials are the most common cause .",
+      "doc_id": "DOC-INT-002",
+      "cos": 1.0,
+      "lex": 1.0,
+      "contradiction": 0.011,
+      "cited": [
+        "DOC-INT-002"
+      ],
+      "ticket_id": "DEV-0299",
+      "source": "generate_check_v1.1"
+    },
+    {
+      "sentence": "The billing period runs from the anniversary of the subscription date .",
+      "doc_id": "DOC-BILL-001",
+      "cos": 0.915,
+      "lex": 1.0,
+      "contradiction": 0.023,
+      "cited": [
+        "DOC-BILL-001"
+      ],
+      "ticket_id": "DEV-0247",
+      "source": "generate_check_v1.1"
+    },
+    {
+      "sentence": "You can check the billing period dates at the top of the invoice.",
+      "doc_id": "DOC-BILL-001",
+      "cos": 0.97,
+      "lex": 1.0,
+      "contradiction": 0.001,
+      "cited": [],
+      "ticket_id": "DEV-0247",
+      "source": "generate_check_v1.1"
+    },
+    {
+      "sentence": "Set a usage alert on the billing page so that unexpected accrual is noticed during the period rather than at the end of it .",
+      "doc_id": "DOC-BILL-001",
+      "cos": 1.0,
+      "lex": 1.0,
+      "contradiction": 0.009,
+      "cited": [
+        "DOC-BILL-001"
+      ],
+      "ticket_id": "DEV-0247",
+      "source": "generate_check_v1.1"
+    },
+    {
+      "sentence": "We've identified a few potential causes for the increased latency.",
+      "doc_id": "DOC-PERF-001",
+      "cos": 0.722,
+      "lex": 0.333,
+      "contradiction": 0.003,
+      "cited": [],
+      "ticket_id": "DEV-0056",
+      "source": "generate_check_v1.1"
+    },
+    {
+      "sentence": "It's possible that the service is running close to its memory limit and spending time in garbage collection .",
+      "doc_id": "DOC-PERF-001",
+      "cos": 0.93,
+      "lex": 0.9,
+      "contradiction": 0.013,
+      "cited": [
+        "DOC-PERF-001"
+      ],
+      "ticket_id": "DEV-0056",
+      "source": "generate_check_v1.1"
+    },
+    {
+      "sentence": "Additionally, a downstream dependency may have slowed and the delay is propagating .",
+      "doc_id": "DOC-PERF-001",
+      "cos": 0.924,
+      "lex": 0.833,
+      "contradiction": 0.003,
+      "cited": [
+        "DOC-PERF-001"
+      ],
+      "ticket_id": "DEV-0056",
+      "source": "generate_check_v1.1"
+    },
+    {
+      "sentence": "It's also possible that instance count is not scaling with the load pattern .",
+      "doc_id": "DOC-PERF-001",
+      "cos": 0.936,
+      "lex": 0.833,
+      "contradiction": 0.002,
+      "cited": [
+        "DOC-PERF-001"
+      ],
+      "ticket_id": "DEV-0056",
+      "source": "generate_check_v1.1"
+    },
+    {
+      "sentence": "To further diagnose the issue, we recommend comparing median and 95th percentile latency on the metrics page to identify whether the time is being spent in your service or waiting on another .",
+      "doc_id": "DOC-PERF-001",
+      "cos": 0.791,
+      "lex": 0.737,
+      "contradiction": 0.002,
+      "cited": [
+        "DOC-PERF-001"
+      ],
+      "ticket_id": "DEV-0056",
+      "source": "generate_check_v1.1"
+    },
+    {
+      "sentence": "A spend cap can stop a production workload.",
+      "doc_id": "DOC-BILL-003",
+      "cos": 0.856,
+      "lex": 0.8,
+      "contradiction": 0.014,
+      "cited": [],
+      "ticket_id": "DEV-0092",
+      "source": "generate_check_v1.1"
+    },
+    {
+      "sentence": "Spend caps apply per organisation and cannot currently be set per project.",
+      "doc_id": "DOC-BILL-003",
+      "cos": 1.0,
+      "lex": 1.0,
+      "contradiction": 0.001,
+      "cited": [],
+      "ticket_id": "DEV-0092",
+      "source": "generate_check_v1.1"
+    },
+    {
+      "sentence": "Read the rate limit headers returned with every response .",
+      "doc_id": "DOC-BILL-003",
+      "cos": 0.349,
+      "lex": 0.143,
+      "contradiction": 0.11,
+      "cited": [],
+      "ticket_id": "DEV-0092",
+      "source": "generate_check_v1.1"
+    },
+    {
+      "sentence": "Implement exponential backoff with jitter on 429 responses rather than retrying immediately .",
+      "doc_id": "DOC-BILL-003",
+      "cos": 0.198,
+      "lex": 0.222,
+      "contradiction": 0.263,
+      "cited": [],
+      "ticket_id": "DEV-0092",
+      "source": "generate_check_v1.1"
+    },
+    {
+      "sentence": "They must match exactly, including the trailing path .",
+      "doc_id": "DOC-AUTH-003",
+      "cos": 1.0,
+      "lex": 1.0,
+      "contradiction": 0.003,
+      "cited": [
+        "DOC-AUTH-003"
+      ],
+      "ticket_id": "DEV-0471",
+      "source": "generate_check_v1.2"
+    },
+    {
+      "sentence": "Additionally, inspect a failing assertion and confirm the NameID is the user's email address in lower case .",
+      "doc_id": "DOC-AUTH-003",
+      "cos": 0.99,
+      "lex": 0.909,
+      "contradiction": 0.001,
+      "cited": [
+        "DOC-AUTH-003"
+      ],
+      "ticket_id": "DEV-0471",
+      "source": "generate_check_v1.2"
+    },
+    {
+      "sentence": "If new users should be created on first login, enable just-in-time provisioning and set a default role for provisioned users .",
+      "doc_id": "DOC-AUTH-003",
+      "cos": 0.967,
+      "lex": 1.0,
+      "contradiction": 0.001,
+      "cited": [
+        "DOC-AUTH-003"
+      ],
+      "ticket_id": "DEV-0471",
+      "source": "generate_check_v1.2"
+    },
+    {
+      "sentence": "Please also ensure that just-in-time provisioning is enabled on the connection .",
+      "doc_id": "DOC-AUTH-003",
+      "cos": 0.84,
+      "lex": 0.6,
+      "contradiction": 0.003,
+      "cited": [
+        "DOC-AUTH-003"
+      ],
+      "ticket_id": "DEV-0471",
+      "source": "generate_check_v1.2"
+    },
+    {
+      "sentence": "According to our documentation, a delay of up to two minutes on metrics is expected due to aggregation before they're sent .",
+      "doc_id": "DOC-INT-002",
+      "cos": 0.915,
+      "lex": 0.636,
+      "contradiction": 0.001,
+      "cited": [
+        "DOC-PERF-001"
+      ],
+      "ticket_id": "DEV-0124",
+      "source": "generate_check_v1.2"
+    },
+    {
+      "sentence": "However, if the forwarded volume is higher than expected, it's likely due to debug output being forwarded, which can be resolved by applying a level filter at source .",
+      "doc_id": "DOC-INT-002",
+      "cos": 0.868,
+      "lex": 0.667,
+      "contradiction": 0.005,
+      "cited": [
+        "DOC-INT-002"
+      ],
+      "ticket_id": "DEV-0124",
+      "source": "generate_check_v1.2"
+    },
+    {
+      "sentence": "I recommend checking the forwarding status page to see the last successful delivery and any error returned by the destination, as well as verifying the destination credential separately if delivery has stopped entirely.",
+      "doc_id": "DOC-INT-002",
+      "cos": 0.901,
+      "lex": 0.722,
+      "contradiction": 0.001,
+      "cited": [],
+      "ticket_id": "DEV-0124",
+      "source": "generate_check_v1.2"
+    },
+    {
+      "sentence": "Then, review the environment overrides page, which lists values that differ from the defaults for each environment .",
+      "doc_id": "DOC-DEPLOY-004",
+      "cos": 0.977,
+      "lex": 1.0,
+      "contradiction": 0.022,
+      "cited": [
+        "DOC-DEPLOY-004"
+      ],
+      "ticket_id": "DEV-0116",
+      "source": "generate_check_v1.2"
+    },
+    {
+      "sentence": "Finally, redeploy after changing configuration, as running containers do not pick up new values without a restart .",
+      "doc_id": "DOC-DEPLOY-004",
+      "cos": 0.797,
+      "lex": 0.909,
+      "contradiction": 0.01,
+      "cited": [
+        "DOC-DEPLOY-004"
+      ],
+      "ticket_id": "DEV-0116",
+      "source": "generate_check_v1.2"
+    },
+    {
+      "sentence": "Store anything sensitive as a secret rather than a variable, as secrets are masked in logs and are not readable through the API after creation .",
+      "doc_id": "DOC-DEPLOY-004",
+      "cos": 0.806,
+      "lex": 1.0,
+      "contradiction": 0.02,
+      "cited": [
+        "DOC-DEPLOY-004"
+      ],
+      "ticket_id": "DEV-0404",
+      "source": "generate_check_v1.2"
+    },
+    {
+      "sentence": "Review the environment overrides page, which lists values that differ from the defaults for each environment .",
+      "doc_id": "DOC-DEPLOY-004",
+      "cos": 1.0,
+      "lex": 1.0,
+      "contradiction": 0.029,
+      "cited": [
+        "DOC-DEPLOY-004"
+      ],
+      "ticket_id": "DEV-0404",
+      "source": "generate_check_v1.2"
+    },
+    {
+      "sentence": "Redeploy after changing configuration, as running containers do not pick up new values without a restart .",
+      "doc_id": "DOC-DEPLOY-004",
+      "cos": 0.79,
+      "lex": 1.0,
+      "contradiction": 0.018,
+      "cited": [
+        "DOC-DEPLOY-004"
+      ],
+      "ticket_id": "DEV-0404",
+      "source": "generate_check_v1.2"
+    },
+    {
+      "sentence": "Additionally, please note that a secret that has been printed to logs should be treated as exposed and rotated, even if the logs are private .",
+      "doc_id": "DOC-DEPLOY-004",
+      "cos": 0.964,
+      "lex": 0.818,
+      "contradiction": 0.002,
+      "cited": [
+        "DOC-DEPLOY-004"
+      ],
+      "ticket_id": "DEV-0404",
+      "source": "generate_check_v1.2"
+    },
+    {
+      "sentence": "To help diagnose the problem, we recommend comparing the median and 95th percentile latency on the metrics page.",
+      "doc_id": "DOC-PERF-001",
+      "cos": 0.918,
+      "lex": 0.545,
+      "contradiction": 0.001,
+      "cited": [],
+      "ticket_id": "DEV-0213",
+      "source": "generate_check_v1.2"
+    },
+    {
+      "sentence": "If there's a large gap, it may indicate contention or queueing rather than a uniformly slower service .",
+      "doc_id": "DOC-PERF-001",
+      "cos": 0.866,
+      "lex": 0.8,
+      "contradiction": 0.003,
+      "cited": [
+        "DOC-PERF-001"
+      ],
+      "ticket_id": "DEV-0213",
+      "source": "generate_check_v1.2"
+    },
+    {
+      "sentence": "Next, please check memory utilisation across instances.",
+      "doc_id": "DOC-PERF-001",
+      "cos": 0.787,
+      "lex": 0.833,
+      "contradiction": 0.009,
+      "cited": [],
+      "ticket_id": "DEV-0213",
+      "source": "generate_check_v1.2"
+    },
+    {
+      "sentence": "Sustained utilisation above eighty per cent typically shows up as latency before it shows up as failure .",
+      "doc_id": "DOC-PERF-001",
+      "cos": 1.0,
+      "lex": 1.0,
+      "contradiction": 0.016,
+      "cited": [
+        "DOC-PERF-001"
+      ],
+      "ticket_id": "DEV-0213",
+      "source": "generate_check_v1.2"
+    },
+    {
+      "sentence": "Additionally, review the dependency timing breakdown on the trace view to identify whether the time is being spent in your service or waiting on another .",
+      "doc_id": "DOC-PERF-001",
+      "cos": 0.995,
+      "lex": 0.933,
+      "contradiction": 0.001,
+      "cited": [
+        "DOC-PERF-001"
+      ],
+      "ticket_id": "DEV-0213",
+      "source": "generate_check_v1.2"
+    },
+    {
+      "sentence": "Finally, if load is predictable, consider adjusting the autoscaling policy to scale on request count, which responds sooner than scaling on processor utilisation .",
+      "doc_id": "DOC-PERF-001",
+      "cos": 0.832,
+      "lex": 0.733,
+      "contradiction": 0.004,
+      "cited": [
+        "DOC-PERF-001"
+      ],
+      "ticket_id": "DEV-0213",
+      "source": "generate_check_v1.2"
+    },
+    {
+      "sentence": "To revert to an earlier revision, please follow these steps: Open the revisions page for your service and identify the last revision that was healthy.",
+      "doc_id": "DOC-DEPLOY-002",
+      "cos": 0.788,
+      "lex": 0.667,
+      "contradiction": 0.019,
+      "cited": [],
+      "ticket_id": "DEV-0386",
+      "source": "generate_check_v1.2"
+    },
+    {
+      "sentence": "Select roll back on that revision.",
+      "doc_id": "DOC-DEPLOY-002",
+      "cos": 1.0,
+      "lex": 1.0,
+      "contradiction": 0.001,
+      "cited": [],
+      "ticket_id": "DEV-0386",
+      "source": "generate_check_v1.2"
+    },
+    {
+      "sentence": "Traffic will move within roughly thirty seconds and no rebuild will take place.",
+      "doc_id": "DOC-DEPLOY-002",
+      "cos": 0.924,
+      "lex": 0.778,
+      "contradiction": 0.002,
+      "cited": [],
+      "ticket_id": "DEV-0386",
+      "source": "generate_check_v1.2"
+    },
+    {
+      "sentence": "If the release included a database migration, roll the migration back before the service, or the older code will encounter a schema it does not expect.",
+      "doc_id": "DOC-DEPLOY-002",
+      "cos": 1.0,
+      "lex": 1.0,
+      "contradiction": 0.002,
+      "cited": [],
+      "ticket_id": "DEV-0386",
+      "source": "generate_check_v1.2"
+    },
+    {
+      "sentence": "Record the incident and the reason for the rollback before deploying a fix, while the detail is still fresh.",
+      "doc_id": "DOC-DEPLOY-002",
+      "cos": 1.0,
+      "lex": 1.0,
+      "contradiction": 0.001,
+      "cited": [],
+      "ticket_id": "DEV-0386",
+      "source": "generate_check_v1.2"
+    },
+    {
+      "sentence": "This can be caused by the pool size multiplied by the instance count exceeding the database connection limit, or connections not being returned to the pool after use.",
+      "doc_id": "DOC-PERF-003",
+      "cos": 0.877,
+      "lex": 0.857,
+      "contradiction": 0.011,
+      "cited": [],
+      "ticket_id": "DEV-0137",
+      "source": "generate_check_v1.2"
+    },
+    {
+      "sentence": "Long-running transactions may also be holding connections open.",
+      "doc_id": "DOC-PERF-003",
+      "cos": 0.898,
+      "lex": 1.0,
+      "contradiction": 0.002,
+      "cited": [],
+      "ticket_id": "DEV-0137",
+      "source": "generate_check_v1.2"
+    },
+    {
+      "sentence": "Additionally, verify that connections are being returned to the pool after use, and check for any long-running transactions that may be holding connections open.",
+      "doc_id": "DOC-PERF-003",
+      "cos": 0.712,
+      "lex": 0.75,
+      "contradiction": 0.003,
+      "cited": [],
+      "ticket_id": "DEV-0137",
+      "source": "generate_check_v1.2"
+    },
+    {
+      "sentence": "According to our documentation , the rate limit headers returned with every response give the limit, the remaining allowance, and the reset time, which is more reliable than inferring the limit from behavior .",
+      "doc_id": "DOC-API-001",
+      "cos": 0.803,
+      "lex": 0.824,
+      "contradiction": 0.003,
+      "cited": [
+        "DOC-API-001"
+      ],
+      "ticket_id": "DEV-0252",
+      "source": "generate_check_v1.2"
+    },
+    {
+      "sentence": "We recommend reading these headers to confirm the limit for your specific endpoint.",
+      "doc_id": "DOC-API-001",
+      "cos": 0.832,
+      "lex": 0.714,
+      "contradiction": 0.001,
+      "cited": [],
+      "ticket_id": "DEV-0252",
+      "source": "generate_check_v1.2"
+    },
+    {
+      "sentence": "Some endpoints, such as search and export endpoints, have lower limits than reads .",
+      "doc_id": "DOC-API-001",
+      "cos": 0.733,
+      "lex": 0.625,
+      "contradiction": 0.03,
+      "cited": [
+        "DOC-API-001"
+      ],
+      "ticket_id": "DEV-0252",
+      "source": "generate_check_v1.2"
+    },
+    {
+      "sentence": "To implement exponential backoff with jitter on 429 responses, rather than retrying immediately, which prolongs the throttling .",
+      "doc_id": "DOC-API-001",
+      "cos": 0.949,
+      "lex": 1.0,
+      "contradiction": 0.004,
+      "cited": [
+        "DOC-API-001"
+      ],
+      "ticket_id": "DEV-0252",
+      "source": "generate_check_v1.2"
+    },
+    {
+      "sentence": "If you require sustained higher throughput, you can raise the limit on your Business plan by submitting an account request .",
+      "doc_id": "DOC-API-001",
+      "cos": 0.887,
+      "lex": 0.636,
+      "contradiction": 0.003,
+      "cited": [
+        "DOC-API-001"
+      ],
+      "ticket_id": "DEV-0252",
+      "source": "generate_check_v1.2"
+    },
+    {
+      "sentence": "Look for resources in staging or development environments, which are billed at the same rate as production .",
+      "doc_id": "DOC-BILL-001",
+      "cos": 1.0,
+      "lex": 1.0,
+      "contradiction": 0.01,
+      "cited": [
+        "DOC-BILL-001"
+      ],
+      "ticket_id": "DEV-0478",
+      "source": "generate_check_v1.2"
+    },
+    {
+      "sentence": "Check the billing period dates at the top of the invoice.",
+      "doc_id": "DOC-BILL-001",
+      "cos": 1.0,
+      "lex": 1.0,
+      "contradiction": 0.001,
+      "cited": [],
+      "ticket_id": "DEV-0478",
+      "source": "generate_check_v1.2"
+    },
+    {
+      "sentence": "The period runs from the anniversary of the subscription date .",
+      "doc_id": "DOC-BILL-001",
+      "cos": 1.0,
+      "lex": 1.0,
+      "contradiction": 0.04,
+      "cited": [
+        "DOC-BILL-001"
+      ],
+      "ticket_id": "DEV-0478",
+      "source": "generate_check_v1.2"
+    },
+    {
+      "sentence": "Set a usage alert on the billing page so that unexpected accrual is noticed during the period rather than at the end of it .",
+      "doc_id": "DOC-BILL-001",
+      "cos": 1.0,
+      "lex": 1.0,
+      "contradiction": 0.009,
+      "cited": [
+        "DOC-BILL-001"
+      ],
+      "ticket_id": "DEV-0478",
+      "source": "generate_check_v1.2"
+    },
+    {
+      "sentence": "According to our documentation, unexpected overage charges can occur when the plan allowance is consumed before the end of the billing period .",
+      "doc_id": "DOC-BILL-003",
+      "cos": 0.755,
+      "lex": 0.5,
+      "contradiction": 0.019,
+      "cited": [
+        "DOC-BILL-003"
+      ],
+      "ticket_id": "DEV-0366",
+      "source": "generate_check_v1.2"
+    },
+    {
+      "sentence": "To avoid being throttled, you can configure alerts at fifty, eighty, and ninety-five per cent of allowance rather than relying on the cap as a warning .",
+      "doc_id": "DOC-BILL-003",
+      "cos": 0.921,
+      "lex": 0.8,
+      "contradiction": 0.002,
+      "cited": [
+        "DOC-BILL-003"
+      ],
+      "ticket_id": "DEV-0366",
+      "source": "generate_check_v1.2"
+    },
+    {
+      "sentence": "Additionally, you can decide deliberately between a hard spend cap, which stops the service, and overage, which continues at the listed rate .",
+      "doc_id": "DOC-BILL-003",
+      "cos": 0.967,
+      "lex": 0.923,
+      "contradiction": 0.004,
+      "cited": [
+        "DOC-BILL-003"
+      ],
+      "ticket_id": "DEV-0366",
+      "source": "generate_check_v1.2"
+    },
+    {
+      "sentence": "If a spend cap has stopped a production service, an account owner can raise it immediately from the billing page and service resumes within a minute .",
+      "doc_id": "DOC-BILL-003",
+      "cos": 0.92,
+      "lex": 1.0,
+      "contradiction": 0.058,
+      "cited": [
+        "DOC-BILL-003"
+      ],
+      "ticket_id": "DEV-0366",
+      "source": "generate_check_v1.2"
+    },
+    {
+      "sentence": "To assist you with exporting audit logs, please follow these steps: Filter the audit log by actor, resource and date range .",
+      "doc_id": "DOC-SEC-003",
+      "cos": 0.819,
+      "lex": 0.583,
+      "contradiction": 0.003,
+      "cited": [
+        "DOC-SEC-003"
+      ],
+      "ticket_id": "DEV-0351",
+      "source": "generate_check_v1.2"
+    },
+    {
+      "sentence": "Every administrative action carries the user, the address and the outcome .",
+      "doc_id": "DOC-SEC-003",
+      "cos": 1.0,
+      "lex": 1.0,
+      "contradiction": 0.038,
+      "cited": [
+        "DOC-SEC-003"
+      ],
+      "ticket_id": "DEV-0351",
+      "source": "generate_check_v1.2"
+    },
+    {
+      "sentence": "Note that read access to resources is not logged on Business plans, only administrative and configuration changes .",
+      "doc_id": "DOC-SEC-003",
+      "cos": 1.0,
+      "lex": 1.0,
+      "contradiction": 0.004,
+      "cited": [
+        "DOC-SEC-003"
+      ],
+      "ticket_id": "DEV-0351",
+      "source": "generate_check_v1.2"
+    },
+    {
+      "sentence": "If the period you need is within the retention window, export the relevant period to object storage for anything needed beyond the retention window .",
+      "doc_id": "DOC-SEC-003",
+      "cos": 0.948,
+      "lex": 0.833,
+      "contradiction": 0.096,
+      "cited": [
+        "DOC-SEC-003"
+      ],
+      "ticket_id": "DEV-0351",
+      "source": "generate_check_v1.2"
+    },
+    {
+      "sentence": "Exports are not subject to retention limits.",
+      "doc_id": "DOC-SEC-003",
+      "cos": 1.0,
+      "lex": 1.0,
+      "contradiction": 0.001,
+      "cited": [],
+      "ticket_id": "DEV-0351",
+      "source": "generate_check_v1.2"
+    },
+    {
+      "sentence": "If a policy requires retention longer than the plan provides, configure continuous export to your own storage .",
+      "doc_id": "DOC-SEC-003",
+      "cos": 0.992,
+      "lex": 1.0,
+      "contradiction": 0.006,
+      "cited": [
+        "DOC-SEC-003"
+      ],
+      "ticket_id": "DEV-0351",
+      "source": "generate_check_v1.2"
+    },
+    {
+      "sentence": "Also, note that exports containing personal data are logged in the audit trail with the requesting user and the fields included .",
+      "doc_id": "DOC-DATA-001",
+      "cos": 0.964,
+      "lex": 0.917,
+      "contradiction": 0.004,
+      "cited": [
+        "DOC-DATA-001"
+      ],
+      "ticket_id": "DEV-0351",
+      "source": "generate_check_v1.2"
+    },
+    {
+      "sentence": "Audit log exports are themselves audited, including the fields selected and the destination .",
+      "doc_id": "DOC-SEC-003",
+      "cos": 1.0,
+      "lex": 1.0,
+      "contradiction": 0.043,
+      "cited": [
+        "DOC-SEC-003"
+      ],
+      "ticket_id": "DEV-0351",
+      "source": "generate_check_v1.2"
+    },
+    {
+      "sentence": "Additionally, please ensure that your endpoint returns a 2xx status as quickly as possible and processes the event asynchronously .",
+      "doc_id": "DOC-API-003",
+      "cos": 0.638,
+      "lex": 0.545,
+      "contradiction": 0.002,
+      "cited": [
+        "DOC-API-003"
+      ],
+      "ticket_id": "DEV-0357",
+      "source": "generate_check_v1.2"
+    },
+    {
+      "sentence": "Also, verify that the signature is computed over the raw request body before any parsing .",
+      "doc_id": "DOC-API-003",
+      "cos": 0.848,
+      "lex": 0.714,
+      "contradiction": 0.002,
+      "cited": [
+        "DOC-API-003"
+      ],
+      "ticket_id": "DEV-0357",
+      "source": "generate_check_v1.2"
+    },
+    {
+      "sentence": "Finally, make sure your handler is idempotent using the event identifier, as at-least-once delivery means duplicates are expected rather than exceptional .",
+      "doc_id": "DOC-API-003",
+      "cos": 0.647,
+      "lex": 0.867,
+      "contradiction": 0.004,
+      "cited": [
+        "DOC-API-003"
+      ],
+      "ticket_id": "DEV-0357",
+      "source": "generate_check_v1.2"
+    },
+    {
+      "sentence": "They must match exactly, including the trailing path .",
+      "doc_id": "DOC-AUTH-003",
+      "cos": 1.0,
+      "lex": 1.0,
+      "contradiction": 0.003,
+      "cited": [
+        "DOC-AUTH-003"
+      ],
+      "ticket_id": "DEV-0419",
+      "source": "generate_check_v1.2"
+    },
+    {
+      "sentence": "Additionally, inspect a failing assertion and confirm the NameID is the user's email address in lower case .",
+      "doc_id": "DOC-AUTH-003",
+      "cos": 0.99,
+      "lex": 0.909,
+      "contradiction": 0.001,
+      "cited": [
+        "DOC-AUTH-003"
+      ],
+      "ticket_id": "DEV-0419",
+      "source": "generate_check_v1.2"
+    },
+    {
+      "sentence": "If new users should be created on first login, enable just-in-time provisioning and set a default role for provisioned users .",
+      "doc_id": "DOC-AUTH-003",
+      "cos": 0.967,
+      "lex": 1.0,
+      "contradiction": 0.001,
+      "cited": [
+        "DOC-AUTH-003"
+      ],
+      "ticket_id": "DEV-0419",
+      "source": "generate_check_v1.2"
+    },
+    {
+      "sentence": "It's also recommended to keep at least one administrator account with password access while testing, so a misconfiguration does not lock the whole organisation out .",
+      "doc_id": "DOC-AUTH-003",
+      "cos": 0.938,
+      "lex": 0.933,
+      "contradiction": 0.001,
+      "cited": [
+        "DOC-AUTH-003"
+      ],
+      "ticket_id": "DEV-0419",
+      "source": "generate_check_v1.2"
+    },
+    {
+      "sentence": "To assist you with your request, please follow these steps: Filter the audit log by actor, resource and date range, as every administrative action carries the user, the address and the outcome .",
+      "doc_id": "DOC-SEC-003",
+      "cos": 0.87,
+      "lex": 0.778,
+      "contradiction": 0.001,
+      "cited": [
+        "DOC-SEC-003"
+      ],
+      "ticket_id": "DEV-0109",
+      "source": "generate_check_v1.2"
+    },
+    {
+      "sentence": "Export the relevant period to object storage for anything needed beyond the ninety-day retention window on Business plans .",
+      "doc_id": "DOC-SEC-003",
+      "cos": 0.844,
+      "lex": 0.923,
+      "contradiction": 0.004,
+      "cited": [
+        "DOC-SEC-001"
+      ],
+      "ticket_id": "DEV-0109",
+      "source": "generate_check_v1.2"
+    },
+    {
+      "sentence": "Note that read access to resources is not logged on Business plans, only administrative and configuration changes .",
+      "doc_id": "DOC-SEC-003",
+      "cos": 1.0,
+      "lex": 1.0,
+      "contradiction": 0.004,
+      "cited": [
+        "DOC-SEC-003"
+      ],
+      "ticket_id": "DEV-0109",
+      "source": "generate_check_v1.2"
+    },
+    {
+      "sentence": "Confirm that the invitation was accepted, as pending invitations appear in a separate section and expire after seven days .",
+      "doc_id": "DOC-ACCT-001",
+      "cos": 0.844,
+      "lex": 1.0,
+      "contradiction": 0.031,
+      "cited": [
+        "DOC-ACCT-001"
+      ],
+      "ticket_id": "DEV-0390",
+      "source": "generate_check_v1.2"
+    },
+    {
+      "sentence": "If the issue persists, please remove the departing user rather than only changing their password, and revoke any API keys they created .",
+      "doc_id": "DOC-ACCT-001",
+      "cos": 0.891,
+      "lex": 0.867,
+      "contradiction": 0.001,
+      "cited": [
+        "DOC-ACCT-001"
+      ],
+      "ticket_id": "DEV-0390",
+      "source": "generate_check_v1.2"
+    },
+    {
+      "sentence": "You may also expect a delay of up to two minutes on metrics, since they are aggregated before being sent.",
+      "doc_id": "DOC-INT-002",
+      "cos": 0.972,
+      "lex": 1.0,
+      "contradiction": 0.001,
+      "cited": [],
+      "ticket_id": "DEV-0299",
+      "source": "generate_check_v1.2"
+    },
+    {
+      "sentence": "Additionally, consider applying a level filter at source so that debug output is not forwarded, which is usually the reason volume is higher than expected.",
+      "doc_id": "DOC-INT-002",
+      "cos": 0.985,
+      "lex": 0.786,
+      "contradiction": 0.002,
+      "cited": [],
+      "ticket_id": "DEV-0299",
+      "source": "generate_check_v1.2"
+    },
+    {
+      "sentence": "If delivery has stopped entirely, verify the destination credential separately, as expired credentials are the most common cause.",
+      "doc_id": "DOC-INT-002",
+      "cos": 0.972,
+      "lex": 1.0,
+      "contradiction": 0.001,
+      "cited": [],
+      "ticket_id": "DEV-0299",
+      "source": "generate_check_v1.2"
+    },
+    {
+      "sentence": "According to our documentation, the billing period runs from the anniversary of the subscription date .",
+      "doc_id": "DOC-BILL-001",
+      "cos": 0.87,
+      "lex": 0.75,
+      "contradiction": 0.002,
+      "cited": [
+        "DOC-BILL-001"
+      ],
+      "ticket_id": "DEV-0247",
+      "source": "generate_check_v1.2"
+    },
+    {
+      "sentence": "Open the usage breakdown for the period, which itemises charges by service and by environment . 2.",
+      "doc_id": "DOC-BILL-001",
+      "cos": 0.983,
+      "lex": 1.0,
+      "contradiction": 0.067,
+      "cited": [
+        "DOC-BILL-001"
+      ],
+      "ticket_id": "DEV-0247",
+      "source": "generate_check_v1.2"
+    },
+    {
+      "sentence": "Check the billing period dates at the top of the invoice.",
+      "doc_id": "DOC-BILL-001",
+      "cos": 1.0,
+      "lex": 1.0,
+      "contradiction": 0.001,
+      "cited": [],
+      "ticket_id": "DEV-0247",
+      "source": "generate_check_v1.2"
+    },
+    {
+      "sentence": "The period runs from the anniversary of the subscription date .",
+      "doc_id": "DOC-BILL-001",
+      "cos": 1.0,
+      "lex": 1.0,
+      "contradiction": 0.04,
+      "cited": [
+        "DOC-BILL-001"
+      ],
+      "ticket_id": "DEV-0247",
+      "source": "generate_check_v1.2"
+    },
+    {
+      "sentence": "A large gap points to contention or queueing rather than a uniformly slower service .",
+      "doc_id": "DOC-PERF-001",
+      "cos": 1.0,
+      "lex": 1.0,
+      "contradiction": 0.032,
+      "cited": [
+        "DOC-PERF-001"
+      ],
+      "ticket_id": "DEV-0056",
+      "source": "generate_check_v1.2"
+    },
+    {
+      "sentence": "Then, check memory utilisation across instances.",
+      "doc_id": "DOC-PERF-001",
+      "cos": 0.926,
+      "lex": 1.0,
+      "contradiction": 0.002,
+      "cited": [],
+      "ticket_id": "DEV-0056",
+      "source": "generate_check_v1.2"
+    },
+    {
+      "sentence": "Sustained utilisation above eighty per cent typically shows up as latency before it shows up as failure .",
+      "doc_id": "DOC-PERF-001",
+      "cos": 1.0,
+      "lex": 1.0,
+      "contradiction": 0.016,
+      "cited": [
+        "DOC-PERF-001"
+      ],
+      "ticket_id": "DEV-0056",
+      "source": "generate_check_v1.2"
+    },
+    {
+      "sentence": "Review the dependency timing breakdown on the trace view to identify whether the time is being spent in your service or waiting on another .",
+      "doc_id": "DOC-PERF-001",
+      "cos": 1.0,
+      "lex": 1.0,
+      "contradiction": 0.028,
+      "cited": [
+        "DOC-PERF-001"
+      ],
+      "ticket_id": "DEV-0056",
+      "source": "generate_check_v1.2"
+    },
+    {
+      "sentence": "If load is predictable, you may also want to adjust the autoscaling policy to scale on request count, which responds sooner than scaling on processor utilisation .",
+      "doc_id": "DOC-PERF-001",
+      "cos": 0.844,
+      "lex": 0.857,
+      "contradiction": 0.002,
+      "cited": [
+        "DOC-PERF-001"
+      ],
+      "ticket_id": "DEV-0056",
+      "source": "generate_check_v1.2"
+    },
+    {
+      "sentence": "You can then decide whether to implement a hard spend cap, which will stop the service, or overage, which will continue at the listed rate.",
+      "doc_id": "DOC-BILL-003",
+      "cos": 0.935,
+      "lex": 0.667,
+      "contradiction": 0.003,
+      "cited": [],
+      "ticket_id": "DEV-0092",
+      "source": "generate_check_v1.2"
+    },
+    {
+      "sentence": "We recommend configuring alerts at fifty, eighty and ninety-five per cent of allowance rather than relying on the cap as a warning.",
+      "doc_id": "DOC-BILL-003",
+      "cos": 0.982,
+      "lex": 0.846,
+      "contradiction": 0.001,
+      "cited": [],
+      "ticket_id": "DEV-0092",
+      "source": "generate_check_v1.2"
+    },
+    {
+      "sentence": "If your spend cap has stopped a production service, an account owner can raise it immediately from the billing page, and the service will resume within a minute.",
+      "doc_id": "DOC-BILL-003",
+      "cos": 0.877,
+      "lex": 0.929,
+      "contradiction": 0.032,
+      "cited": [],
+      "ticket_id": "DEV-0092",
+      "source": "generate_check_v1.2"
+    }
+  ]
+}

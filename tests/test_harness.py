@@ -143,3 +143,38 @@ def test_compute_metrics_handles_unlabelled_records():
     m = compute_metrics(recs)
     assert m["volume"]["processed"] == 1
     assert m["technical"]["classification"]["labelled"] == 0   # no labels -> no precision claimed
+
+
+class LoggingStub(OracleStub):
+    """OracleStub that also writes the decision-log rows the real pipeline writes, so reconciliation is testable."""
+
+    def __init__(self, db_path, fail_on=()):
+        super().__init__(fail_on)
+        from src.logging_store import DecisionLog
+        self.log = DecisionLog(db_path, run_id="stub-run")
+
+    def process(self, ticket):
+        r = super().process(ticket)
+        for stage in ("classification", "routing", "generation", "validation"):
+            self.log.record(ticket_id=ticket.ticket_id, stage=stage, action_taken=r.action, reason="stub",
+                            input_summary=ticket.text[:50], model_name="stub")
+        return r
+
+
+def test_log_reconciles_including_harness_level_failures(input_file, tmp_path, sample_tickets):
+    victim = sample_tickets[1]["ticket_id"]
+    out = tmp_path / "o"
+    m = harness.run(input_path=input_file, output_dir=out, pipeline=LoggingStub(tmp_path / "d.db", fail_on=[victim]))
+    rec = m["governance"]["decision_log"]
+    assert rec["complete"] and rec["tickets"] == len(sample_tickets) and rec["missing_validation"] == []
+    assert m["governance"]["decisions_logged"] == rec["rows_total"]
+    assert "reconcil" in (out / "run_summary.md").read_text(encoding="utf-8").lower()
+
+
+def test_calibration_small_bins_are_reported_not_judged():
+    from evaluation.metrics_report import calibration_table
+    pairs = [(0.99, True)] * 100 + [(0.70, True), (0.70, True)]      # two tickets in the 0.6-0.8 band
+    t = calibration_table(pairs)
+    assert t["all_bins_within_5_points"] is True                     # judged on bins with n >= min_n only
+    small = [b for b in t["bins"] if b["n"] == 2][0]
+    assert small["evaluable"] is False and t["min_n"] == 20
