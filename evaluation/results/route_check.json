@@ -1,0 +1,279 @@
+{
+  "variants": [
+    {
+      "variant": "base",
+      "auto_rate": 0.786,
+      "routing_accuracy": 0.784,
+      "auto_on_not_answerable": 81,
+      "escalated_but_expected_auto": 13,
+      "rules": {
+        "confident_and_grounded": 393,
+        "instruction_like_input": 1,
+        "low_confidence": 11,
+        "never_auto_intent": 86,
+        "no_grounded_source": 9
+      }
+    },
+    {
+      "variant": "plan_rule",
+      "auto_rate": 0.73,
+      "routing_accuracy": 0.756,
+      "auto_on_not_answerable": 74,
+      "escalated_but_expected_auto": 34,
+      "rules": {
+        "confident_and_grounded": 365,
+        "instruction_like_input": 1,
+        "low_confidence": 11,
+        "never_auto_intent": 86,
+        "no_grounded_source": 9,
+        "plan_restriction": 28
+      }
+    },
+    {
+      "variant": "answerable_floor",
+      "auto_rate": 0.752,
+      "routing_accuracy": 0.762,
+      "auto_on_not_answerable": 78,
+      "escalated_but_expected_auto": 27,
+      "rules": {
+        "confident_and_grounded": 376,
+        "instruction_like_input": 1,
+        "learned_not_answerable": 19,
+        "low_confidence": 11,
+        "never_auto_intent": 86,
+        "no_grounded_source": 7
+      }
+    },
+    {
+      "variant": "both",
+      "auto_rate": 0.696,
+      "routing_accuracy": 0.734,
+      "auto_on_not_answerable": 71,
+      "escalated_but_expected_auto": 48,
+      "rules": {
+        "confident_and_grounded": 348,
+        "instruction_like_input": 1,
+        "learned_not_answerable": 19,
+        "low_confidence": 11,
+        "never_auto_intent": 86,
+        "no_grounded_source": 7,
+        "plan_restriction": 28
+      }
+    }
+  ],
+  "sweep": [
+    {
+      "threshold": 0.5,
+      "auto_rate": 0.76,
+      "routing_accuracy": 0.77,
+      "unsafe_auto_must_not": 0,
+      "auto_on_not_answerable": 78,
+      "auto_with_wrong_intent": 0,
+      "escalated_but_expected_auto": 23,
+      "rules": {
+        "confident_and_grounded": 380,
+        "instruction_like_input": 1,
+        "learned_not_answerable": 22,
+        "never_auto_intent": 86,
+        "no_grounded_source": 11
+      }
+    },
+    {
+      "threshold": 0.6,
+      "auto_rate": 0.76,
+      "routing_accuracy": 0.77,
+      "unsafe_auto_must_not": 0,
+      "auto_on_not_answerable": 78,
+      "auto_with_wrong_intent": 0,
+      "escalated_but_expected_auto": 23,
+      "rules": {
+        "confident_and_grounded": 380,
+        "instruction_like_input": 1,
+        "learned_not_answerable": 22,
+        "never_auto_intent": 86,
+        "no_grounded_source": 11
+      }
+    },
+    {
+      "threshold": 0.65,
+      "auto_rate": 0.76,
+      "routing_accuracy": 0.77,
+      "unsafe_auto_must_not": 0,
+      "auto_on_not_answerable": 78,
+      "auto_with_wrong_intent": 0,
+      "escalated_but_expected_auto": 23,
+      "rules": {
+        "confident_and_grounded": 380,
+        "instruction_like_input": 1,
+        "learned_not_answerable": 22,
+        "never_auto_intent": 86,
+        "no_grounded_source": 11
+      }
+    },
+    {
+      "threshold": 0.7,
+      "auto_rate": 0.752,
+      "routing_accuracy": 0.762,
+      "unsafe_auto_must_not": 0,
+      "auto_on_not_answerable": 78,
+      "auto_with_wrong_intent": 0,
+      "escalated_but_expected_auto": 27,
+      "rules": {
+        "confident_and_grounded": 376,
+        "instruction_like_input": 1,
+        "learned_not_answerable": 19,
+        "low_confidence": 11,
+        "never_auto_intent": 86,
+        "no_grounded_source": 7
+      }
+    },
+    {
+      "threshold": 0.75,
+      "auto_rate": 0.752,
+      "routing_accuracy": 0.762,
+      "unsafe_auto_must_not": 0,
+      "auto_on_not_answerable": 78,
+      "auto_with_wrong_intent": 0,
+      "escalated_but_expected_auto": 27,
+      "rules": {
+        "confident_and_grounded": 376,
+        "instruction_like_input": 1,
+        "learned_not_answerable": 19,
+        "low_confidence": 11,
+        "never_auto_intent": 86,
+        "no_grounded_source": 7
+      }
+    },
+    {
+      "threshold": 0.8,
+      "auto_rate": 0.752,
+      "routing_accuracy": 0.762,
+      "unsafe_auto_must_not": 0,
+      "auto_on_not_answerable": 78,
+      "auto_with_wrong_intent": 0,
+      "escalated_but_expected_auto": 27,
+      "rules": {
+        "confident_and_grounded": 376,
+        "instruction_like_input": 1,
+        "learned_not_answerable": 19,
+        "low_confidence": 11,
+        "never_auto_intent": 86,
+        "no_grounded_source": 7
+      }
+    },
+    {
+      "threshold": 0.85,
+      "auto_rate": 0.752,
+      "routing_accuracy": 0.762,
+      "unsafe_auto_must_not": 0,
+      "auto_on_not_answerable": 78,
+      "auto_with_wrong_intent": 0,
+      "escalated_but_expected_auto": 27,
+      "rules": {
+        "confident_and_grounded": 376,
+        "instruction_like_input": 1,
+        "learned_not_answerable": 19,
+        "low_confidence": 11,
+        "never_auto_intent": 86,
+        "no_grounded_source": 7
+      }
+    },
+    {
+      "threshold": 0.9,
+      "auto_rate": 0.752,
+      "routing_accuracy": 0.762,
+      "unsafe_auto_must_not": 0,
+      "auto_on_not_answerable": 78,
+      "auto_with_wrong_intent": 0,
+      "escalated_but_expected_auto": 27,
+      "rules": {
+        "confident_and_grounded": 376,
+        "instruction_like_input": 1,
+        "learned_not_answerable": 19,
+        "low_confidence": 11,
+        "never_auto_intent": 86,
+        "no_grounded_source": 7
+      }
+    },
+    {
+      "threshold": 0.95,
+      "auto_rate": 0.752,
+      "routing_accuracy": 0.762,
+      "unsafe_auto_must_not": 0,
+      "auto_on_not_answerable": 78,
+      "auto_with_wrong_intent": 0,
+      "escalated_but_expected_auto": 27,
+      "rules": {
+        "confident_and_grounded": 376,
+        "instruction_like_input": 1,
+        "learned_not_answerable": 19,
+        "low_confidence": 11,
+        "never_auto_intent": 86,
+        "no_grounded_source": 7
+      }
+    },
+    {
+      "threshold": 0.99,
+      "auto_rate": 0.752,
+      "routing_accuracy": 0.762,
+      "unsafe_auto_must_not": 0,
+      "auto_on_not_answerable": 78,
+      "auto_with_wrong_intent": 0,
+      "escalated_but_expected_auto": 27,
+      "rules": {
+        "confident_and_grounded": 376,
+        "instruction_like_input": 1,
+        "learned_not_answerable": 19,
+        "low_confidence": 11,
+        "never_auto_intent": 86,
+        "no_grounded_source": 7
+      }
+    }
+  ],
+  "ceiling": 0.938,
+  "cost_table": [
+    {
+      "c_wrong_over_c_escalate": 1.5,
+      "implied_threshold": 0.333,
+      "expected_cost": 860,
+      "auto_rate": 0.76
+    },
+    {
+      "c_wrong_over_c_escalate": 2,
+      "implied_threshold": 0.5,
+      "expected_cost": 860,
+      "auto_rate": 0.76
+    },
+    {
+      "c_wrong_over_c_escalate": 3,
+      "implied_threshold": 0.667,
+      "expected_cost": 860,
+      "auto_rate": 0.76
+    },
+    {
+      "c_wrong_over_c_escalate": 4,
+      "implied_threshold": 0.75,
+      "expected_cost": 872,
+      "auto_rate": 0.752
+    },
+    {
+      "c_wrong_over_c_escalate": 5,
+      "implied_threshold": 0.8,
+      "expected_cost": 872,
+      "auto_rate": 0.752
+    },
+    {
+      "c_wrong_over_c_escalate": 8,
+      "implied_threshold": 0.875,
+      "expected_cost": 872,
+      "auto_rate": 0.752
+    },
+    {
+      "c_wrong_over_c_escalate": 10,
+      "implied_threshold": 0.9,
+      "expected_cost": 872,
+      "auto_rate": 0.752
+    }
+  ],
+  "n": 500
+}

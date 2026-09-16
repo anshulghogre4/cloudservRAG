@@ -54,6 +54,10 @@ class Settings:
     llm_max_retries: int = 3
     llm_cache_dir: Path = ROOT / "storage" / "llm_cache"
     kill_switch: bool = False            # True forces every ticket to escalate (Governance §5)
+    # Both optional routing rules were measured on the development set (evaluation/route_check.py,
+    # 16 Sep 2026) and lowered routing accuracy, so both are off; they stay available for the report.
+    answerable_floor: float = 0.0        # escalate when neighbours say P(answerable from docs) is below this; 0 disables
+    plan_rule: bool = False              # escalate when the cited article's plan excludes the customer's tier
     metrics_port: int = 8001
 
     @property
@@ -93,5 +97,7 @@ def load_settings(env_file: Optional[str | os.PathLike] = ".env") -> Settings:
         llm_max_retries=_int(env.get("LLM_MAX_RETRIES"), defaults.llm_max_retries),
         llm_cache_dir=Path(env.get("LLM_CACHE_DIR", str(defaults.llm_cache_dir))),
         kill_switch=_bool(env.get("KILL_SWITCH"), defaults.kill_switch),
+        answerable_floor=_float(env.get("ANSWERABLE_FLOOR"), defaults.answerable_floor),
+        plan_rule=_bool(env.get("PLAN_RULE"), defaults.plan_rule),
         metrics_port=_int(env.get("METRICS_PORT"), defaults.metrics_port),
     )

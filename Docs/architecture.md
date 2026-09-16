@@ -128,3 +128,31 @@ regularised one is flat (every ticket 0.97 to 0.99). Five-fold cross-validated t
 every band within 5 points (0.6-0.8 band n=14 stated 0.686 observed 0.714; 0.8-1.0 band n=486
 stated 0.995 observed 1.000). Urgency is barely predictable from text in this data (both
 signals near the 45% majority baseline); reported as a limitation.
+
+## Routing threshold and decision table (B-07, 16 Sep 2026)
+
+Decision table in `src/route.py`, checked in order: kill switch, classification failed,
+instruction-like input, never-auto intent, low confidence, no grounded source, then auto-respond.
+Deterministic, no model call, every branch logged with a plain-English reason and the threshold.
+
+CONFIDENCE_THRESHOLD = 0.80. Derived with the selective-classification cost rule: with a
+calibrated P(correct), escalate when P < 1 - c_escalate / c_wrong. Marcus put an escalation at
+about 4x a resolved ticket and a wrong answer as worse than waiting. Sweeping c_wrong / c_escalate
+over the development set (`evaluation/results/route_check.json`): ratios up to 3 imply a threshold
+of 0.67 (expected cost 860); ratios of 4 and above imply 0.75 to 0.90 (cost 872), all of which
+route identically because calibrated confidence is bimodal (0.686 for LLM/neighbour
+disagreements, 0.99+ otherwise). 0.80 is the conservative reading of "rather say nothing than
+something wrong"; the cost difference is 1.4%.
+
+Measured and not adopted (kept behind settings, off by default):
+- plan_restriction (escalate when the cited article applies to other plans): routing accuracy
+  0.784 -> 0.756, 28 expected auto-answers lost; PR-03 rule 7 already words plan limits into
+  the draft. Reverses the Stage 5 candidate change to FR-05.
+- learned_not_answerable (neighbour vote on answerable_from_docs below 0.5): 0.784 -> 0.762;
+  the labels are inconsistent on near-identical bodies, so neighbours cannot recover them.
+
+Development-set routing at 0.80: auto-respond 78.6%, routing accuracy 0.784 against a
+text-only ceiling of 0.938 (35 duplicate-body groups carry both routes), 0 auto-answers on
+must_not_auto_respond tickets, 0 auto-answers with a wrong intent. The 81 auto-answers on
+tickets labelled escalate are answerable-looking intents (rollback, database, performance) whose
+labels the text does not distinguish; reported as the main limitation of routing.

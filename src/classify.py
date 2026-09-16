@@ -65,6 +65,7 @@ class Classification:
     combined_score: Optional[float] = None
     urgency_source: str = "llm"
     llm_intent: Optional[str] = None   # what PR-02 said, kept for the per-class report
+    knn_answerable: Optional[float] = None   # neighbours' estimate that the docs can resolve this ticket
     model: Optional[str] = None
 
 
@@ -130,6 +131,7 @@ class KNNClassifier:
         self._vecs: List[List[float]] = []
         self._labels: List[str] = []
         self._urgencies: List[str] = []
+        self._answerable: List[Optional[bool]] = []
         self._texts: List[str] = []
 
     def fit(self, tickets: Sequence[Ticket]) -> "KNNClassifier":
@@ -137,6 +139,7 @@ class KNNClassifier:
         self._texts = [t.text for t in labelled]
         self._labels = [t.raw["labels"]["intent"] for t in labelled]
         self._urgencies = [str(t.raw["labels"].get("urgency") or "medium") for t in labelled]
+        self._answerable = [t.raw["labels"].get("answerable_from_docs") for t in labelled]
         self._vecs = self.embedder.embed_documents(self._texts) if labelled else []
         return self
 
@@ -169,6 +172,16 @@ class KNNClassifier:
     def predict_proba(self, text: str, exclude_text: Optional[str] = None,
                       exclude_sim_above: Optional[float] = None) -> Dict[str, float]:
         return self._vote([(self._labels[i], w) for i, w in self._neighbours(text, exclude_text, exclude_sim_above)])
+
+    def predict_answerable(self, text: str, exclude_text: Optional[str] = None,
+                           exclude_sim_above: Optional[float] = None) -> Optional[float]:
+        """Weighted neighbour estimate of P(answerable from the documentation); None if unknown."""
+        pairs = [(self._answerable[i], w) for i, w in self._neighbours(text, exclude_text, exclude_sim_above)
+                 if self._answerable[i] is not None]
+        if not pairs:
+            return None
+        total = sum(w for _, w in pairs)
+        return sum(w for a, w in pairs if a) / total if total else None
 
     def predict_urgency(self, text: str, exclude_text: Optional[str] = None):
         """Weighted neighbour vote on urgency; (label, share) or (None, 0.0)."""
@@ -204,13 +217,14 @@ def combine(llm_conf: float, knn_share: Optional[float], agree: Optional[bool]) 
 def classify(ticket: Ticket, llm, calibrator: Optional[Callable[[float], float]] = None,
              knn: Optional[KNNClassifier] = None, template: Optional[str] = None) -> Classification:
     """Classify one ticket. Never raises; returns a fallback Classification on any failure."""
-    knn_intent, knn_probs = None, {}
+    knn_intent, knn_probs, knn_answerable = None, {}, None
     if knn is not None and len(knn):
         try:
             knn_probs = knn.predict_proba(ticket.text)
             knn_intent = max(knn_probs, key=knn_probs.get) if knn_probs else None
-        except Exception as exc:  # the local signal must never break classification
-            knn_intent, knn_probs = None, {}
+            knn_answerable = knn.predict_answerable(ticket.text)
+        except Exception:  # the local signal must never break classification
+            knn_intent, knn_probs, knn_answerable = None, {}, None
 
     try:
         text = llm.complete(build_prompt(ticket, template), json_mode=True)
@@ -268,7 +282,7 @@ def classify(ticket: Ticket, llm, calibrator: Optional[Callable[[float], float]]
     return Classification(intent=intent, urgency=urgency, confidence=confidence, raw_confidence=raw_conf,
                           alternatives=alts, instruction_like=instruction_like, reason=reason,
                           knn_intent=knn_intent, knn_prob=knn_share, agreement=agree, combined_score=score,
-                          urgency_source=urgency_source, llm_intent=llm_intent,
+                          urgency_source=urgency_source, llm_intent=llm_intent, knn_answerable=knn_answerable,
                           model=getattr(getattr(llm, "settings", None), "model_name", None))
 
 
