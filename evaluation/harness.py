@@ -6,6 +6,7 @@ Writes into <dir>:
     results.jsonl    one row per ticket, appended as each ticket finishes (crash-safe, resumable)
     metrics.json     the four metric groups + segments (Build Spec section 04)
     run_summary.md   human-readable summary
+    metrics.prom     Prometheus text snapshot of the run's counters and histograms
     run_meta.json    input path, ticket count, timestamps, system version, thresholds, run count
 
 Every ticket is wrapped: a component failure produces an escalation row with the error, and the
@@ -25,7 +26,9 @@ from typing import Iterable, List, Optional
 
 from src.config import Settings, load_settings
 from src.ingest import Ticket, load_tickets
-from src.models import Pipeline, failure_result
+from src.models import Pipeline
+from src.monitoring import export as export_metrics
+from src.pipeline import safe_process
 from evaluation.metrics_report import compute_metrics, render_summary
 
 log = logging.getLogger("harness")
@@ -57,20 +60,6 @@ def _done_ids(results_path: Path) -> set:
         except Exception:
             continue
     return ids
-
-
-def _log_failure(pipeline, ticket: Ticket, error: str, settings: Settings) -> None:
-    """A8 includes failures: when process() itself raised, write the routing and validation rows here."""
-    store = getattr(pipeline, "log", None)
-    if store is None or not hasattr(store, "record"):
-        return
-    for stage in ("routing", "validation"):
-        try:
-            store.record(ticket_id=ticket.ticket_id, stage=stage, action_taken="escalate",
-                         reason=f"Escalated: pipeline failure ({error})", input_summary=(ticket.text or "")[:300],
-                         model_name=settings.model_name, prediction_value="escalate", requirement_ids=["FR-14"], error=error)
-        except Exception:  # noqa: BLE001
-            log.exception("could not log failure row for %s", ticket.ticket_id)
 
 
 def _reconcile(pipeline, ticket_ids: List[str], resume: bool) -> Optional[dict]:
@@ -110,13 +99,7 @@ def run(input_path, output_dir, pipeline: Optional[Pipeline] = None, settings: O
     with results_path.open("a", encoding="utf-8") as fh:
         for i, ticket in enumerate(todo, 1):
             t_start = time.perf_counter()
-            try:
-                result = pipeline.process(ticket)
-            except Exception as exc:  # a failing component must not stop the run (A9, A11)
-                ms = (time.perf_counter() - t_start) * 1000
-                log.exception("ticket %s failed; escalating", ticket.ticket_id)
-                result = failure_result(ticket, f"{type(exc).__name__}: {exc}", stage="pipeline", latency_ms=ms)
-                _log_failure(pipeline, ticket, result.error, settings)
+            result = safe_process(pipeline, ticket, settings)   # a failing component must not stop the run (A9, A11)
             fh.write(json.dumps(result.to_record(), ensure_ascii=False) + "\n")
             fh.flush()
             processed += 1
@@ -149,6 +132,7 @@ def run(input_path, output_dir, pipeline: Optional[Pipeline] = None, settings: O
     (out / "metrics.json").write_text(json.dumps(metrics, indent=2), encoding="utf-8")
     meta_path.write_text(json.dumps(meta, indent=2), encoding="utf-8")
     (out / "run_summary.md").write_text(render_summary(metrics, meta), encoding="utf-8")
+    (out / "metrics.prom").write_bytes(export_metrics())          # Prometheus snapshot of the run (B-12)
     log.info("done: %d records, metrics at %s", len(records), out / "metrics.json")
     return metrics
 

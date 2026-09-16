@@ -77,3 +77,24 @@ def test_count_and_export(log, tmp_path):
 def test_durability_pragmas(log):
     con = sqlite3.connect(log.path)
     assert con.execute("PRAGMA journal_mode").fetchone()[0].lower() == "wal"
+
+
+def test_rows_written_from_worker_threads_reconcile(tmp_path):
+    """The API handles requests on a thread pool (B-16); the log must accept rows from any thread."""
+    import threading
+    log = DecisionLog(tmp_path / "t.db", run_id="threads")
+
+    def work(i):
+        for stage in ("classification", "routing", "generation", "validation"):
+            log.record(ticket_id=f"T-{i}", stage=stage, action_taken="escalate", reason="r",
+                       input_summary="s", model_name="m")
+
+    threads = [threading.Thread(target=work, args=(i,)) for i in range(8)]
+    for th in threads:
+        th.start()
+    for th in threads:
+        th.join()
+    rec = log.reconcile([f"T-{i}" for i in range(8)], run_id="threads")
+    assert rec["complete"] and rec["rows_total"] == 32
+    assert len(log.rows_for("T-3")) == 4
+

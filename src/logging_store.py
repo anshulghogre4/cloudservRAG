@@ -10,6 +10,7 @@ from __future__ import annotations
 
 import json
 import sqlite3
+import threading
 import uuid
 from datetime import datetime, timezone
 from pathlib import Path
@@ -55,7 +56,10 @@ class DecisionLog:
         self.path = str(path)
         Path(self.path).parent.mkdir(parents=True, exist_ok=True)
         self.run_id = run_id or datetime.now(timezone.utc).strftime("run-%Y%m%dT%H%M%SZ")
-        self._con = sqlite3.connect(self.path, isolation_level=None)  # autocommit; explicit BEGIN per row
+        # check_same_thread=False: the API serves requests from a thread pool; every use of the
+        # connection is serialised by the lock, so one row's BEGIN/INSERT/COMMIT is never interleaved.
+        self._con = sqlite3.connect(self.path, isolation_level=None, check_same_thread=False)  # autocommit; explicit BEGIN per row
+        self._lock = threading.RLock()
         self._con.execute("PRAGMA journal_mode=WAL")
         self._con.execute("PRAGMA synchronous=FULL")
         self._con.executescript(_SCHEMA)
@@ -78,9 +82,10 @@ class DecisionLog:
             threshold_applied, action_taken, reason, json.dumps(guardrail_results or {}, ensure_ascii=False),
             prompt_version, json.dumps(requirement_ids or []), latency_ms, error,
         )
-        self._con.execute("BEGIN")
-        self._con.execute("INSERT INTO decisions VALUES (" + ",".join("?" * len(row)) + ")", row)
-        self._con.execute("COMMIT")
+        with self._lock:
+            self._con.execute("BEGIN")
+            self._con.execute("INSERT INTO decisions VALUES (" + ",".join("?" * len(row)) + ")", row)
+            self._con.execute("COMMIT")
         return decision_id
 
     # ---- read --------------------------------------------------------------------------------
@@ -95,7 +100,8 @@ class DecisionLog:
         return d
 
     def rows_for(self, ticket_id: str) -> List[Dict[str, Any]]:
-        cur = self._con.execute("SELECT * FROM decisions WHERE ticket_id = ? ORDER BY timestamp", (ticket_id,))
+        with self._lock:
+            cur = self._con.execute("SELECT * FROM decisions WHERE ticket_id = ? ORDER BY timestamp", (ticket_id,))
         return [self._decode(cur, r) for r in cur.fetchall()]
 
     def count(self, run_id: Optional[str] = None) -> int:

@@ -20,6 +20,7 @@ the nearest version that satisfies the neighbouring pins; nothing else was alter
 | onnxruntime | (unpinned) | 1.17.1 | pulled in by chromadb 0.4.24; the current 1.30 build segfaults on Windows when scipy is imported first (access violation in the full test run) |
 | scipy | (unpinned) | 1.12.0 | scipy 1.15 with numpy 1.24 is an ABI mismatch; 1.12.0 is the February 2024 release matching the rest |
 | numpy | 1.24.0 | 1.24.4 | onnxruntime 1.17.1 requires numpy >= 1.24.2; same 1.24 series, patch release only |
+| httpx | (unpinned) | 0.27.2 | httpx 0.28 removed the app= argument starlette 0.27's TestClient uses; openai 1.12 accepts any httpx below 1.0 (B-16) |
 
 Environment: Python 3.11 (the version the pack's CI workflow uses), created with `uv`.
 Python 3.13 cannot build `pandas==2.0.0`; a 3.10 venv would also work.
@@ -379,3 +380,142 @@ concern, I'd like to walk you through the steps", "We will look at the ticket fu
 filler filter is left unchanged, because adjusting it on the validation set would be tuning
 toward the set. They are recorded as the expected false-block rate (about 2 to 3 percent of
 tickets) for the report.
+
+## Single-ticket API (B-16, FR-18, 16 Sep 2026)
+
+`python -m src.api` serves the same `SupportPipeline` the harness uses, on API_HOST:API_PORT
+(default 127.0.0.1:8000), with Prometheus metrics on METRICS_PORT (8001) when prometheus_client
+is importable. Endpoints: `POST /tickets` (one ticket object in the dataset schema, labels
+optional; returns the same record the harness writes), `GET /decisions/{ticket_id}` (the
+decision-log rows, so a grader can reconcile a hand-submitted ticket), `GET /health` (kill-switch
+state, model, git version). The pipeline is built once at startup (embedder, NLI model, vector
+store, neighbour memory: about 20 s).
+
+Design points: `safe_process()` in `src/pipeline.py` is now the single failure boundary for both
+the harness and the API: a component exception becomes an escalation with the reason and the
+routing and validation rows are still written (A8, A11). Only a body that is not a JSON object is
+rejected (422); an empty object, unknown channel or control characters go through
+`normalise_ticket()` and produce a decision. The decision log's SQLite connection is opened with
+`check_same_thread=False` and every use is serialised by a lock, because FastAPI runs sync handlers
+on a thread pool (found by the test client; the same would have failed under uvicorn).
+
+Pins: httpx 0.27.2 added to requirements.txt. httpx 0.28 removed the `app=` argument that
+starlette 0.27's TestClient passes, so the API tests could not run; openai 1.12 accepts any httpx
+below 1.0.
+
+Live check (graders' steps 5 to 7, real models and provider): one ticket per channel returned in
+150 ms to 1.4 s (cached classifications), the four trigger tickets in 5.6 to 11 s. Outcomes:
+DEV-0005 escalate (feature request), DEV-0001 auto (deployment_failure, DOC-DEPLOY-003), DEV-0003
+escalate (compliance), DEV-0023 auto (account_access, DOC-ACCT-001); TRIG-PII-001 **blocked** by
+the grounding check (the model did not echo the name, so the PII check passed and an unsupported
+sentence blocked instead), TRIG-INJ-001 escalated as instruction-like, TRIG-TONE-001 escalated on
+low confidence (0.50), TRIG-GRND-001 auto-answered (the model did not invert the fact this time).
+Which guardrail fires on a live model cannot be forced from the ticket text; each check's blocking
+behaviour is proven deterministically in `tests/test_guardrails.py` and `tests/test_pipeline.py`,
+and the API response always shows the verdict of every check that ran. A malformed body
+(`{"channel": "fax"}`) returned 200 with an escalation under a generated UNKNOWN- id; `[1]`
+returned 422. 140 tests pass.
+
+## Continuous integration (B-13, 16 Sep 2026)
+
+`.github/workflows/ci.yml` follows the Setup Guide template (ubuntu, Python 3.11, no key) with
+two jobs. `test` runs the 141 tests; every test uses fakes for the provider, the embedder and the
+NLI model, so no key or network is involved. `smoke-no-key` runs the real pipeline over the four
+sample tickets with the provider disconnected (empty key, empty reply cache) and asserts that all
+four escalate with a reason and that the decision log reconciles: the A11 check the graders run,
+performed on every push. torch is installed from the CPU wheel index first, because the pinned
+sentence-transformers pulls the default CUDA build otherwise; the two local models are cached
+between runs.
+
+The disconnected smoke run, done locally first, found two things. With the reply cache present,
+tickets whose model replies were cached still auto-answered without a key; that is intended
+(cached replies make runs reproducible), so the smoke job uses an empty cache directory. With an
+empty cache, every ticket escalated with "provider unavailable: no API key configured", but the
+fallback intent was unclear_request even though the neighbour vote, which needs no provider, had
+the right intent. `classify()` now keeps the neighbours' intent on a model failure, with a
+confidence scored as if the model had disagreed (0.99 after calibration on development tickets:
+when the model disagrees with a strong neighbour vote, the neighbours are right 99% of the time);
+the ticket still escalates through the classification_failed rule. Second local run: 4 of 4
+escalated, intents feature_request, deployment_failure, compliance_request, account_access, 16
+rows reconciled, 0 crashes. The metrics report counts these as failed tickets, which is correct:
+the provider failed.
+
+## Monitoring (B-12, 16 Sep 2026)
+
+`src/monitoring.py` defines the metrics for the five dashboard views the Setup Guide names
+(section 06): `tickets_processed_total{channel, outcome}`, `response_seconds` (histogram, buckets
+0.25 s to 60 s), `guardrail_blocks_total{guardrail}`, `classification_confidence` (histogram in
+tenths, where drift shows first), plus `pipeline_failures_total{stage}`. `observe()` is called
+once per ticket inside `safe_process()`, so the harness and the API feed the same counters and
+monitoring can never break processing (it swallows its own errors). The API serves the exposition
+at GET /metrics and `python -m src.api` also starts the Prometheus server on METRICS_PORT (8001),
+as the guide's snippet does; the harness writes a `metrics.prom` snapshot at the end of each run so
+a batch run leaves the same evidence. `monitoring/prometheus.yml` is the guide's scrape config;
+`monitoring/grafana_dashboard.json` is a six-panel dashboard (tickets per hour by channel and
+outcome; auto-answered against escalated; latency p50 and p95; guardrail activations; confidence
+distribution; failures by stage) written as a Grafana JSON model with PromQL over these metrics.
+It was not opened in a running Grafana here; that is recorded as unverified.
+
+Live check: with the API running, two tickets posted, both `:8000/metrics` and `:8001/metrics`
+showed `tickets_processed_total{channel="email",outcome="escalate"} 1`,
+`{channel="chat",outcome="auto_respond"} 1`, `response_seconds_count 2`,
+`classification_confidence_count 2`. 145 tests pass.
+
+## Fairness audit (B-14, NFR-06, 16 Sep 2026)
+
+`python -m evaluation.fairness_audit --results <results.jsonl> [--results ...] --output <dir>`
+segments a run by tier, fluency, ticket length (short under 120 characters), region and channel
+and writes the Governance Framework section 3 table with 95% Wilson intervals
+(`evaluation/results/fairness_audit/fairness_audit.md` and `.json`). Definitions are the metrics
+report's: resolution rate = auto-responded and not blocked; quality score = routing accuracy
+against the labels; variation = best segment minus this one. For each segment the script also
+prints the facts behind a gap (share labelled escalate, share with no passage above the
+threshold, mean length, mean confidence, retrieval hit rate) and leaves the Explanation column to
+the author.
+
+Results (quality score, max variation in points; "separated" means the segment's interval does
+not overlap the best segment's):
+
+| Group | Validation (n=80) | Development (n=500) | Separated segments |
+|---|---|---|---|
+| tier | 14.2 | 7.4 | none |
+| fluency | 22.4 | 2.6 | none |
+| ticket length | 28.6 | 11.7 | none |
+| region | 26.5 | 7.5 | none |
+| channel | 8.7 | 6.5 | none |
+
+The 5-point condition is not met as a point estimate on any group except fluency on the
+development set, but no gap is statistically established: every segment's interval overlaps the
+best segment's on both sets (validation segments are 8 to 42 tickets; one ticket moves an
+8-ticket segment by 12.5 points). Facts for the explanation: non-fluent tickets on the development
+set retrieve the expected article less often (88.5% vs 94.8%, n=87 vs 270), the effect the
+Governance Framework predicts, but their routing quality is within 2.6 points; on validation the
+non-fluent gap (57.9% vs 80.3%, n=19) comes with a 100% retrieval hit rate and a higher share of
+tickets labelled escalate (57.9% vs 34.4%), so it is the mixed-label ceiling, not retrieval.
+Short tickets score higher because 36.7% of them get no passage above the threshold and escalate,
+which matches their labels (46.9% labelled escalate vs 36.8% for long tickets). The interpretation
+of these facts belongs to the author (report and Governance section 3). 148 tests pass.
+
+## Governance (B-17, 16 Sep 2026)
+
+`Docs/governance.md` follows the Governance Framework section by section with the run figures:
+decision logging and the coverage check (2006/500, 324/80, 16/4 rows reconciled), the risk
+register R-01 to R-10 (the framework's eight plus the two Stage 1 risks, ratings kept from
+Stage 1, owners proposed from the interview roster and not yet agreed by anyone at CloudServe),
+the fairness table from B-14, the five guardrails mapped to their implementation and measured
+activations, the incident procedure written for an on-call engineer with the exact commands, the
+kill switch answers, the declaration (drafted for the author's confirmation) and the AI
+assistance declaration required by Project Instructions section 09.
+
+Kill switch, made runtime: before B-17 the only switch was `KILL_SWITCH=true` read at start-up, so
+stopping automatic answers needed a restart. Now a flag file (`KILL_SWITCH_FILE`, default
+`storage/KILL_SWITCH`) is checked on every ticket at routing and again before an answer is
+released, so a ticket that was past routing when the switch went on still escalates with its
+draft in the package. `python -m src.killswitch on|off|status` writes who set it and when into
+the file; `GET /health` reports the live state. Five tests cover the env setting, the flag file
+without restart, the in-flight re-check, the CLI and the health endpoint. Exercised once for
+real: status RUNNING, on (file written with user and UTC time), off. 152 tests pass.
+
+Not built, recorded: an article-age rule that escalates when the cited article is older than a
+threshold (R-05); a load test (R-07).
+

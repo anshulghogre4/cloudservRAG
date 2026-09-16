@@ -241,23 +241,23 @@ def classify(ticket: Ticket, llm, calibrator: Optional[Callable[[float], float]]
         text = llm.complete(build_prompt(ticket, template), json_mode=True)
     except ProviderUnavailable as exc:
         c = _fallback(f"classification failed: {exc}", str(exc))
-        _attach_knn(c, knn_intent, knn_probs)
+        _attach_knn(c, knn_intent, knn_probs, calibrator)
         return c
     except Exception as exc:
         c = _fallback(f"classification failed: {type(exc).__name__}: {exc}", str(exc))
-        _attach_knn(c, knn_intent, knn_probs)
+        _attach_knn(c, knn_intent, knn_probs, calibrator)
         return c
 
     obj = _extract_json(text)
     if obj is None:
         c = _fallback("classification failed: could not parse model output as JSON", "parse error")
-        _attach_knn(c, knn_intent, knn_probs)
+        _attach_knn(c, knn_intent, knn_probs, calibrator)
         return c
 
     intent = str(obj.get("intent", "")).strip().lower()
     if intent not in INTENTS:
         c = _fallback(f"classification failed: unknown intent {intent!r} from model", "unknown intent")
-        _attach_knn(c, knn_intent, knn_probs)
+        _attach_knn(c, knn_intent, knn_probs, calibrator)
         return c
     urgency = str(obj.get("urgency", "")).strip().lower()
     if urgency not in URGENCIES:
@@ -297,6 +297,19 @@ def classify(ticket: Ticket, llm, calibrator: Optional[Callable[[float], float]]
                           model=getattr(getattr(llm, "settings", None), "model_name", None))
 
 
-def _attach_knn(c: Classification, knn_intent: Optional[str], knn_probs: Dict[str, float]) -> None:
+def _attach_knn(c: Classification, knn_intent: Optional[str], knn_probs: Dict[str, float],
+                calibrator: Optional[Callable[[float], float]] = None) -> None:
+    """On a model failure the neighbour vote still stands (it needs no provider): the escalation
+    package gets the neighbours' intent and a confidence scored as if the model had disagreed.
+    The ticket still escalates because the router's classification_failed rule runs before the
+    threshold; the confidence only tells the engineer how reliable the intent is (A11;
+    disconnected-provider smoke run, 16 Sep 2026)."""
     c.knn_intent = knn_intent
     c.knn_prob = knn_probs.get(knn_intent) if knn_intent else None
+    if knn_intent:
+        c.intent = knn_intent
+        c.combined_score = combine(0.0, c.knn_prob, False)
+        c.confidence = _clamp(calibrator(c.combined_score)) if calibrator else c.combined_score
+        c.alternatives = [{"intent": k, "confidence": round(v, 3)} for k, v in
+                          sorted(knn_probs.items(), key=lambda kv: -kv[1]) if k != knn_intent][:2]
+        c.reason = c.reason + "; intent taken from the labelled neighbours"

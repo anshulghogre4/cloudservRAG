@@ -54,16 +54,23 @@ class Settings:
     llm_max_retries: int = 3
     llm_cache_dir: Path = ROOT / "storage" / "llm_cache"
     kill_switch: bool = False            # True forces every ticket to escalate (Governance §5)
+    kill_switch_file: Path = ROOT / "storage" / "KILL_SWITCH"   # flag file: create it to stop auto-answers without a restart
     # Both optional routing rules were measured on the development set (evaluation/route_check.py,
     # 16 Sep 2026) and lowered routing accuracy, so both are off; they stay available for the report.
     answerable_floor: float = 0.0        # escalate when neighbours say P(answerable from docs) is below this; 0 disables
     plan_rule: bool = False              # escalate when the cited article's plan excludes the customer's tier
+    api_host: str = "127.0.0.1"
+    api_port: int = 8000
     metrics_port: int = 8001
     # grounding guardrail thresholds (tuned on development drafts, evaluation/guardrail_check.py)
     grounding_cos: float = 0.50           # sentence-passage cosine at or above this counts as supported
     grounding_lex: float = 0.50           # or this share of the sentence's content words found in the passage
     grounding_contradiction: float = 0.85 # NLI contradiction probability at or above this blocks (dev drafts: true positive 0.965, false positives 0.61-0.73)
     grounding_nli: bool = True            # set false to skip the NLI model (faster, weaker)
+
+    def kill_switch_active(self) -> bool:
+        """Checked per ticket: the env setting or the flag file (python -m src.killswitch on)."""
+        return bool(self.kill_switch) or Path(self.kill_switch_file).exists()
 
     @property
     def sqlite_path(self) -> Path:
@@ -102,8 +109,11 @@ def load_settings(env_file: Optional[str | os.PathLike] = ".env") -> Settings:
         llm_max_retries=_int(env.get("LLM_MAX_RETRIES"), defaults.llm_max_retries),
         llm_cache_dir=Path(env.get("LLM_CACHE_DIR", str(defaults.llm_cache_dir))),
         kill_switch=_bool(env.get("KILL_SWITCH"), defaults.kill_switch),
+        kill_switch_file=Path(env.get("KILL_SWITCH_FILE", str(defaults.kill_switch_file))),
         answerable_floor=_float(env.get("ANSWERABLE_FLOOR"), defaults.answerable_floor),
         plan_rule=_bool(env.get("PLAN_RULE"), defaults.plan_rule),
+        api_host=env.get("API_HOST", defaults.api_host),
+        api_port=_int(env.get("API_PORT"), defaults.api_port),
         metrics_port=_int(env.get("METRICS_PORT"), defaults.metrics_port),
         grounding_cos=_float(env.get("GROUNDING_COS"), defaults.grounding_cos),
         grounding_lex=_float(env.get("GROUNDING_LEX"), defaults.grounding_lex),

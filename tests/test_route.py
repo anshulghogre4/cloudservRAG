@@ -129,3 +129,20 @@ def test_rule_order_never_auto_beats_threshold(settings):
     # never-auto is checked before confidence so the reason names the governance rule, not the number
     r = route(cls(intent="feature_request", confidence=0.1), [], "standard", settings)
     assert r.rule == "never_auto_intent"
+
+
+def test_kill_switch_flag_file_takes_effect_without_restart(tmp_path):
+    """Governance section 5: the flag file stops automatic answers for the next ticket, no restart."""
+    from src.classify import Classification
+    from src.retrieve import Passage
+    s = Settings(confidence_threshold=0.80, retrieval_threshold=0.40, kill_switch=False, kill_switch_file=tmp_path / "KILL")
+    cls = Classification(intent="rate_limit", urgency="medium", confidence=0.99, raw_confidence=0.9, alternatives=[],
+                         instruction_like=False, reason="r")
+    p = [Passage(doc_id="DOC-API-001", section="Resolution", title="t", applies_to="All plans", text="x", score=0.8, chunk_id="c")]
+    assert route(cls, p, "business", s).action == "auto_respond"
+    (tmp_path / "KILL").write_text("set by test", encoding="utf-8")
+    r = route(cls, p, "business", s)
+    assert r.action == "escalate" and r.rule == "kill_switch"
+    (tmp_path / "KILL").unlink()
+    assert route(cls, p, "business", s).action == "auto_respond"
+

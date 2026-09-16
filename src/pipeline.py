@@ -26,7 +26,8 @@ from src.guardrails import Grounder, NLIScorer, run_guardrails
 from src.ingest import Ticket, load_tickets
 from src.llm import LLMClient
 from src.logging_store import DecisionLog
-from src.models import TicketResult
+from src.models import TicketResult, failure_result
+from src.monitoring import observe
 from src.retrieve import Passage, Retriever, SentenceTransformerEmbedder
 from src.route import Route, route
 
@@ -145,6 +146,9 @@ class SupportPipeline:
                     blocked_by = [k for k, v in rep.verdicts.items() if v == "block"]
                     final_reason = (f"Blocked by guardrail ({', '.join(blocked_by)}) and escalated: "
                                     + self._guardrail_reason(rep.details, blocked_by))
+                elif s.kill_switch_active():                  # switched on while this ticket was in flight
+                    final_action = "escalate"
+                    final_reason = "Escalated: the kill switch was switched on while the answer was being prepared."
                 else:
                     answer = add_disclosure(rep.answer)
                     citations = draft.citations
@@ -199,3 +203,31 @@ class SupportPipeline:
             elif k == "injection":
                 parts.append("the ticket text contained instructions aimed at the system")
         return "; ".join(parts) + "."
+
+
+def safe_process(pipeline, ticket: Ticket, settings: Settings) -> TicketResult:
+    """process() that cannot raise: a component failure becomes an escalation with the reason (A11),
+    and the routing and validation rows are written so the failure still reconciles (A8). Used by
+    the harness and the API so both degrade the same way."""
+    t0 = time.perf_counter()
+    try:
+        result = pipeline.process(ticket)
+        observe(result)                                  # B-12: one observation per ticket
+        return result
+    except Exception as exc:  # noqa: BLE001
+        error = f"{type(exc).__name__}: {exc}"
+        log.exception("ticket %s failed; escalating", ticket.ticket_id)
+        result = failure_result(ticket, error, stage="pipeline", latency_ms=(time.perf_counter() - t0) * 1000)
+        store = getattr(pipeline, "log", None)
+        if store is not None and hasattr(store, "record"):
+            for stage in ("routing", "validation"):
+                try:
+                    store.record(ticket_id=ticket.ticket_id, stage=stage, action_taken="escalate",
+                                 reason=f"Escalated: pipeline failure ({error})", input_summary=(ticket.text or "")[:300],
+                                 model_name=settings.model_name, prediction_value="escalate",
+                                 requirement_ids=["FR-14"], error=error)
+                except Exception:  # noqa: BLE001
+                    log.exception("could not log failure row for %s", ticket.ticket_id)
+        observe(result)
+        return result
+

@@ -1,0 +1,1402 @@
+{
+  "2026-09-16_validation": {
+    "tickets": 80,
+    "groups": {
+      "tier": {
+        "best": "enterprise",
+        "max_variation_pts": 14.2,
+        "within_5_points": false,
+        "segments": {
+          "business": {
+            "tickets": 30,
+            "resolution": {
+              "rate": 0.9,
+              "n": 30,
+              "ci": [
+                0.7438,
+                0.9654
+              ]
+            },
+            "quality": {
+              "rate": 0.7333333333333333,
+              "n": 30,
+              "ci": [
+                0.5555,
+                0.8582
+              ]
+            },
+            "retrieval_hit": {
+              "rate": 1.0,
+              "n": 22,
+              "ci": [
+                0.8513,
+                1.0
+              ]
+            },
+            "blocked": {
+              "rate": 0.03333333333333333,
+              "n": 30,
+              "ci": [
+                0.0059,
+                0.1667
+              ]
+            },
+            "facts": {
+              "share_labelled_escalate": 0.3,
+              "share_no_passage": 0.033,
+              "mean_text_len": 149.8,
+              "mean_confidence": 0.996
+            },
+            "variation_from_best_pts": 14.2,
+            "ci_overlaps_best": true,
+            "label": "Business customers"
+          },
+          "enterprise": {
+            "tickets": 8,
+            "resolution": {
+              "rate": 0.875,
+              "n": 8,
+              "ci": [
+                0.5291,
+                0.9776
+              ]
+            },
+            "quality": {
+              "rate": 0.875,
+              "n": 8,
+              "ci": [
+                0.5291,
+                0.9776
+              ]
+            },
+            "retrieval_hit": {
+              "rate": 1.0,
+              "n": 6,
+              "ci": [
+                0.6097,
+                1.0
+              ]
+            },
+            "blocked": {
+              "rate": 0.0,
+              "n": 8,
+              "ci": [
+                0.0,
+                0.3244
+              ]
+            },
+            "facts": {
+              "share_labelled_escalate": 0.25,
+              "share_no_passage": 0.0,
+              "mean_text_len": 159.4,
+              "mean_confidence": 0.997
+            },
+            "variation_from_best_pts": 0.0,
+            "ci_overlaps_best": true,
+            "label": "Enterprise customers"
+          },
+          "standard": {
+            "tickets": 42,
+            "resolution": {
+              "rate": 0.6190476190476191,
+              "n": 42,
+              "ci": [
+                0.4681,
+                0.75
+              ]
+            },
+            "quality": {
+              "rate": 0.7380952380952381,
+              "n": 42,
+              "ci": [
+                0.5893,
+                0.847
+              ]
+            },
+            "retrieval_hit": {
+              "rate": 0.92,
+              "n": 25,
+              "ci": [
+                0.7503,
+                0.9778
+              ]
+            },
+            "blocked": {
+              "rate": 0.07142857142857142,
+              "n": 42,
+              "ci": [
+                0.0246,
+                0.1901
+              ]
+            },
+            "facts": {
+              "share_labelled_escalate": 0.5,
+              "share_no_passage": 0.214,
+              "mean_text_len": 155.4,
+              "mean_confidence": 0.988
+            },
+            "variation_from_best_pts": 13.7,
+            "ci_overlaps_best": true,
+            "label": "Standard customers"
+          }
+        }
+      },
+      "fluency": {
+        "best": "fluent",
+        "max_variation_pts": 22.4,
+        "within_5_points": false,
+        "segments": {
+          "fluent": {
+            "tickets": 61,
+            "resolution": {
+              "rate": 0.7540983606557377,
+              "n": 61,
+              "ci": [
+                0.6332,
+                0.8449
+              ]
+            },
+            "quality": {
+              "rate": 0.8032786885245902,
+              "n": 61,
+              "ci": [
+                0.6869,
+                0.8837
+              ]
+            },
+            "retrieval_hit": {
+              "rate": 0.9545454545454546,
+              "n": 44,
+              "ci": [
+                0.8486,
+                0.9874
+              ]
+            },
+            "blocked": {
+              "rate": 0.03278688524590164,
+              "n": 61,
+              "ci": [
+                0.009,
+                0.1119
+              ]
+            },
+            "facts": {
+              "share_labelled_escalate": 0.344,
+              "share_no_passage": 0.148,
+              "mean_text_len": 152.0,
+              "mean_confidence": 0.991
+            },
+            "variation_from_best_pts": 0.0,
+            "ci_overlaps_best": true,
+            "label": "Tickets in fluent English"
+          },
+          "non_fluent": {
+            "tickets": 19,
+            "resolution": {
+              "rate": 0.7368421052631579,
+              "n": 19,
+              "ci": [
+                0.5121,
+                0.8819
+              ]
+            },
+            "quality": {
+              "rate": 0.5789473684210527,
+              "n": 19,
+              "ci": [
+                0.3628,
+                0.7686
+              ]
+            },
+            "retrieval_hit": {
+              "rate": 1.0,
+              "n": 9,
+              "ci": [
+                0.7008,
+                1.0
+              ]
+            },
+            "blocked": {
+              "rate": 0.10526315789473684,
+              "n": 19,
+              "ci": [
+                0.0294,
+                0.3139
+              ]
+            },
+            "facts": {
+              "share_labelled_escalate": 0.579,
+              "share_no_passage": 0.053,
+              "mean_text_len": 159.2,
+              "mean_confidence": 0.995
+            },
+            "variation_from_best_pts": 22.4,
+            "ci_overlaps_best": true,
+            "label": "Tickets in non-fluent English"
+          }
+        }
+      },
+      "ticket_length": {
+        "best": "short",
+        "max_variation_pts": 28.6,
+        "within_5_points": false,
+        "segments": {
+          "long": {
+            "tickets": 70,
+            "resolution": {
+              "rate": 0.8,
+              "n": 70,
+              "ci": [
+                0.6918,
+                0.877
+              ]
+            },
+            "quality": {
+              "rate": 0.7142857142857143,
+              "n": 70,
+              "ci": [
+                0.5995,
+                0.8068
+              ]
+            },
+            "retrieval_hit": {
+              "rate": 0.9591836734693877,
+              "n": 49,
+              "ci": [
+                0.8629,
+                0.9887
+              ]
+            },
+            "blocked": {
+              "rate": 0.05714285714285714,
+              "n": 70,
+              "ci": [
+                0.0224,
+                0.1379
+              ]
+            },
+            "facts": {
+              "share_labelled_escalate": 0.371,
+              "share_no_passage": 0.057,
+              "mean_text_len": 164.2,
+              "mean_confidence": 0.992
+            },
+            "variation_from_best_pts": 28.6,
+            "ci_overlaps_best": true,
+            "label": "Long or complex tickets"
+          },
+          "short": {
+            "tickets": 10,
+            "resolution": {
+              "rate": 0.4,
+              "n": 10,
+              "ci": [
+                0.1682,
+                0.6873
+              ]
+            },
+            "quality": {
+              "rate": 1.0,
+              "n": 10,
+              "ci": [
+                0.7225,
+                1.0
+              ]
+            },
+            "retrieval_hit": {
+              "rate": 1.0,
+              "n": 4,
+              "ci": [
+                0.5101,
+                1.0
+              ]
+            },
+            "blocked": {
+              "rate": 0.0,
+              "n": 10,
+              "ci": [
+                0.0,
+                0.2775
+              ]
+            },
+            "facts": {
+              "share_labelled_escalate": 0.6,
+              "share_no_passage": 0.6,
+              "mean_text_len": 79.9,
+              "mean_confidence": 0.995
+            },
+            "variation_from_best_pts": 0.0,
+            "ci_overlaps_best": true,
+            "label": "Short tickets (< 120 chars)"
+          }
+        }
+      },
+      "region": {
+        "best": "asia_pacific",
+        "max_variation_pts": 26.5,
+        "within_5_points": false,
+        "segments": {
+          "asia_pacific": {
+            "tickets": 21,
+            "resolution": {
+              "rate": 0.8571428571428571,
+              "n": 21,
+              "ci": [
+                0.6536,
+                0.9502
+              ]
+            },
+            "quality": {
+              "rate": 0.8571428571428571,
+              "n": 21,
+              "ci": [
+                0.6536,
+                0.9502
+              ]
+            },
+            "retrieval_hit": {
+              "rate": 1.0,
+              "n": 17,
+              "ci": [
+                0.8157,
+                1.0
+              ]
+            },
+            "blocked": {
+              "rate": 0.0,
+              "n": 21,
+              "ci": [
+                0.0,
+                0.1546
+              ]
+            },
+            "facts": {
+              "share_labelled_escalate": 0.286,
+              "share_no_passage": 0.095,
+              "mean_text_len": 160.4,
+              "mean_confidence": 0.981
+            },
+            "variation_from_best_pts": 0.0,
+            "ci_overlaps_best": true,
+            "label": "region: asia_pacific"
+          },
+          "europe": {
+            "tickets": 25,
+            "resolution": {
+              "rate": 0.76,
+              "n": 25,
+              "ci": [
+                0.5657,
+                0.885
+              ]
+            },
+            "quality": {
+              "rate": 0.8,
+              "n": 25,
+              "ci": [
+                0.6087,
+                0.9114
+              ]
+            },
+            "retrieval_hit": {
+              "rate": 0.9473684210526315,
+              "n": 19,
+              "ci": [
+                0.7536,
+                0.9906
+              ]
+            },
+            "blocked": {
+              "rate": 0.08,
+              "n": 25,
+              "ci": [
+                0.0222,
+                0.2497
+              ]
+            },
+            "facts": {
+              "share_labelled_escalate": 0.36,
+              "share_no_passage": 0.04,
+              "mean_text_len": 163.5,
+              "mean_confidence": 0.996
+            },
+            "variation_from_best_pts": 5.7,
+            "ci_overlaps_best": true,
+            "label": "region: europe"
+          },
+          "latin_america": {
+            "tickets": 7,
+            "resolution": {
+              "rate": 0.5714285714285714,
+              "n": 7,
+              "ci": [
+                0.2505,
+                0.8418
+              ]
+            },
+            "quality": {
+              "rate": 0.8571428571428571,
+              "n": 7,
+              "ci": [
+                0.4869,
+                0.9743
+              ]
+            },
+            "retrieval_hit": {
+              "rate": 1.0,
+              "n": 3,
+              "ci": [
+                0.4385,
+                1.0
+              ]
+            },
+            "blocked": {
+              "rate": 0.0,
+              "n": 7,
+              "ci": [
+                0.0,
+                0.3543
+              ]
+            },
+            "facts": {
+              "share_labelled_escalate": 0.571,
+              "share_no_passage": 0.286,
+              "mean_text_len": 135,
+              "mean_confidence": 0.995
+            },
+            "variation_from_best_pts": 0.0,
+            "ci_overlaps_best": true,
+            "label": "region: latin_america"
+          },
+          "north_america": {
+            "tickets": 27,
+            "resolution": {
+              "rate": 0.7037037037037037,
+              "n": 27,
+              "ci": [
+                0.5152,
+                0.8415
+              ]
+            },
+            "quality": {
+              "rate": 0.5925925925925926,
+              "n": 27,
+              "ci": [
+                0.4073,
+                0.7549
+              ]
+            },
+            "retrieval_hit": {
+              "rate": 0.9285714285714286,
+              "n": 14,
+              "ci": [
+                0.6853,
+                0.9873
+              ]
+            },
+            "blocked": {
+              "rate": 0.07407407407407407,
+              "n": 27,
+              "ci": [
+                0.0206,
+                0.2337
+              ]
+            },
+            "facts": {
+              "share_labelled_escalate": 0.481,
+              "share_no_passage": 0.185,
+              "mean_text_len": 144.1,
+              "mean_confidence": 0.996
+            },
+            "variation_from_best_pts": 26.5,
+            "ci_overlaps_best": true,
+            "label": "region: north_america"
+          }
+        }
+      },
+      "channel": {
+        "best": "email",
+        "max_variation_pts": 8.7,
+        "within_5_points": false,
+        "segments": {
+          "chat": {
+            "tickets": 22,
+            "resolution": {
+              "rate": 0.6363636363636364,
+              "n": 22,
+              "ci": [
+                0.4295,
+                0.8027
+              ]
+            },
+            "quality": {
+              "rate": 0.7727272727272727,
+              "n": 22,
+              "ci": [
+                0.5656,
+                0.8988
+              ]
+            },
+            "retrieval_hit": {
+              "rate": 0.8461538461538461,
+              "n": 13,
+              "ci": [
+                0.5776,
+                0.9567
+              ]
+            },
+            "blocked": {
+              "rate": 0.045454545454545456,
+              "n": 22,
+              "ci": [
+                0.0081,
+                0.218
+              ]
+            },
+            "facts": {
+              "share_labelled_escalate": 0.409,
+              "share_no_passage": 0.227,
+              "mean_text_len": 127.3,
+              "mean_confidence": 0.981
+            },
+            "variation_from_best_pts": 0.1,
+            "ci_overlaps_best": true,
+            "label": "channel: chat"
+          },
+          "docs_comment": {
+            "tickets": 16,
+            "resolution": {
+              "rate": 0.6875,
+              "n": 16,
+              "ci": [
+                0.444,
+                0.8584
+              ]
+            },
+            "quality": {
+              "rate": 0.6875,
+              "n": 16,
+              "ci": [
+                0.444,
+                0.8584
+              ]
+            },
+            "retrieval_hit": {
+              "rate": 1.0,
+              "n": 10,
+              "ci": [
+                0.7225,
+                1.0
+              ]
+            },
+            "blocked": {
+              "rate": 0.0625,
+              "n": 16,
+              "ci": [
+                0.0111,
+                0.2833
+              ]
+            },
+            "facts": {
+              "share_labelled_escalate": 0.5,
+              "share_no_passage": 0.125,
+              "mean_text_len": 155.1,
+              "mean_confidence": 0.995
+            },
+            "variation_from_best_pts": 8.7,
+            "ci_overlaps_best": true,
+            "label": "channel: docs_comment"
+          },
+          "email": {
+            "tickets": 31,
+            "resolution": {
+              "rate": 0.8387096774193549,
+              "n": 31,
+              "ci": [
+                0.6737,
+                0.9291
+              ]
+            },
+            "quality": {
+              "rate": 0.7741935483870968,
+              "n": 31,
+              "ci": [
+                0.6019,
+                0.8861
+              ]
+            },
+            "retrieval_hit": {
+              "rate": 1.0,
+              "n": 22,
+              "ci": [
+                0.8513,
+                1.0
+              ]
+            },
+            "blocked": {
+              "rate": 0.06451612903225806,
+              "n": 31,
+              "ci": [
+                0.0179,
+                0.2072
+              ]
+            },
+            "facts": {
+              "share_labelled_escalate": 0.323,
+              "share_no_passage": 0.065,
+              "mean_text_len": 166.0,
+              "mean_confidence": 0.996
+            },
+            "variation_from_best_pts": 0.0,
+            "ci_overlaps_best": true,
+            "label": "channel: email"
+          },
+          "forum": {
+            "tickets": 11,
+            "resolution": {
+              "rate": 0.8181818181818182,
+              "n": 11,
+              "ci": [
+                0.523,
+                0.9486
+              ]
+            },
+            "quality": {
+              "rate": 0.7272727272727273,
+              "n": 11,
+              "ci": [
+                0.4343,
+                0.9025
+              ]
+            },
+            "retrieval_hit": {
+              "rate": 1.0,
+              "n": 8,
+              "ci": [
+                0.6756,
+                1.0
+              ]
+            },
+            "blocked": {
+              "rate": 0.0,
+              "n": 11,
+              "ci": [
+                0.0,
+                0.2588
+              ]
+            },
+            "facts": {
+              "share_labelled_escalate": 0.455,
+              "share_no_passage": 0.091,
+              "mean_text_len": 169.4,
+              "mean_confidence": 0.997
+            },
+            "variation_from_best_pts": 4.7,
+            "ci_overlaps_best": true,
+            "label": "channel: forum"
+          }
+        }
+      }
+    }
+  },
+  "2026-09-16_dev_full": {
+    "tickets": 500,
+    "groups": {
+      "tier": {
+        "best": "business",
+        "max_variation_pts": 7.4,
+        "within_5_points": false,
+        "segments": {
+          "business": {
+            "tickets": 164,
+            "resolution": {
+              "rate": 0.7682926829268293,
+              "n": 164,
+              "ci": [
+                0.698,
+                0.8263
+              ]
+            },
+            "quality": {
+              "rate": 0.8170731707317073,
+              "n": 164,
+              "ci": [
+                0.7509,
+                0.8688
+              ]
+            },
+            "retrieval_hit": {
+              "rate": 0.9105691056910569,
+              "n": 123,
+              "ci": [
+                0.8469,
+                0.9493
+              ]
+            },
+            "blocked": {
+              "rate": 0.0,
+              "n": 164,
+              "ci": [
+                0.0,
+                0.0229
+              ]
+            },
+            "facts": {
+              "share_labelled_escalate": 0.354,
+              "share_no_passage": 0.073,
+              "mean_text_len": 157.8,
+              "mean_confidence": 0.988
+            },
+            "variation_from_best_pts": 0.0,
+            "ci_overlaps_best": true,
+            "label": "Business customers"
+          },
+          "enterprise": {
+            "tickets": 83,
+            "resolution": {
+              "rate": 0.8192771084337349,
+              "n": 83,
+              "ci": [
+                0.723,
+                0.8873
+              ]
+            },
+            "quality": {
+              "rate": 0.7710843373493976,
+              "n": 83,
+              "ci": [
+                0.6699,
+                0.8483
+              ]
+            },
+            "retrieval_hit": {
+              "rate": 0.9491525423728814,
+              "n": 59,
+              "ci": [
+                0.8608,
+                0.9826
+              ]
+            },
+            "blocked": {
+              "rate": 0.012048192771084338,
+              "n": 83,
+              "ci": [
+                0.0021,
+                0.0651
+              ]
+            },
+            "facts": {
+              "share_labelled_escalate": 0.386,
+              "share_no_passage": 0.06,
+              "mean_text_len": 161.8,
+              "mean_confidence": 0.992
+            },
+            "variation_from_best_pts": 4.6,
+            "ci_overlaps_best": true,
+            "label": "Enterprise customers"
+          },
+          "standard": {
+            "tickets": 253,
+            "resolution": {
+              "rate": 0.7628458498023716,
+              "n": 253,
+              "ci": [
+                0.7067,
+                0.8111
+              ]
+            },
+            "quality": {
+              "rate": 0.7430830039525692,
+              "n": 253,
+              "ci": [
+                0.6859,
+                0.793
+              ]
+            },
+            "retrieval_hit": {
+              "rate": 0.9428571428571428,
+              "n": 175,
+              "ci": [
+                0.898,
+                0.9687
+              ]
+            },
+            "blocked": {
+              "rate": 0.019762845849802372,
+              "n": 253,
+              "ci": [
+                0.0085,
+                0.0454
+              ]
+            },
+            "facts": {
+              "share_labelled_escalate": 0.391,
+              "share_no_passage": 0.047,
+              "mean_text_len": 159.2,
+              "mean_confidence": 0.985
+            },
+            "variation_from_best_pts": 7.4,
+            "ci_overlaps_best": true,
+            "label": "Standard customers"
+          }
+        }
+      },
+      "fluency": {
+        "best": "non_fluent",
+        "max_variation_pts": 2.6,
+        "within_5_points": true,
+        "segments": {
+          "fluent": {
+            "tickets": 380,
+            "resolution": {
+              "rate": 0.7789473684210526,
+              "n": 380,
+              "ci": [
+                0.7345,
+                0.8178
+              ]
+            },
+            "quality": {
+              "rate": 0.7657894736842106,
+              "n": 380,
+              "ci": [
+                0.7207,
+                0.8056
+              ]
+            },
+            "retrieval_hit": {
+              "rate": 0.9481481481481482,
+              "n": 270,
+              "ci": [
+                0.9149,
+                0.9689
+              ]
+            },
+            "blocked": {
+              "rate": 0.013157894736842105,
+              "n": 380,
+              "ci": [
+                0.0056,
+                0.0304
+              ]
+            },
+            "facts": {
+              "share_labelled_escalate": 0.392,
+              "share_no_passage": 0.047,
+              "mean_text_len": 163.4,
+              "mean_confidence": 0.986
+            },
+            "variation_from_best_pts": 2.6,
+            "ci_overlaps_best": true,
+            "label": "Tickets in fluent English"
+          },
+          "non_fluent": {
+            "tickets": 120,
+            "resolution": {
+              "rate": 0.7583333333333333,
+              "n": 120,
+              "ci": [
+                0.6745,
+                0.8261
+              ]
+            },
+            "quality": {
+              "rate": 0.7916666666666666,
+              "n": 120,
+              "ci": [
+                0.7105,
+                0.8547
+              ]
+            },
+            "retrieval_hit": {
+              "rate": 0.8850574712643678,
+              "n": 87,
+              "ci": [
+                0.8012,
+                0.9364
+              ]
+            },
+            "blocked": {
+              "rate": 0.008333333333333333,
+              "n": 120,
+              "ci": [
+                0.0015,
+                0.0457
+              ]
+            },
+            "facts": {
+              "share_labelled_escalate": 0.333,
+              "share_no_passage": 0.092,
+              "mean_text_len": 145.9,
+              "mean_confidence": 0.991
+            },
+            "variation_from_best_pts": 0.0,
+            "ci_overlaps_best": true,
+            "label": "Tickets in non-fluent English"
+          }
+        }
+      },
+      "ticket_length": {
+        "best": "short",
+        "max_variation_pts": 11.7,
+        "within_5_points": false,
+        "segments": {
+          "long": {
+            "tickets": 451,
+            "resolution": {
+              "rate": 0.7960088691796009,
+              "n": 451,
+              "ci": [
+                0.7564,
+                0.8306
+              ]
+            },
+            "quality": {
+              "rate": 0.7605321507760532,
+              "n": 451,
+              "ci": [
+                0.719,
+                0.7976
+              ]
+            },
+            "retrieval_hit": {
+              "rate": 0.9420731707317073,
+              "n": 328,
+              "ci": [
+                0.9113,
+                0.9626
+              ]
+            },
+            "blocked": {
+              "rate": 0.013303769401330377,
+              "n": 451,
+              "ci": [
+                0.0061,
+                0.0287
+              ]
+            },
+            "facts": {
+              "share_labelled_escalate": 0.368,
+              "share_no_passage": 0.024,
+              "mean_text_len": 166.7,
+              "mean_confidence": 0.989
+            },
+            "variation_from_best_pts": 11.7,
+            "ci_overlaps_best": true,
+            "label": "Long or complex tickets"
+          },
+          "short": {
+            "tickets": 49,
+            "resolution": {
+              "rate": 0.5714285714285714,
+              "n": 49,
+              "ci": [
+                0.4327,
+                0.6998
+              ]
+            },
+            "quality": {
+              "rate": 0.8775510204081632,
+              "n": 49,
+              "ci": [
+                0.7576,
+                0.9427
+              ]
+            },
+            "retrieval_hit": {
+              "rate": 0.8275862068965517,
+              "n": 29,
+              "ci": [
+                0.6545,
+                0.924
+              ]
+            },
+            "blocked": {
+              "rate": 0.0,
+              "n": 49,
+              "ci": [
+                0.0,
+                0.0727
+              ]
+            },
+            "facts": {
+              "share_labelled_escalate": 0.469,
+              "share_no_passage": 0.367,
+              "mean_text_len": 90.0,
+              "mean_confidence": 0.97
+            },
+            "variation_from_best_pts": 0.0,
+            "ci_overlaps_best": true,
+            "label": "Short tickets (< 120 chars)"
+          }
+        }
+      },
+      "region": {
+        "best": "europe",
+        "max_variation_pts": 7.5,
+        "within_5_points": false,
+        "segments": {
+          "asia_pacific": {
+            "tickets": 119,
+            "resolution": {
+              "rate": 0.7310924369747899,
+              "n": 119,
+              "ci": [
+                0.6451,
+                0.8026
+              ]
+            },
+            "quality": {
+              "rate": 0.7394957983193278,
+              "n": 119,
+              "ci": [
+                0.654,
+                0.81
+              ]
+            },
+            "retrieval_hit": {
+              "rate": 0.9210526315789473,
+              "n": 76,
+              "ci": [
+                0.8383,
+                0.9633
+              ]
+            },
+            "blocked": {
+              "rate": 0.008403361344537815,
+              "n": 119,
+              "ci": [
+                0.0015,
+                0.0461
+              ]
+            },
+            "facts": {
+              "share_labelled_escalate": 0.462,
+              "share_no_passage": 0.109,
+              "mean_text_len": 154.3,
+              "mean_confidence": 0.983
+            },
+            "variation_from_best_pts": 7.5,
+            "ci_overlaps_best": true,
+            "label": "region: asia_pacific"
+          },
+          "europe": {
+            "tickets": 151,
+            "resolution": {
+              "rate": 0.7880794701986755,
+              "n": 151,
+              "ci": [
+                0.7162,
+                0.8457
+              ]
+            },
+            "quality": {
+              "rate": 0.8145695364238411,
+              "n": 151,
+              "ci": [
+                0.7451,
+                0.8685
+              ]
+            },
+            "retrieval_hit": {
+              "rate": 0.9304347826086956,
+              "n": 115,
+              "ci": [
+                0.8687,
+                0.9643
+              ]
+            },
+            "blocked": {
+              "rate": 0.013245033112582781,
+              "n": 151,
+              "ci": [
+                0.0036,
+                0.047
+              ]
+            },
+            "facts": {
+              "share_labelled_escalate": 0.318,
+              "share_no_passage": 0.046,
+              "mean_text_len": 162.9,
+              "mean_confidence": 0.99
+            },
+            "variation_from_best_pts": 0.0,
+            "ci_overlaps_best": true,
+            "label": "region: europe"
+          },
+          "latin_america": {
+            "tickets": 60,
+            "resolution": {
+              "rate": 0.8666666666666667,
+              "n": 60,
+              "ci": [
+                0.7583,
+                0.9309
+              ]
+            },
+            "quality": {
+              "rate": 0.7833333333333333,
+              "n": 60,
+              "ci": [
+                0.6638,
+                0.8688
+              ]
+            },
+            "retrieval_hit": {
+              "rate": 0.9534883720930233,
+              "n": 43,
+              "ci": [
+                0.8454,
+                0.9872
+              ]
+            },
+            "blocked": {
+              "rate": 0.0,
+              "n": 60,
+              "ci": [
+                0.0,
+                0.0602
+              ]
+            },
+            "facts": {
+              "share_labelled_escalate": 0.35,
+              "share_no_passage": 0.017,
+              "mean_text_len": 156.1,
+              "mean_confidence": 0.991
+            },
+            "variation_from_best_pts": 3.1,
+            "ci_overlaps_best": true,
+            "label": "region: latin_america"
+          },
+          "north_america": {
+            "tickets": 170,
+            "resolution": {
+              "rate": 0.7588235294117647,
+              "n": 170,
+              "ci": [
+                0.6893,
+                0.817
+              ]
+            },
+            "quality": {
+              "rate": 0.7529411764705882,
+              "n": 170,
+              "ci": [
+                0.683,
+                0.8117
+              ]
+            },
+            "retrieval_hit": {
+              "rate": 0.9349593495934959,
+              "n": 123,
+              "ci": [
+                0.8769,
+                0.9667
+              ]
+            },
+            "blocked": {
+              "rate": 0.01764705882352941,
+              "n": 170,
+              "ci": [
+                0.006,
+                0.0506
+              ]
+            },
+            "facts": {
+              "share_labelled_escalate": 0.382,
+              "share_no_passage": 0.047,
+              "mean_text_len": 160.4,
+              "mean_confidence": 0.987
+            },
+            "variation_from_best_pts": 6.2,
+            "ci_overlaps_best": true,
+            "label": "region: north_america"
+          }
+        }
+      },
+      "channel": {
+        "best": "email",
+        "max_variation_pts": 6.5,
+        "within_5_points": false,
+        "segments": {
+          "chat": {
+            "tickets": 155,
+            "resolution": {
+              "rate": 0.7677419354838709,
+              "n": 155,
+              "ci": [
+                0.6953,
+                0.8273
+              ]
+            },
+            "quality": {
+              "rate": 0.7806451612903226,
+              "n": 155,
+              "ci": [
+                0.7091,
+                0.8386
+              ]
+            },
+            "retrieval_hit": {
+              "rate": 0.907563025210084,
+              "n": 119,
+              "ci": [
+                0.842,
+                0.9476
+              ]
+            },
+            "blocked": {
+              "rate": 0.012903225806451613,
+              "n": 155,
+              "ci": [
+                0.0035,
+                0.0458
+              ]
+            },
+            "facts": {
+              "share_labelled_escalate": 0.323,
+              "share_no_passage": 0.077,
+              "mean_text_len": 143.1,
+              "mean_confidence": 0.974
+            },
+            "variation_from_best_pts": 1.2,
+            "ci_overlaps_best": true,
+            "label": "channel: chat"
+          },
+          "docs_comment": {
+            "tickets": 78,
+            "resolution": {
+              "rate": 0.7692307692307693,
+              "n": 78,
+              "ci": [
+                0.6644,
+                0.8487
+              ]
+            },
+            "quality": {
+              "rate": 0.7307692307692307,
+              "n": 78,
+              "ci": [
+                0.6232,
+                0.8166
+              ]
+            },
+            "retrieval_hit": {
+              "rate": 0.9375,
+              "n": 48,
+              "ci": [
+                0.8316,
+                0.9785
+              ]
+            },
+            "blocked": {
+              "rate": 0.0,
+              "n": 78,
+              "ci": [
+                0.0,
+                0.0469
+              ]
+            },
+            "facts": {
+              "share_labelled_escalate": 0.474,
+              "share_no_passage": 0.051,
+              "mean_text_len": 161.8,
+              "mean_confidence": 0.992
+            },
+            "variation_from_best_pts": 6.2,
+            "ci_overlaps_best": true,
+            "label": "channel: docs_comment"
+          },
+          "email": {
+            "tickets": 212,
+            "resolution": {
+              "rate": 0.7783018867924528,
+              "n": 212,
+              "ci": [
+                0.7177,
+                0.829
+              ]
+            },
+            "quality": {
+              "rate": 0.7924528301886793,
+              "n": 212,
+              "ci": [
+                0.7329,
+                0.8416
+              ]
+            },
+            "retrieval_hit": {
+              "rate": 0.9411764705882353,
+              "n": 153,
+              "ci": [
+                0.892,
+                0.9687
+              ]
+            },
+            "blocked": {
+              "rate": 0.018867924528301886,
+              "n": 212,
+              "ci": [
+                0.0074,
+                0.0475
+              ]
+            },
+            "facts": {
+              "share_labelled_escalate": 0.373,
+              "share_no_passage": 0.047,
+              "mean_text_len": 166.5,
+              "mean_confidence": 0.995
+            },
+            "variation_from_best_pts": 0.0,
+            "ci_overlaps_best": true,
+            "label": "channel: email"
+          },
+          "forum": {
+            "tickets": 55,
+            "resolution": {
+              "rate": 0.7818181818181819,
+              "n": 55,
+              "ci": [
+                0.6563,
+                0.8705
+              ]
+            },
+            "quality": {
+              "rate": 0.7272727272727273,
+              "n": 55,
+              "ci": [
+                0.5977,
+                0.8272
+              ]
+            },
+            "retrieval_hit": {
+              "rate": 0.972972972972973,
+              "n": 37,
+              "ci": [
+                0.8618,
+                0.9952
+              ]
+            },
+            "blocked": {
+              "rate": 0.0,
+              "n": 55,
+              "ci": [
+                0.0,
+                0.0653
+              ]
+            },
+            "facts": {
+              "share_labelled_escalate": 0.418,
+              "share_no_passage": 0.055,
+              "mean_text_len": 172.3,
+              "mean_confidence": 0.99
+            },
+            "variation_from_best_pts": 6.5,
+            "ci_overlaps_best": true,
+            "label": "channel: forum"
+          }
+        }
+      }
+    }
+  }
+}

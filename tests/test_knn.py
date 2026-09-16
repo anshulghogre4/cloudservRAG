@@ -83,8 +83,9 @@ def test_classify_uses_knn_signal(knn):
 def test_provider_down_still_reports_knn_intent(knn):
     t = _t(9, "we keep getting 429 too many requests", "rate_limit")
     c = classify(t, FakeLLM(error=ProviderUnavailable("provider unavailable: timeout")), knn=knn)
-    assert c.fallback is True and c.intent == "unclear_request" and c.confidence == 0.0
-    assert c.knn_intent == "rate_limit"      # the escalation package can still say what it looks like
+    assert c.fallback is True and c.error
+    assert c.intent == "rate_limit" and c.knn_intent == "rate_limit"   # neighbours need no provider (A11)
+    assert 0.0 < c.confidence < 0.80                                   # raw score without a calibrator
 
 
 def test_knn_votes_on_urgency(knn):
@@ -108,3 +109,21 @@ def test_contains_and_self_exclusion_for_memorised_tickets(knn):
     with_self = knn._neighbours(body)
     without = knn._neighbours(body, exclude_text=body)
     assert with_self[0][1] > 0.999 and all(sim < 0.999 for _, sim in without)
+
+
+def test_provider_down_keeps_neighbour_intent_but_escalates(knn):
+    """A11: with the provider disconnected the neighbour vote still classifies; confidence stays under 0.80."""
+    t = _t(99, "requests return 429 too many requests rate limit", "rate_limit")
+    c = classify(t, FakeDownLLM(), knn=knn)
+    assert c.fallback and c.error and "provider unavailable" in c.reason
+    assert c.intent == knn.predict(t.text)[0] and c.intent != "unclear_request"
+    assert 0.0 < c.confidence < 0.80
+    assert "neighbours" in c.reason
+
+
+class FakeDownLLM:
+    settings = type("S", (), {"model_name": "fake"})()
+
+    def complete(self, prompt, **kw):
+        raise ProviderUnavailable("provider unavailable: no API key configured")
+

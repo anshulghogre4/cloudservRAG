@@ -57,7 +57,7 @@ def route(classification: Classification, passages: Sequence[Passage], customer_
     thr = float(settings.confidence_threshold)
     intent_words = classification.intent.replace("_", " ")
 
-    if settings.kill_switch:
+    if settings.kill_switch_active() if hasattr(settings, "kill_switch_active") else settings.kill_switch:
         return Route("escalate", "kill_switch",
                      "Escalated: the kill switch is on, so no ticket is answered automatically.", thr)
     if classification.fallback:

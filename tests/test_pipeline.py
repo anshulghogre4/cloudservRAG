@@ -204,3 +204,22 @@ def test_kill_switch(tmp_path, documentation, memory_tickets):
     p = make_pipeline(tmp_path, documentation, memory_tickets, ScriptedLLM(intent="rate_limit"), settings=s)
     r = p.process(ticket("We keep getting 429 too many requests errors.", "Rate limit"))
     assert r.action == "escalate" and "kill switch" in r.route_reason.lower()
+
+
+def test_kill_switch_file_while_in_flight_escalates_before_release(tmp_path, documentation, memory_tickets):
+    """The flag is re-checked before an answer is released, so a ticket past routing is still stopped."""
+    flag = tmp_path / "KILL"
+    s = Settings(confidence_threshold=0.80, retrieval_threshold=0.05, kill_switch_file=flag,
+                 database_url=f"sqlite:///{(tmp_path / 'd.db').as_posix()}")
+
+    class SwitchDuringGeneration(ScriptedLLM):
+        def complete(self, prompt, **kw):
+            if "<passages>" in prompt:
+                flag.write_text("set during generation", encoding="utf-8")
+            return super().complete(prompt, **kw)
+
+    p = make_pipeline(tmp_path, documentation, memory_tickets, SwitchDuringGeneration(intent="rate_limit"), settings=s)
+    r = p.process(ticket("We keep getting 429 too many requests errors.", "Rate limit"))
+    assert r.action == "escalate" and "kill switch" in r.route_reason.lower() and r.answer is None
+    assert r.escalation and r.escalation["draft"]          # the prepared draft goes to the engineer, not the customer
+
