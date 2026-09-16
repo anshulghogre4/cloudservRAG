@@ -347,6 +347,35 @@ confidence intervals rather than tuned here.
 Latency: the 3 s p95 target (NFR-01) fails with the live provider (run 1 p95 16.8 s, two or three
 round trips per ticket at free-tier pacing); the local pipeline without the provider is 0.5 s p95.
 
-Validation run: not yet done. `validation_tickets.json` is absent from the datasets folder by the
-user's rule (restored only after the build); it is to be run once with the same command and
-reported as validation figures with the run count from `run_meta.json`.
+### Validation run (B-11 gate, 16 Sep 2026, once)
+
+`validation_tickets.json` was restored after the development run and run exactly once
+(`evaluation/results/2026-09-16_validation`, run count 1, code version ab696a0, live provider,
+460 s for 80 tickets, 0 errors). The file was not opened or analysed; only the harness output
+was read. Nothing was tuned on it.
+
+| Metric | Validation (n=80) | Development run 3 (n=500) |
+|---|---|---|
+| auto / escalate / block | 60 / 16 / 4 | 387 / 107 / 6 |
+| first-contact resolution | 75.0% (CI 64.5 to 83.2) | 77.4% |
+| escalation rate | 25.0% | 22.6% |
+| intent accuracy / macro precision | 0.988 / 0.991 (one error, at confidence 0.69, escalated) | 0.992 / 0.992 |
+| retrieval hit rate (answerable) | 96.2% (n=53) | 93.3% (n=357) |
+| routing accuracy | 75.0% | 77.2% |
+| citations resolve / cite expected article | 100% / 73.3% | 100% / 72.6% |
+| must-not-auto violations / private data | 0 / 0 | 0 / 0 |
+| calibration, bins n >= 20 | passes; ECE 0.013 | passes; ECE 0.005 |
+| decision log | 324 rows, 80/80 reconciled | 2006 rows, 500/500 |
+| latency median / p95 (live) | 6.0 s / 13.7 s | 2.4 s / 16.8 s (run 1) |
+| segment variation in routing accuracy | tier 14.2, region 26.5, fluency 22.4, length 28.6, channel 8.7 points | 7.4 / 7.5 / 2.6 / 11.7 / 6.5 |
+
+Reading: business and technical figures are within a few points of the development set, which is
+what the Dataset Guide predicts for a system that was not tuned to a number. The one class under
+85 percent precision is account_access (0.80 on 4 tickets). The segment variation figures are
+large because the segments are tiny at n=80 (a single ticket moves a 4-ticket segment by 25
+points); they must be reported with Wilson intervals in the fairness audit, not as point
+estimates. Two of the four grounding blocks are again narration sentences ("To address your
+concern, I'd like to walk you through the steps", "We will look at the ticket further"); the
+filler filter is left unchanged, because adjusting it on the validation set would be tuning
+toward the set. They are recorded as the expected false-block rate (about 2 to 3 percent of
+tickets) for the report.

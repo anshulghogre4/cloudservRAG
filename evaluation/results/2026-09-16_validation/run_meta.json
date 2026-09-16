@@ -1,0 +1,15 @@
+{
+  "input": "Docs/Capstone_Project/05_Datasets/validation_tickets.json",
+  "output": "evaluation\\results\\2026-09-16_validation",
+  "tickets": 80,
+  "processed_this_run": 80,
+  "started_at": "2026-09-16T06:13:21.696900+00:00",
+  "finished_at": "2026-09-16T06:21:01.741230+00:00",
+  "duration_s": 460.04424909999943,
+  "version": "ab696a0",
+  "model": "meta-llama/llama-3.1-8b-instruct",
+  "confidence_threshold": 0.8,
+  "retrieval_threshold": 0.4,
+  "kill_switch": false,
+  "run_count_on_this_input": 1
+}
