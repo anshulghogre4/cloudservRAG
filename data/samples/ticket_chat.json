@@ -1,0 +1,29 @@
+{
+  "ticket_id": "DEV-0001",
+  "channel": "chat",
+  "subject": "",
+  "body": "builds that work last week are now fail during dependency resolution. we are having not change our code at all.",
+  "received_at": "2026-05-23T22:43:00Z",
+  "customer_id": "CUST-1131",
+  "customer_name": "Xin Kulkarni",
+  "customer_tier": "standard",
+  "customer_region": "latin_america",
+  "language_fluency": "non_fluent",
+  "labels": {
+    "intent": "deployment_failure",
+    "urgency": "high",
+    "expected_route": "auto_respond",
+    "answerable_from_docs": true,
+    "expected_doc_ids": [
+      "DOC-DEPLOY-001"
+    ],
+    "must_not_auto_respond": false
+  },
+  "history": {
+    "first_contact_resolution": true,
+    "resolution_time_minutes": 30,
+    "csat_rating": 5,
+    "escalated": false,
+    "repeat_contact": false
+  }
+}

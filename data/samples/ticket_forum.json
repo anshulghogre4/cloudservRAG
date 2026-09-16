@@ -1,0 +1,29 @@
+{
+  "ticket_id": "DEV-0023",
+  "channel": "forum",
+  "subject": "User cannot access a project",
+  "body": "We are tightening permissions after a review and I want to understand how group membership interacts with directly assigned roles.",
+  "received_at": "2026-03-13T03:56:00Z",
+  "customer_id": "CUST-1035",
+  "customer_name": "Tomas Liu",
+  "customer_tier": "standard",
+  "customer_region": "north_america",
+  "language_fluency": "fluent",
+  "labels": {
+    "intent": "account_access",
+    "urgency": "medium",
+    "expected_route": "auto_respond",
+    "answerable_from_docs": true,
+    "expected_doc_ids": [
+      "DOC-ACCT-001"
+    ],
+    "must_not_auto_respond": false
+  },
+  "history": {
+    "first_contact_resolution": true,
+    "resolution_time_minutes": 8,
+    "csat_rating": 2,
+    "escalated": false,
+    "repeat_contact": false
+  }
+}

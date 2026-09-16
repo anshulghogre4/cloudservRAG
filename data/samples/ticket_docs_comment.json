@@ -1,0 +1,29 @@
+{
+  "ticket_id": "DEV-0003",
+  "channel": "docs_comment",
+  "subject": "Evidence for a compliance review",
+  "body": "Our auditor has asked for access records covering the last six months. Can I export these, and is that period within what you retain?",
+  "received_at": "2026-04-29T10:22:00Z",
+  "customer_id": "CUST-1001",
+  "customer_name": "Sanjay Demir",
+  "customer_tier": "enterprise",
+  "customer_region": "asia_pacific",
+  "language_fluency": "fluent",
+  "labels": {
+    "intent": "compliance_request",
+    "urgency": "medium",
+    "expected_route": "escalate",
+    "answerable_from_docs": true,
+    "expected_doc_ids": [
+      "DOC-SEC-003"
+    ],
+    "must_not_auto_respond": true
+  },
+  "history": {
+    "first_contact_resolution": false,
+    "resolution_time_minutes": 538,
+    "csat_rating": 3,
+    "escalated": true,
+    "repeat_contact": true
+  }
+}

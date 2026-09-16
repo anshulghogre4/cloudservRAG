@@ -532,3 +532,33 @@ reviewed: only Word lock files, run logs, storage and caches remain ignored. The
 also run in a clean Linux container (python:3.11, CPU torch) to confirm nothing else is
 platform-specific.
 
+Second run (commit a12ba80, prompts committed): both jobs green, `test` 152 passed, `smoke-no-key` 4 of 4 escalated with the provider disconnected and the log reconciled on the runner.
+
+## README and clean-clone rehearsal (B-19, 16 Sep 2026)
+
+The README was rewritten from the graders' eleven-step procedure (Build Specification section
+06) and then followed literally in a fresh clone on this machine (Windows, uv-provided Python
+3.11.15, new virtual environment, pinned install, empty storage and reply cache). Findings, each
+fixed before the rehearsal was repeated:
+
+1. `uv venv` creates an environment without pip, so the README's fallback line for machines
+   without a 3.11 interpreter now reads `uv venv --python 3.11 --seed .venv`.
+2. The first clone sat in a deep temporary folder and `pip install` failed on Windows' 260-character
+   path limit inside `jedi` (pulled in by the pack's Jupyter pins). The README now says to clone
+   into a short path. The install from a short path succeeds; pip prints one harmless notice
+   (uv-seeded `wheel` wants a newer `packaging` than the pinned 23.2).
+3. `data/samples/` (one ticket per channel and the four trigger tickets as single JSON files for
+   the README's curl commands) was created for B-19 and had not been committed, so the clone's
+   curl calls sent empty bodies and received 422. Committed with this item; the 422 shape is in the
+   troubleshooting list.
+
+Rehearsal result in the clone: 152 tests pass; the API starts with the documented command
+(models downloaded, 116 chunks indexed, 500-ticket neighbour memory loaded, startup complete);
+one ticket per channel returned escalate, auto-respond, escalate, auto-respond with reasons; the
+trigger ticket was blocked (grounding), its five log rows readable at `/decisions/TRIG-PII-001`,
+metrics live; the kill switch turned on from the command line took effect on the next ticket
+and showed in `/health`; the unattended run over the first 12 development tickets completed with
+0 failures, 48 log rows reconciled 12/12; the fairness audit command ran; a search of every
+commit for the key pattern found nothing. The validation set was not run again (run-once rule).
+The clone, which held a copy of the key in its `.env`, was deleted afterwards.
+
