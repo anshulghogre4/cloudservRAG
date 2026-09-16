@@ -1,0 +1,18 @@
+{
+  "n": 20,
+  "parsed_ok": 20,
+  "unknown": 1,
+  "with_invalid_citation": 1,
+  "cites_expected_doc": 0.9473684210526315,
+  "factual_sentence_citation_rate": 0.6486486486486487,
+  "answers_with_every_factual_sentence_cited": 0.5263157894736842,
+  "forbidden_claim_hits": 0,
+  "must_mention_coverage": 0.5,
+  "words_mean": 66,
+  "words_min_max": [
+    13,
+    126
+  ],
+  "provider_calls": 19,
+  "cache_hits": 0
+}

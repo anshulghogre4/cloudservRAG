@@ -156,3 +156,28 @@ text-only ceiling of 0.938 (35 duplicate-body groups carry both routes), 0 auto-
 must_not_auto_respond tickets, 0 auto-answers with a wrong intent. The 81 auto-answers on
 tickets labelled escalate are answerable-looking intents (rollback, database, performance) whose
 labels the text does not distinguish; reported as the main limitation of routing.
+
+## Answer generation and citations (B-08, 16 Sep 2026)
+
+`src/generate.py` drafts with PR-03 in JSON mode from the retrieved passages only, listed as
+[doc_id | section | applies_to] blocks. Inline [DOC-ID] markers are the citation format; every
+marker is validated against the passages retrieved for that ticket and anything else is dropped
+and reported (A6). No passages, provider failure or unparseable output all yield an "unknown" draft
+that the router escalates. The disclosure line (FR-12) is appended by code.
+
+PR-03 went through three versions on the same 20 development tickets (19 drafted, 1 unknown):
+
+| Version | Markers resolve | Cites expected article | Factual sentences with a marker | must_mention coverage | Mean words |
+|---|---|---|---|---|---|
+| 1.0 | 100% | 100% | 22.6% | 100% | 99 |
+| 1.1 (example + "uncited sentences removed") | 1 invalid | 94.7% | 64.9% | 50% | 66, min 13 |
+| 1.2 (chosen) | 100% | 100% | 53.3% | 100% | 119 |
+
+Two lessons recorded for the prompt register: a worked example was copied verbatim into an
+unrelated answer by the 8B model (few-shot leakage), and a threat to remove uncited sentences made
+it shorten answers instead of citing. v1.2 describes the marker form with a placeholder and asks for
+full prose first. In v1.2, of 70 uncited sentences 32 are greetings or closings and 38 are steps
+taken from the passage without a marker; one v1.0 draft inverted a fact (containers pick up new
+values "without a restart", the passage says the opposite). Both facts define B-09: verify every
+sentence against the retrieved passages, attach the marker mechanically when a sentence is
+supported, block when it is not. Forbidden claims: 0 in all 57 drafts.

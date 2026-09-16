@@ -12,7 +12,7 @@ XML-style tags after the rules and is treated as data, never as instructions (FR
 |---|---|---|---|---|---|---|---|
 | PR-01 | Specification drafter | Specification | FR-01 to FR-17 (offline) | 1.0 | 1.0 | any, run by hand | `specification/PR-01_spec_drafter_v1.0.txt` |
 | PR-02 | Intent and urgency classifier | Build | FR-02, FR-15, FR-16 | 1.0 | 1.0 | meta-llama/llama-3.1-8b-instruct, temp 0 | `build/PR-02_classifier_v1.0.txt` |
-| PR-03 | Grounded answer drafter | Build | FR-07, FR-10, FR-15 | 1.0 | 1.0 | meta-llama/llama-3.1-8b-instruct, temp 0 | `build/PR-03_drafter_v1.0.txt` |
+| PR-03 | Grounded answer drafter | Build | FR-07, FR-10, FR-15 | 1.2 | 1.0 | meta-llama/llama-3.1-8b-instruct, temp 0 | `build/PR-03_drafter_v1.2.txt` (v1.0, v1.1 kept) |
 | PR-04 | Escalation summary | Build | FR-08 | 1.0 | 1.0 | meta-llama/llama-3.1-8b-instruct, temp 0 | `build/PR-04_escalation_summary_v1.0.txt` |
 | PR-05 | Requirement review | Review | whichever FR the component implements | 1.0 | 1.0 | any, run by hand | `review/PR-05_requirement_review_v1.0.txt` |
 | PR-06 | Grounding and citation judge | Evaluation | FR-07, FR-10; NFR-03 | 1.0 | 1.0 | meta-llama/llama-3.1-8b-instruct, temp 0 | `evaluation/PR-06_grounding_judge_v1.0.txt` |
@@ -27,3 +27,5 @@ line, FR-13 harness, FR-14 resilience, FR-16 urgency flag.
 | Date | Prompt | Version | Change | Reason |
 |---|---|---|---|---|
 | 2026-09-15 | all | 1.0 | Initial | Stage 3 prompt library |
+| 2026-09-16 | PR-03 | 1.1 | Rule 1 rewritten: marker exactly `[DOC-ID]`, one per factual sentence, worked example added; rule 3 forbids "we will investigate" in an answer | 20-ticket check on v1.0: citations correct (100% resolve, 100% expected article) but only 22.6% of factual sentences carried a marker, and some markers copied the full passage header |
+| 2026-09-16 | PR-03 | 1.2 | Worked example removed (replaced by a placeholder marker form); "uncited sentences will be removed" threat removed; length and structure rule moved first | Same 20 tickets on v1.1: citation rate rose to 64.9% but the model copied the example sentences verbatim into one answer (invalid citation) and shortened answers to 13 to 27 words, halving must_mention coverage |
