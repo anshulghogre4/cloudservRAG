@@ -12,13 +12,13 @@
     {
       "id": 1, "type": "timeseries", "title": "Tickets per hour by channel and outcome",
       "gridPos": {"x": 0, "y": 0, "w": 12, "h": 8},
-      "datasource": {"type": "prometheus", "uid": "${DS_PROMETHEUS}"},
+      "datasource": {"type": "prometheus", "uid": "prometheus"},
       "targets": [{"refId": "A", "expr": "sum by (channel, outcome) (increase(tickets_processed_total[1h]))", "legendFormat": "{{channel}} / {{outcome}}"}]
     },
     {
       "id": 2, "type": "stat", "title": "Answered automatically vs escalated (last hour)",
       "gridPos": {"x": 12, "y": 0, "w": 12, "h": 8},
-      "datasource": {"type": "prometheus", "uid": "${DS_PROMETHEUS}"},
+      "datasource": {"type": "prometheus", "uid": "prometheus"},
       "fieldConfig": {"defaults": {"unit": "percentunit", "min": 0, "max": 1}},
       "targets": [
         {"refId": "A", "expr": "sum(increase(tickets_processed_total{outcome=\"auto_respond\"}[1h])) / sum(increase(tickets_processed_total[1h]))", "legendFormat": "auto-answered"},
@@ -28,7 +28,7 @@
     {
       "id": 3, "type": "timeseries", "title": "Response latency, median and p95",
       "gridPos": {"x": 0, "y": 8, "w": 12, "h": 8},
-      "datasource": {"type": "prometheus", "uid": "${DS_PROMETHEUS}"},
+      "datasource": {"type": "prometheus", "uid": "prometheus"},
       "fieldConfig": {"defaults": {"unit": "s"}},
       "targets": [
         {"refId": "A", "expr": "histogram_quantile(0.5, sum by (le) (rate(response_seconds_bucket[5m])))", "legendFormat": "p50"},
@@ -38,21 +38,20 @@
     {
       "id": 4, "type": "timeseries", "title": "Guardrail activations by guardrail",
       "gridPos": {"x": 12, "y": 8, "w": 12, "h": 8},
-      "datasource": {"type": "prometheus", "uid": "${DS_PROMETHEUS}"},
+      "datasource": {"type": "prometheus", "uid": "prometheus"},
       "targets": [{"refId": "A", "expr": "sum by (guardrail) (increase(guardrail_blocks_total[1h]))", "legendFormat": "{{guardrail}}"}]
     },
     {
       "id": 5, "type": "barchart", "title": "Confidence distribution (last hour)",
       "gridPos": {"x": 0, "y": 16, "w": 12, "h": 8},
-      "datasource": {"type": "prometheus", "uid": "${DS_PROMETHEUS}"},
+      "datasource": {"type": "prometheus", "uid": "prometheus"},
       "targets": [{"refId": "A", "expr": "sum by (le) (increase(classification_confidence_bucket[1h]))", "legendFormat": "<= {{le}}", "format": "table", "instant": true}]
     },
     {
       "id": 6, "type": "timeseries", "title": "Pipeline failures by stage",
       "gridPos": {"x": 12, "y": 16, "w": 12, "h": 8},
-      "datasource": {"type": "prometheus", "uid": "${DS_PROMETHEUS}"},
+      "datasource": {"type": "prometheus", "uid": "prometheus"},
       "targets": [{"refId": "A", "expr": "sum by (stage) (increase(pipeline_failures_total[1h]))", "legendFormat": "{{stage}}"}]
     }
-  ],
-  "__inputs": [{"name": "DS_PROMETHEUS", "label": "Prometheus", "type": "datasource", "pluginId": "prometheus"}]
+  ]
 }

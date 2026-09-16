@@ -519,3 +519,16 @@ real: status RUNNING, on (file written with user and UTC time), off. 152 tests p
 Not built, recorded: an article-age rule that escalates when the cited article is older than a
 threshold (R-05); a load test (R-07).
 
+### First CI run: the clean-checkout failure (B-13, 16 Sep 2026)
+
+The first push failed 26 tests on the runner with `FileNotFoundError: prompts/build/PR-02_classifier_v1.0.txt`
+(and PR-03). The four build prompts were never in git: `.gitignore` carried the Python packaging
+rule `build/`, which also matches `prompts/build/`. Locally everything passed because the files
+were on disk. This is the failure the Build Specification predicts for step two of the graders'
+procedure ("the README assumes something that exists only on the author's machine"); CI caught
+it before the clean-clone rehearsal (B-19) would have. Fix: the rules are anchored to the repo
+root (`/build/`, `/dist/`) and `prompts/build/` is committed. Every other ignored path was
+reviewed: only Word lock files, run logs, storage and caches remain ignored. The same suite was
+also run in a clean Linux container (python:3.11, CPU torch) to confirm nothing else is
+platform-specific.
+

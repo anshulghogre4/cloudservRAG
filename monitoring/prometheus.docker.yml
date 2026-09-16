@@ -1,0 +1,9 @@
+# Prometheus config used by monitoring/docker-compose.yml: the API runs on the host, so the
+# target is host.docker.internal rather than localhost (see prometheus.yml for the host-run form).
+global:
+  scrape_interval: 15s
+
+scrape_configs:
+  - job_name: "support-system"
+    static_configs:
+      - targets: ["host.docker.internal:8001"]
