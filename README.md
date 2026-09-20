@@ -18,6 +18,10 @@ declaration): `Docs/governance.md`. Prompt register: `prompts/README.md`.
 - An OpenRouter API key (`https://openrouter.ai/keys`). The default model is
   `meta-llama/llama-3.1-8b-instruct`; a full 500-ticket run costs about $0.03. Without a key the
   system still runs: every ticket escalates with the reason "provider unavailable".
+- **Docker is optional.** Nothing in sections 2 to 5 needs it: the API, the client, the harness and
+  the tests run with Python alone. Docker (Docker Desktop on Windows and macOS, Docker Engine with
+  the compose plugin on Linux) is needed only for the Grafana dashboard in section 6; the same
+  metrics are readable without it (`python -m src.client metrics`).
 
 ## 2. Setup (about five minutes plus the download)
 
@@ -75,7 +79,25 @@ The first start downloads the two models and builds the vector store under `stor
 two minutes); later starts take about twenty seconds. Wait for `Application startup complete`.
 The API listens on `http://127.0.0.1:8000`; Prometheus metrics on `http://127.0.0.1:8001/metrics`.
 
-In a second terminal, from the repository root (on Windows PowerShell type `curl.exe`, not `curl`):
+In a second terminal, from the repository root with the virtual environment active, submit one ticket
+per channel with the bundled client, which prints the reply in a readable, coloured layout (the
+decision, the reason, the retrieved passages, the guardrail verdicts, then the reply with its
+citations or the escalation package):
+
+```
+python -m src.client ticket data/samples/ticket_email.json
+python -m src.client ticket data/samples/ticket_chat.json
+python -m src.client ticket data/samples/ticket_docs_comment.json
+python -m src.client ticket data/samples/ticket_forum.json
+```
+
+Expected: email escalates (feature request, policy rule), chat is answered with `DOC-DEPLOY-003`
+citations, docs comment escalates (compliance request, policy rule), forum is answered with
+`DOC-ACCT-001` citations. The client uses only the standard library and works on Windows, macOS
+and Linux; add `--raw` to see the JSON record, `--no-color` for plain text.
+
+The same requests with curl, which prints the raw JSON record on one line (on Windows PowerShell
+type `curl.exe`, not `curl`):
 
 ```
 curl -X POST http://127.0.0.1:8000/tickets -H "content-type: application/json" -d @data/samples/ticket_email.json
@@ -92,8 +114,10 @@ verdict of every check, `latency_ms`, `error`.
 A guardrail-trigger ticket (the body asks the system to repeat the customer's name and account id):
 
 ```
-curl -X POST http://127.0.0.1:8000/tickets -H "content-type: application/json" -d @data/samples/trig_pii_001.json
+python -m src.client ticket data/samples/trig_pii_001.json
 ```
+
+or, raw: `curl -X POST http://127.0.0.1:8000/tickets -H "content-type: application/json" -d @data/samples/trig_pii_001.json`
 
 Expect `"action": "block"` with the blocking guardrail named in `route_reason`, `answer: null`
 and the blocked draft inside `escalation`. Which guardrail fires on a live model depends on what
@@ -102,7 +126,16 @@ verdict is in `guardrails`, and each block path is proven deterministically in `
 trigger tickets are `trig_inj_001.json` (instruction injection, escalates before drafting),
 `trig_tone_001.json` and `trig_grnd_001.json`.
 
-Read back the decision-log rows for any ticket, the health and the metrics:
+Read back the decision-log rows for any ticket (the most recent submission by default, `--all` for every row),
+the health, and a readable summary of any harness output directory:
+
+```
+python -m src.client decisions TRIG-PII-001
+python -m src.client health
+python -m src.client run evaluation/results/2026-09-16_validation
+```
+
+Raw equivalents, plus the Prometheus metrics:
 
 ```
 curl http://127.0.0.1:8000/decisions/TRIG-PII-001
@@ -155,22 +188,64 @@ Runs already recorded in this repository: `evaluation/results/2026-09-16_dev_ful
 set, 500 tickets), `evaluation/results/2026-09-16_validation` (validation set, the single evaluation run; a later re-run with cached replies was made only for the video) and the
 measurement scripts' outputs (`retrieval_check`, `classify_check`, `route_check`, `guardrail_check`).
 
-## 6. Optional: dashboard
+## 6. Monitoring
 
-With Docker running and the API started:
+The API exposes Prometheus metrics (tickets by channel and outcome, response time, guardrail
+blocks, classification confidence, pipeline failures) on `http://127.0.0.1:8001/metrics`. Without
+any extra software, a readable live view:
+
+```
+python -m src.client metrics
+```
+
+Optional Grafana dashboard (requires Docker). First check that Docker is installed and its engine
+is running; on Windows and macOS that means Docker Desktop has been started and shows "Engine
+running":
+
+```
+docker --version
+docker info --format "{{.ServerVersion}}"
+```
+
+The second command prints a version number when the engine is running. If it prints "failed to
+connect to the docker API" or "Cannot connect to the Docker daemon", start Docker Desktop (or
+`sudo systemctl start docker` on Linux), wait until it reports that the engine is running, and try
+again. Then, with the API started (`python -m src.api`):
 
 ```
 docker compose -f monitoring/docker-compose.yml up -d
 ```
 
-Grafana at `http://localhost:3000` (admin / admin) with the dashboard "CloudServe support
-pipeline" provisioned; Prometheus at `http://localhost:9090`. `docker compose -f monitoring/docker-compose.yml down` stops them.
+The first run downloads the Prometheus and Grafana images (about 600 MB); later runs start in a few
+seconds. Check that everything is up:
+
+```
+docker compose -f monitoring/docker-compose.yml ps
+curl http://localhost:3000/api/health
+curl http://localhost:9090/api/v1/targets
+```
+
+Expected: two services with state `running` (`prometheus` and `grafana`); Grafana answers
+`"database": "ok"`; the Prometheus target `support-system` shows `"health":"up"`. A target that is
+`down` means the API is not running or its metrics port (8001) is blocked; start the API and wait
+one scrape (5 seconds). On Windows PowerShell type `curl.exe`.
+
+Open `http://localhost:3000/d/cloudserve-support/cloudserve-support-pipeline` (no login needed for
+viewing; admin / admin to edit). The dashboard "CloudServe support pipeline" is provisioned
+automatically: counters for processed, answered, escalated, blocked and failed tickets, mean
+confidence, a step chart by outcome, tickets by channel, median and p95 response time against the
+3-second target, guardrail blocks and the confidence bands. Prometheus scrapes every 5 seconds and
+the dashboard refreshes every 5 seconds, so each submitted ticket shows within about ten seconds.
+Counters are totals since the API process started. The batch harness is a separate process and does
+not feed the live dashboard; it writes a `metrics.prom` snapshot into its output directory.
+Prometheus itself is at `http://localhost:9090`. `docker compose -f monitoring/docker-compose.yml down` stops both.
 
 ## 7. Layout
 
 ```
 src/            ingest, classify, retrieve, route, generate, guardrails, logging_store, escalation,
-                pipeline, api, monitoring, killswitch, llm (provider client), calibration, config, models
+                pipeline, api, client (readable command-line view of the API), monitoring, killswitch,
+                llm (provider client), calibration, config, models
 prompts/        versioned prompts (PR-01 to PR-07) and the register with change history
 tests/          the suite and its fixtures (sample, edge and trigger tickets)
 evaluation/     harness, metrics report, fairness audit, measurement scripts, results/
@@ -192,6 +267,18 @@ storage/        created at runtime (vector store, decision log, reply cache, kil
 - Port 8000 or 8001 in use: set `API_PORT` or `METRICS_PORT` in `.env`.
 - `curl` returns `{"detail":[{"type":"missing","loc":["body"] ...` (HTTP 422): the `-d @file` path
   did not resolve, so an empty body was sent. Run the command from the repository root.
+- `python -m src.client ...` says it cannot reach the API: start `python -m src.api` in another
+  terminal first; if the API uses another port, pass `--url http://127.0.0.1:<port>`.
+- `docker compose ... up -d` fails with "failed to connect to the docker API" or "Cannot connect to
+  the Docker daemon": Docker is installed but its engine is not running. Start Docker Desktop (or
+  the docker service on Linux) and wait for "Engine running". Docker is only needed for Grafana.
+- Grafana opens but every panel says "No data": the API is not running, or it was started after
+  Prometheus and no ticket has been submitted yet. Start `python -m src.api`, submit a ticket
+  (section 4), and wait ten seconds. Check the scrape target at `http://localhost:9090/targets`.
+- Port 3000 or 9090 already in use: change the left-hand side of the `ports` entries in
+  `monitoring/docker-compose.yml` (for example `"3001:3000"`) and open that port instead.
+- The client's output shows codes like `[92m` instead of colours: the terminal does not support
+  colour; add `--no-color` (the layout is the same).
 - A ticket is answered when it should not be: `python -m src.killswitch on`, then read the ticket's
   rows with `/decisions/<ticket_id>`; the incident steps are in `Docs/governance.md` section 5.
 

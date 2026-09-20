@@ -459,7 +459,17 @@ a batch run leaves the same evidence. `monitoring/prometheus.yml` is the guide's
 `monitoring/grafana_dashboard.json` is a six-panel dashboard (tickets per hour by channel and
 outcome; auto-answered against escalated; latency p50 and p95; guardrail activations; confidence
 distribution; failures by stage) written as a Grafana JSON model with PromQL over these metrics.
-It was not opened in a running Grafana here; that is recorded as unverified.
+It was not opened in a running Grafana at the time; that was recorded as unverified.
+
+Verified and reworked on 20 September 2026: the stack was brought up with Docker
+(`monitoring/docker-compose.yml`), the Prometheus target reported up, and every panel query
+returned data. The first dashboard relied on `increase(...[1h])`, which is nearly empty until
+Prometheus has an hour of history, one panel rendered nothing and the confidence panel plotted the
+bucket bounds. It was rewritten around running totals and instant queries (six stat tiles, a step
+chart by outcome, channel bars, p50 and p95 latency with the 3 s line, guardrail blocks, confidence
+bands), the scrape interval was lowered from 15 s to 5 s, and the dashboard refresh set to 5 s, so
+a submitted ticket is visible within about ten seconds. `python -m src.client metrics` prints the
+same series in the terminal for machines without Docker.
 
 Live check: with the API running, two tickets posted, both `:8000/metrics` and `:8001/metrics`
 showed `tickets_processed_total{channel="email",outcome="escalate"} 1`,
