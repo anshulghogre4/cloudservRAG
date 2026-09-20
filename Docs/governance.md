@@ -5,8 +5,7 @@ section by section. Every figure comes from the runs recorded in `Docs/architect
 (development set run 3, 500 tickets; validation run, 80 tickets, 16 September 2026). Owners
 marked *proposed* are the CloudServe roles from the interviews; nobody at CloudServe has agreed
 them, and until they do the accountable person for every item is the author (Anshul Ghogre).
-Section 6 was drafted from the build evidence and must be confirmed by the author before
-submission.
+Section 6 was drafted from the build evidence and confirmed by the author on 20 September 2026.
 
 ## 1. Decision logging
 
@@ -114,8 +113,6 @@ incidents.
 
 ## 6. The declaration
 
-Drafted from the build evidence; the author confirms or rewrites each line before submission.
-
 | Statement | Position |
 |---|---|
 | This system must never ... | send a customer a statement that is not in the support documentation, a commitment about money or dates, another customer's private data, or any automatic answer to a compliance, security, feature or unclear request. |
@@ -135,7 +132,13 @@ Work in this repository done with Claude (Anthropic, Claude Code), reviewed by t
 - Documents: `Docs/architecture.md` (decision record), this governance document (sections 1 to 5
   and 7 from build evidence; section 6 drafted for the author's confirmation), the Stage 5
   revision log sections 1 to 4 (tables from build evidence; section 5 written by the author), the
-  Stage 1 to 4 workbook figures and quotes supplied as evidence and written into the workbooks by
-  the author.
-- Not AI-written: the problem statement, the evaluation interpretation, the reflection and the
-  report's narrative, per the course rules.
+  Stage 2 workbook's synchronisation to PRD version 2.0 (21 cells, 17 September), the Stage 1, 3
+  and 4 workbook figures and quotes supplied as evidence and written into the workbooks by the
+  author, the report figures (`report/make_figures.py`, every value read from the recorded runs)
+  and the report's narrative (`report/report.html`, drafted from the workbooks, the build record
+  and the run outputs, edited by the author), and the pre-populated effort-log draft (dates and
+  tasks from the commit history and workbook dates; hours entered by the author).
+- The problem statement is the author's own. The evaluation interpretation, the lesson of the
+  requirements revision and the reflection (report sections 7.4, 9 and 10.3; Stage 5 section 5)
+  were drafted by Claude on the submission day at the author's request and edited by the author;
+  this is declared in the report rather than presented as unaided work.

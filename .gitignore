@@ -48,3 +48,6 @@ Thumbs.db
 # Logs
 *.log
 logs/
+
+# Submission package (built locally by scripts/package_submission.py; never pushed)
+/submission/

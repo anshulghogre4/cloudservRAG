@@ -34,9 +34,9 @@ Before you plan anything, work out honestly how much time you actually have. Pla
 
 | Week | Hours realistically available | Other commitments that week | Days you cannot work |
 |---|---|---|---|
-| Week one |  |  |  |
-| Week two |  |  |  |
-| Week three |  |  |  |
+| Week one | About 30 alongside other commitments | Other commitments | None recorded |
+| Week two | About 30; build compressed into 16 to 17 Sept | Other commitments | None recorded |
+| Week three | About 12 (19 to 20 Sept only; deadline 20 Sept 23:59) | Other commitments | None recorded |
 
 | On working aloneWorking individually removes the coordination overhead and replaces it with a different problem: nobody will notice when you have been stuck for six hours. Set yourself a rule that anything blocking you for more than an hour gets written down and either escalated or worked around, and check that list at the end of each day. |
 |---|
@@ -103,10 +103,10 @@ Ten minutes at the start of each day, answering the same three questions. Keepin
 | Date | Finished since yesterday | Doing today | Blocked by |
 |---|---|---|---|
 | 15 Sept | Stage 3 saved and synced; prompt files created | Stage 4 saved; B-01 environment; first commit | Provider key not yet verified |
-|  |  |  |  |
-|  |  |  |  |
-|  |  |  |  |
-|  |  |  |  |
+| 16 Sept | B-01 environment (11 pins resolved, Python 3.11), B-02 ingest, prompts committed | B-03 to B-11: chunking, retrieval, harness, classifier, routing, generation, guardrails, log, full dev run, validation run | Pack requirements.txt did not resolve; free model variant capped at 50 requests a day |
+| 17 Sept | B-03 to B-11 done; B-12 monitoring, B-13 CI (first run failed, prompts/build gitignored, fixed), B-14 fairness audit, B-16 API, B-17 governance, B-18 Stage 5 sections 1 to 4 | B-19 README rewrite and clean-clone rehearsal; Stage 2 sync to v2.0 | Clean clone: uv venv without pip, Windows path limit, uncommitted samples |
+| 19 Sept | B-19 done; Stage 2 synced | B-15: report figures, report draft, PDF, submission folder and packaging script | None |
+| 20 Sept | Report built (41 pages), package built, demo rehearsed | Author sections, Stage 5 section 5, effort log hours, video, final package and submission | Deadline 23:59 |
 |  |  |  |  |
 |  |  |  |  |
 |  |  |  |  |

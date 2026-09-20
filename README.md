@@ -152,7 +152,7 @@ python -m evaluation.fairness_audit --results evaluation/results/my_run/results.
 ```
 
 Runs already recorded in this repository: `evaluation/results/2026-09-16_dev_full` (development
-set, 500 tickets), `evaluation/results/2026-09-16_validation` (validation set, run once) and the
+set, 500 tickets), `evaluation/results/2026-09-16_validation` (validation set, the single evaluation run; a later re-run with cached replies was made only for the video) and the
 measurement scripts' outputs (`retrieval_check`, `classify_check`, `route_check`, `guardrail_check`).
 
 ## 6. Optional: dashboard

@@ -350,10 +350,15 @@ round trips per ticket at free-tier pacing); the local pipeline without the prov
 
 ### Validation run (B-11 gate, 16 Sep 2026, once)
 
-`validation_tickets.json` was restored after the development run and run exactly once
+`validation_tickets.json` was restored after the development run and run once for evaluation
 (`evaluation/results/2026-09-16_validation`, run count 1, code version ab696a0, live provider,
 460 s for 80 tickets, 0 errors). The file was not opened or analysed; only the harness output
 was read. Nothing was tuned on it.
+
+Demonstration re-run (20 Sep 2026): the same command was run again on the validation file solely
+to record the unattended run for the video, with model replies served from the on-disk cache and the
+code unchanged; it reproduces the 16 September output exactly (60 / 16 / 4, 324 rows) and none of the
+reported figures come from it. Its output directory is not committed.
 
 | Metric | Validation (n=80) | Development run 3 (n=500) |
 |---|---|---|
