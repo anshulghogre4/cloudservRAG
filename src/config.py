@@ -54,7 +54,9 @@ class Settings:
     llm_max_retries: int = 3
     llm_cache_dir: Path = ROOT / "storage" / "llm_cache"
     kill_switch: bool = False            # True forces every ticket to escalate (Governance §5)
-    kill_switch_file: Path = ROOT / "storage" / "KILL_SWITCH"   # flag file: create it to stop auto-answers without a restart
+    # flag file: create it to stop auto-answers without a restart. The default honours KILL_SWITCH_FILE
+    # at construction time, so tests (and a second instance) can point at their own flag.
+    kill_switch_file: Path = field(default_factory=lambda: Path(os.environ.get("KILL_SWITCH_FILE", str(ROOT / "storage" / "KILL_SWITCH"))))
     # Both optional routing rules were measured on the development set (evaluation/route_check.py,
     # 16 Sep 2026) and lowered routing accuracy, so both are off; they stay available for the report.
     answerable_floor: float = 0.0        # escalate when neighbours say P(answerable from docs) is below this; 0 disables

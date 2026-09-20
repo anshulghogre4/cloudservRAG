@@ -236,8 +236,17 @@ automatically: counters for processed, answered, escalated, blocked and failed t
 confidence, a step chart by outcome, tickets by channel, median and p95 response time against the
 3-second target, guardrail blocks and the confidence bands. Prometheus scrapes every 5 seconds and
 the dashboard refreshes every 5 seconds, so each submitted ticket shows within about ten seconds.
-Counters are totals since the API process started. The batch harness is a separate process and does
-not feed the live dashboard; it writes a `metrics.prom` snapshot into its output directory.
+Counters are totals since the API process started. The evaluation harness is a separate process and
+does not feed the live dashboard; it writes a `metrics.prom` snapshot into its output directory. To
+watch the dashboard while a whole file is processed unattended, send the file through the API instead:
+
+```
+python -m src.client batch data/samples/tickets_small.json
+python -m src.client batch Docs/Capstone_Project/05_Datasets/development_tickets.json --limit 100
+```
+
+Each ticket prints one line (id, channel, outcome, intent, confidence, latency) and moves the
+counters within one scrape; any file with the ticket schema works, `--limit N` takes the first N.
 Prometheus itself is at `http://localhost:9090`. `docker compose -f monitoring/docker-compose.yml down` stops both.
 
 ## 7. Layout

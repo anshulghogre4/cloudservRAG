@@ -219,6 +219,10 @@ def test_kill_switch_file_while_in_flight_escalates_before_release(tmp_path, doc
             return super().complete(prompt, **kw)
 
     p = make_pipeline(tmp_path, documentation, memory_tickets, SwitchDuringGeneration(intent="rate_limit"), settings=s)
+    # This test is about the in-flight re-check, not grounding: the approximate vector index can return
+    # a different passage from run to run, which would turn the outcome into a grounding block. A
+    # permissive grounder keeps the draft valid so the kill switch is the only thing that can stop it.
+    p.grounder = Grounder(BagEmbedder(), nli=FakeNLI(), cos_threshold=0.0, lex_threshold=0.0, contradiction_threshold=0.99)
     r = p.process(ticket("We keep getting 429 too many requests errors.", "Rate limit"))
     assert r.action == "escalate" and "kill switch" in r.route_reason.lower() and r.answer is None
     assert r.escalation and r.escalation["draft"]          # the prepared draft goes to the engineer, not the customer

@@ -12,6 +12,8 @@ so it runs wherever the project runs (Windows, macOS, Linux).
     python -m src.client decisions TRIG-PII-001 --all    # every logged row
     python -m src.client run evaluation/results/my_run    # summary of a harness output directory
     python -m src.client metrics                          # live Prometheus metrics, readable
+    python -m src.client batch <tickets.json>             # a whole file through the API, unattended
+    python -m src.client batch <tickets.json> --limit 20  # (moves the Grafana dashboard live)
     python -m src.client ticket data/samples/ticket_chat.json --raw   # the raw JSON, indented
 
 Options: --url http://127.0.0.1:8000 (default), --no-color. Colour is switched off automatically
@@ -357,6 +359,41 @@ def show_metrics() -> None:
     rule()
 
 
+def run_batch(path: str, limit: int | None) -> None:
+    """Submit every ticket of a file to the running API, unattended, one line per ticket.
+    Unlike the evaluation harness (a separate process that writes its own metrics report), these
+    tickets go through the API, so the Prometheus counters and the Grafana dashboard move live."""
+    import time
+    data = json.loads(Path(path).read_text(encoding="utf-8"))
+    tickets = data if isinstance(data, list) else data.get("tickets", [])
+    if limit:
+        tickets = tickets[:limit]
+    rule(f"UNATTENDED BATCH THROUGH THE API  {len(tickets)} tickets from {path}")
+    print(c("  watch the Grafana dashboard: every ticket moves the counters within one scrape (5 s)", "dim"))
+    tally = {"auto_respond": 0, "escalate": 0, "block": 0}
+    failed = 0
+    colour = {"auto_respond": "green", "escalate": "yellow", "block": "red"}
+    label = {"auto_respond": "ANSWERED ", "escalate": "ESCALATED", "block": "BLOCKED  "}
+    t0 = time.perf_counter()
+    for i, t in enumerate(tickets, 1):
+        r = call("/tickets", t)
+        a = r.get("action", "escalate")
+        tally[a] = tally.get(a, 0) + 1
+        failed += 1 if r.get("error") else 0
+        print(f"  {str(i).rjust(3)}/{len(tickets)}  {str(r.get('ticket_id', '?')).ljust(14)} {str(r.get('channel', '?')).ljust(13)}"
+              f" {c(label.get(a, a), colour.get(a, 'white'), 'bold')}  {str(r.get('intent', '')).ljust(24)}"
+              f" conf {r.get('confidence') or 0:.2f}  {(r.get('latency_ms') or 0) / 1000:5.2f} s")
+    dt = time.perf_counter() - t0
+    n = max(len(tickets), 1)
+    print()
+    print(f"  done in {dt:.0f} s, no intervention:  {c('answered ' + str(tally['auto_respond']), 'green', 'bold')}"
+          f"   {c('escalated ' + str(tally['escalate']), 'yellow', 'bold')}   {c('blocked ' + str(tally['block']), 'red', 'bold')}"
+          f"   errors {c(failed, 'green' if not failed else 'red', 'bold')}")
+    print(f"  first-contact resolution {tally['auto_respond'] / n:.1%}   escalation rate {(tally['escalate'] + tally['block']) / n:.1%}")
+    print(c("  every decision is in the log: python -m src.client decisions <ticket_id>;  metrics: python -m src.client metrics", "dim"))
+    rule()
+
+
 def main(argv: list[str]) -> int:
     global URL, USE_COLOR
     args = [a for a in argv if not a.startswith("--")]
@@ -379,6 +416,11 @@ def main(argv: list[str]) -> int:
         show_run(args[1])
     elif cmd == "metrics":
         show_metrics()
+    elif cmd == "batch" and len(args) > 1:
+        limit = None
+        if "--limit" in argv:
+            limit = int(argv[argv.index("--limit") + 1])
+        run_batch(args[1], limit)
     else:
         print(__doc__)
         return 1

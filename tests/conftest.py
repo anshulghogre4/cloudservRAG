@@ -9,6 +9,14 @@ ROOT = Path(__file__).resolve().parents[1]
 DATASETS = ROOT / "Docs" / "Capstone_Project" / "05_Datasets"
 
 
+@pytest.fixture(autouse=True)
+def _isolated_kill_switch(tmp_path, monkeypatch):
+    """Tests must never read the operator's real flag file (storage/KILL_SWITCH): with the kill
+    switch on for a live system, every test expecting an automatic answer would fail."""
+    monkeypatch.setenv("KILL_SWITCH_FILE", str(tmp_path / "KILL_SWITCH_TEST"))
+    monkeypatch.delenv("KILL_SWITCH", raising=False)
+
+
 @pytest.fixture(scope="session")
 def sample_tickets():
     """One real development ticket per channel: email, chat, docs_comment, forum."""
